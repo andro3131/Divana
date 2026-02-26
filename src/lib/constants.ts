@@ -1,6 +1,7 @@
 export const CDN_BASE = 'https://divana-cdn.b-cdn.net';
 
 export const HERO_IMAGE = `${CDN_BASE}/DIVANA-HERO.jpg`;
+export const LOGO_IMAGE = `${CDN_BASE}/logo-divana-transparent.png`;
 
 export const GALLERY_IMAGES = [
   `${CDN_BASE}/divana1.jpg`,
