@@ -26,8 +26,8 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
     <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-dark-900/20"></div>
   </div>
 
-  <!-- Title - left third, lower -->
-  <div class="absolute z-10 left-6 md:left-12 lg:left-20 bottom-24 md:bottom-32 lg:bottom-36 animate-fade-in">
+  <!-- Title - centered on singer, lower -->
+  <div class="absolute z-10 left-[22%] md:left-[28%] lg:left-[30%] -translate-x-1/2 bottom-24 md:bottom-32 lg:bottom-36 animate-fade-in text-center">
     <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-semibold text-gold-gradient mb-3 tracking-wide">
       Divana
     </h1>
@@ -36,13 +36,13 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
     </p>
   </div>
 
-  <!-- Dance Evening Star Banner - right side, vertically centered -->
-  <div class="hidden md:block absolute right-8 lg:right-16 xl:right-24 top-1/2 -translate-y-1/2 animate-fade-in-delay">
+  <!-- Dance Evening Star Banner - moved more left, vertically centered -->
+  <div class="hidden md:block absolute right-20 lg:right-32 xl:right-40 top-1/2 -translate-y-1/2 animate-fade-in-delay">
     <div class="star-float flex flex-col items-center">
-      <!-- Star -->
-      <div class="relative w-[300px] lg:w-[360px] xl:w-[400px] aspect-square group">
-        <!-- SVG Star background -->
-        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_40px_rgba(201,168,76,0.3)] group-hover:drop-shadow-[0_0_60px_rgba(201,168,76,0.5)] transition-all duration-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Slim Star -->
+      <div class="relative w-[240px] lg:w-[280px] xl:w-[320px] aspect-[5/7] group">
+        <!-- SVG Star background - slimmer, taller -->
+        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_40px_rgba(201,168,76,0.3)] group-hover:drop-shadow-[0_0_60px_rgba(201,168,76,0.5)] transition-all duration-500" viewBox="0 0 200 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f5e8a0"/>
@@ -53,25 +53,25 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
             </linearGradient>
           </defs>
           <polygon
-            points="100,2 132,56 193,70 157,117 158,178 100,158 42,178 43,117 7,70 68,56"
+            points="100,3 123,78 167,98 141,164 142,249 100,221 58,249 59,164 33,98 77,78"
             fill="url(#starGold)"
             class="group-hover:opacity-100 opacity-90 transition-opacity duration-300"
           />
         </svg>
 
-        <!-- Star text - minimal info only -->
+        <!-- Star text - bigger -->
         <div class="absolute inset-0 flex items-center justify-center z-10">
-          <div class="text-center px-[25%]">
-            <p class="text-dark-900 text-[10px] lg:text-xs xl:text-sm font-bold tracking-widest uppercase mb-2">
+          <div class="text-center px-[18%]">
+            <p class="text-dark-900 text-xs lg:text-sm xl:text-base font-bold tracking-widest uppercase mb-2 lg:mb-3">
               {locale === 'sl' ? 'Plesni večer' : 'Dance Evening'}
             </p>
-            <p class="text-dark-900 text-2xl lg:text-3xl xl:text-4xl font-heading font-bold tracking-wide mb-3">
+            <p class="text-dark-900 text-3xl lg:text-4xl xl:text-5xl font-heading font-bold tracking-wide mb-3 lg:mb-4">
               Divana
             </p>
-            <p class="text-dark-800 text-[9px] lg:text-[11px] xl:text-xs font-medium leading-snug">
+            <p class="text-dark-800 text-xs lg:text-sm xl:text-base font-medium leading-snug">
               Dvorana Stik
             </p>
-            <p class="text-dark-800 text-[9px] lg:text-[11px] xl:text-xs font-medium">
+            <p class="text-dark-800 text-xs lg:text-sm xl:text-base font-medium mt-0.5">
               {locale === 'sl' ? '8. marec 2026 ob 18h' : 'March 8, 2026 at 18h'}
             </p>
           </div>
@@ -80,8 +80,8 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
         <!-- Sparkle decorations -->
         <div class="absolute -top-4 -right-2 text-gold text-2xl animate-pulse">&#10022;</div>
         <div class="absolute -bottom-3 -left-3 text-gold-light text-xl animate-pulse" style="animation-delay: 0.7s">&#10022;</div>
-        <div class="absolute top-1/4 -left-5 text-gold-dark/70 text-sm animate-pulse" style="animation-delay: 1.2s">&#10023;</div>
-        <div class="absolute bottom-1/4 -right-4 text-gold/60 text-base animate-pulse" style="animation-delay: 0.4s">&#10023;</div>
+        <div class="absolute top-[20%] -left-5 text-gold-dark/70 text-sm animate-pulse" style="animation-delay: 1.2s">&#10023;</div>
+        <div class="absolute bottom-[20%] -right-4 text-gold/60 text-base animate-pulse" style="animation-delay: 0.4s">&#10023;</div>
       </div>
 
       <!-- Reservation button below star -->
