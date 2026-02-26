@@ -88,6 +88,19 @@
     "success": "Sporočilo poslano! Odgovorili vam bomo v najkrajšem možnem času.",
     "error": "Napaka pri pošiljanju. Prosimo, poskusite znova."
   },
+  "heroBanner": {
+    "title": "Plesni večer Divana – Vajin stik",
+    "desc1": "To ni samo ples. Je prostor za poglede, dotike in globoko povezavo.",
+    "desc2": "Prebudita vajin gib in si podarita čas samo za vaju.",
+    "when": "Kdaj",
+    "where": "Kje",
+    "priceLabel": "Cena",
+    "date": "8. 3. 2026, ob 18.00–20.00",
+    "location": "Dvorana Stik (Trebnje)",
+    "priceInfo": "50 € na par (ali le 40 €, če pripeljeta še en par)",
+    "warning": "Omejeno število mest!",
+    "cta": "Rezerviraj vajin večer"
+  },
   "footer": {
     "rights": "Vse pravice pridržane."
   }

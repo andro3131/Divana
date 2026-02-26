@@ -80,6 +80,16 @@ body {
   opacity: 0;
 }
 
+/* Star float animation - 10px up and down */
+@keyframes star-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.star-float {
+  animation: star-float 3s ease-in-out infinite;
+}
+
 /* Lightbox */
 .lightbox-open {
   overflow: hidden;

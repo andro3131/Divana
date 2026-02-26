@@ -88,6 +88,19 @@
     "success": "Message sent! We'll get back to you as soon as possible.",
     "error": "Error sending message. Please try again."
   },
+  "heroBanner": {
+    "title": "Dance Evening Divana – Your Connection",
+    "desc1": "This is not just dance. It's space for gazes, touches and deep connection.",
+    "desc2": "Awaken your movement together and give yourselves time just for two.",
+    "when": "When",
+    "where": "Where",
+    "priceLabel": "Price",
+    "date": "March 8, 2026, 18:00–20:00",
+    "location": "Dvorana Stik (Trebnje)",
+    "priceInfo": "€50 per couple (or €40 if you bring another couple)",
+    "warning": "Limited spots available!",
+    "cta": "Reserve your evening"
+  },
   "footer": {
     "rights": "All rights reserved."
   }
