@@ -26,9 +26,9 @@ const danceId = sectionIds.danceEvenings[locale];
   </div>
 
   <!-- Content -->
-  <div class="relative z-10 flex items-end justify-between h-full pb-24 px-4 md:px-8 lg:px-16">
-    <!-- Left: Title -->
-    <div class="text-center md:text-left flex-1">
+  <div class="relative z-10 flex flex-col items-center justify-end h-full pb-24 px-4 md:px-8 lg:px-16">
+    <!-- Center: Title -->
+    <div class="text-center mb-8">
       <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-semibold text-gold-gradient animate-fade-in mb-4 tracking-wide">
         Divana
       </h1>
@@ -37,22 +37,29 @@ const danceId = sectionIds.danceEvenings[locale];
       </p>
     </div>
 
-    <!-- Right: Dance Evening Banner -->
-    <div class="hidden md:block animate-fade-in-delay">
-      <a href={`#${danceId}`} class="group block bg-dark-950/60 backdrop-blur-md border border-gold/30 rounded-2xl p-6 lg:p-8 max-w-xs hover:border-gold/60 hover:bg-dark-950/70 transition-all duration-300">
-        <span class="inline-block px-3 py-1 bg-gold/20 text-gold text-xs font-semibold tracking-widest uppercase rounded-full mb-3">
-          {locale === 'sl' ? 'Novo' : 'New'}
-        </span>
-        <h2 class="text-xl lg:text-2xl font-heading font-semibold text-dark-50 mb-2">
-          {t('danceEvenings.title')}
-        </h2>
-        <p class="text-dark-300 text-sm leading-relaxed mb-4">
-          {t('danceEvenings.subtitle')}
-        </p>
-        <span class="inline-flex items-center text-gold text-sm font-medium group-hover:gap-3 gap-2 transition-all">
-          {t('danceEvenings.reserve')}
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-        </span>
+    <!-- Dance Evening Banner - Glamorous Gold -->
+    <div class="hidden md:block absolute right-6 lg:right-16 bottom-24 animate-fade-in-delay">
+      <a href={`#${danceId}`} class="dance-banner group block relative overflow-hidden rounded-2xl p-[1px] max-w-xs hover:scale-[1.02] transition-transform duration-300">
+        <!-- Gold gradient border -->
+        <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-gold-light via-gold to-gold-dark opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
+        <!-- Inner content -->
+        <div class="relative bg-dark-950/80 backdrop-blur-xl rounded-2xl p-6 lg:p-8">
+          <span class="inline-block px-3 py-1 bg-gradient-to-r from-gold-dark/30 to-gold/30 text-gold-light text-xs font-semibold tracking-widest uppercase rounded-full mb-3 border border-gold/40">
+            {locale === 'sl' ? 'Novo' : 'New'}
+          </span>
+          <h2 class="text-xl lg:text-2xl font-heading font-semibold text-gold-gradient mb-2">
+            {t('danceEvenings.title')}
+          </h2>
+          <p class="text-primary-200/70 text-sm leading-relaxed mb-4 italic">
+            {t('danceEvenings.subtitle')}
+          </p>
+          <span class="inline-flex items-center text-gold-light text-sm font-medium group-hover:gap-3 gap-2 transition-all">
+            {t('danceEvenings.reserve')}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+        <!-- Shimmer effect -->
+        <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-gold-light/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
       </a>
     </div>
   </div>
