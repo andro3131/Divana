@@ -39,10 +39,9 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
   <!-- Dance Evening Star Banner - moved more left, vertically centered -->
   <div class="hidden md:block absolute right-20 lg:right-32 xl:right-40 top-1/2 -translate-y-1/2 animate-fade-in-delay">
     <div class="star-float flex flex-col items-center">
-      <!-- Slim Star -->
-      <div class="relative w-[240px] lg:w-[280px] xl:w-[320px] aspect-[5/7] group">
-        <!-- SVG Star background - slimmer, taller -->
-        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_40px_rgba(201,168,76,0.3)] group-hover:drop-shadow-[0_0_60px_rgba(201,168,76,0.5)] transition-all duration-500" viewBox="0 0 200 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Star - even proportions, thinner arms -->
+      <div class="relative w-[280px] lg:w-[340px] xl:w-[380px] aspect-square group">
+        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_40px_rgba(201,168,76,0.3)] group-hover:drop-shadow-[0_0_60px_rgba(201,168,76,0.5)] transition-all duration-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f5e8a0"/>
@@ -53,7 +52,7 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
             </linearGradient>
           </defs>
           <polygon
-            points="100,3 123,78 167,98 141,164 142,249 100,221 58,249 59,164 33,98 77,78"
+            points="100,2 124,68 193,70 138,112 158,179 100,140 42,179 62,112 7,70 77,68"
             fill="url(#starGold)"
             class="group-hover:opacity-100 opacity-90 transition-opacity duration-300"
           />
