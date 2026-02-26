@@ -1,6 +1,6 @@
 export const CDN_BASE = 'https://divana-cdn.b-cdn.net';
 
-export const HERO_IMAGE = `${CDN_BASE}/DIVANA-HERO.jpg`;
+export const HERO_IMAGE = `${CDN_BASE}/Premakni_pevko_malo_bolj_levo_ohrani_jo_pa_tono_ta_delpmaspu.jpg`;
 export const LOGO_IMAGE = `${CDN_BASE}/logo-divana-transparent.png`;
 
 export const GALLERY_IMAGES = [

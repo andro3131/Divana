@@ -10,6 +10,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const danceId = sectionIds.danceEvenings[locale];
+const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
 ---
 
 <section id="hero" class="relative h-screen w-full overflow-hidden">
@@ -25,65 +26,54 @@ const danceId = sectionIds.danceEvenings[locale];
     <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-dark-900/20"></div>
   </div>
 
-  <!-- Content -->
-  <div class="relative z-10 flex flex-col items-center justify-center h-full px-4 md:px-8 lg:px-16">
-    <!-- Center: Title -->
-    <div class="text-center">
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-semibold text-gold-gradient animate-fade-in mb-4 tracking-wide">
-        Divana
-      </h1>
-      <p class="text-lg md:text-xl text-primary-200/80 font-light tracking-widest uppercase animate-fade-in-delay">
-        {t('hero.subtitle')}
-      </p>
-    </div>
+  <!-- Title - left third, lower -->
+  <div class="absolute z-10 left-6 md:left-12 lg:left-20 bottom-24 md:bottom-32 lg:bottom-36 animate-fade-in">
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-semibold text-gold-gradient mb-3 tracking-wide">
+      Divana
+    </h1>
+    <p class="text-base md:text-lg lg:text-xl text-primary-200/80 font-light tracking-widest uppercase animate-fade-in-delay">
+      {t('hero.subtitle')}
+    </p>
+  </div>
 
-    <!-- Dance Evening Star Banner -->
-    <div class="hidden md:block absolute right-6 lg:right-14 xl:right-20 top-1/2 -translate-y-1/2 animate-fade-in-delay">
-      <a href={`#${danceId}`} class="group block relative star-float">
-        <!-- Star container -->
-        <div class="relative w-[360px] lg:w-[430px] xl:w-[480px] aspect-square">
-          <!-- SVG Star background -->
-          <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_40px_rgba(201,168,76,0.25)] group-hover:drop-shadow-[0_0_60px_rgba(201,168,76,0.5)] transition-all duration-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#f5e8a0"/>
-                <stop offset="25%" stop-color="#e0c872"/>
-                <stop offset="50%" stop-color="#c9a84c"/>
-                <stop offset="75%" stop-color="#dcc26a"/>
-                <stop offset="100%" stop-color="#f0dc8a"/>
-              </linearGradient>
-            </defs>
-            <polygon
-              points="100,2 132,56 193,70 157,117 158,178 100,158 42,178 43,117 7,70 68,56"
-              fill="url(#starGold)"
-              class="group-hover:opacity-100 opacity-90 transition-opacity duration-300"
-            />
-          </svg>
+  <!-- Dance Evening Star Banner - right side, vertically centered -->
+  <div class="hidden md:block absolute right-8 lg:right-16 xl:right-24 top-1/2 -translate-y-1/2 animate-fade-in-delay">
+    <div class="star-float flex flex-col items-center">
+      <!-- Star -->
+      <div class="relative w-[300px] lg:w-[360px] xl:w-[400px] aspect-square group">
+        <!-- SVG Star background -->
+        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_40px_rgba(201,168,76,0.3)] group-hover:drop-shadow-[0_0_60px_rgba(201,168,76,0.5)] transition-all duration-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f5e8a0"/>
+              <stop offset="25%" stop-color="#e0c872"/>
+              <stop offset="50%" stop-color="#c9a84c"/>
+              <stop offset="75%" stop-color="#dcc26a"/>
+              <stop offset="100%" stop-color="#f0dc8a"/>
+            </linearGradient>
+          </defs>
+          <polygon
+            points="100,2 132,56 193,70 157,117 158,178 100,158 42,178 43,117 7,70 68,56"
+            fill="url(#starGold)"
+            class="group-hover:opacity-100 opacity-90 transition-opacity duration-300"
+          />
+        </svg>
 
-          <!-- Text content overlay -->
-          <div class="absolute inset-0 flex items-center justify-center z-10">
-            <div class="text-center px-[23%] py-[18%]">
-              <h2 class="text-[11px] lg:text-sm xl:text-base font-heading font-bold text-dark-900 mb-1.5 lg:mb-2 leading-tight uppercase tracking-wide">
-                {t('heroBanner.title')}
-              </h2>
-              <p class="text-dark-800 text-[9px] lg:text-[11px] xl:text-xs leading-relaxed mb-1.5 lg:mb-2">
-                {t('heroBanner.desc1')}
-              </p>
-              <p class="text-dark-700 text-[9px] lg:text-[11px] xl:text-xs leading-relaxed mb-2 lg:mb-3 italic">
-                {t('heroBanner.desc2')}
-              </p>
-              <div class="text-dark-900 text-[8px] lg:text-[10px] xl:text-[11px] space-y-0.5 mb-1.5 lg:mb-2 text-left">
-                <p><strong>{t('heroBanner.when')}:</strong> {t('heroBanner.date')}</p>
-                <p><strong>{t('heroBanner.where')}:</strong> {t('heroBanner.location')}</p>
-                <p><strong>{t('heroBanner.priceLabel')}:</strong> {t('heroBanner.priceInfo')}</p>
-              </div>
-              <p class="text-dark-900/80 text-[8px] lg:text-[10px] font-semibold mb-2 lg:mb-3">
-                {t('heroBanner.warning')}
-              </p>
-              <span class="inline-block px-3 lg:px-5 py-1 lg:py-1.5 bg-dark-900 text-gold-light text-[8px] lg:text-[10px] xl:text-xs font-bold tracking-widest uppercase rounded-sm group-hover:bg-dark-950 transition-colors duration-300">
-                {t('heroBanner.cta')}
-              </span>
-            </div>
+        <!-- Star text - minimal info only -->
+        <div class="absolute inset-0 flex items-center justify-center z-10">
+          <div class="text-center px-[25%]">
+            <p class="text-dark-900 text-[10px] lg:text-xs xl:text-sm font-bold tracking-widest uppercase mb-2">
+              {locale === 'sl' ? 'Plesni večer' : 'Dance Evening'}
+            </p>
+            <p class="text-dark-900 text-2xl lg:text-3xl xl:text-4xl font-heading font-bold tracking-wide mb-3">
+              Divana
+            </p>
+            <p class="text-dark-800 text-[9px] lg:text-[11px] xl:text-xs font-medium leading-snug">
+              Dvorana Stik
+            </p>
+            <p class="text-dark-800 text-[9px] lg:text-[11px] xl:text-xs font-medium">
+              {locale === 'sl' ? '8. marec 2026 ob 18h' : 'March 8, 2026 at 18h'}
+            </p>
           </div>
         </div>
 
@@ -92,6 +82,14 @@ const danceId = sectionIds.danceEvenings[locale];
         <div class="absolute -bottom-3 -left-3 text-gold-light text-xl animate-pulse" style="animation-delay: 0.7s">&#10022;</div>
         <div class="absolute top-1/4 -left-5 text-gold-dark/70 text-sm animate-pulse" style="animation-delay: 1.2s">&#10023;</div>
         <div class="absolute bottom-1/4 -right-4 text-gold/60 text-base animate-pulse" style="animation-delay: 0.4s">&#10023;</div>
+      </div>
+
+      <!-- Reservation button below star -->
+      <a
+        href={`#${danceId}`}
+        class="mt-4 lg:mt-6 inline-block px-8 lg:px-10 py-3 lg:py-3.5 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-dark-900 text-sm lg:text-base font-bold tracking-widest uppercase rounded-full hover:scale-105 hover:shadow-[0_0_30px_rgba(201,168,76,0.4)] transition-all duration-300"
+      >
+        {reserveText}
       </a>
     </div>
   </div>
