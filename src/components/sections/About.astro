@@ -10,12 +10,10 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const sectionId = sectionIds.about[locale];
-
-const songs = ['Metulja sva', 'Ta trenutek', 'Sestro', 'Prava ženska', 'Dahni mi', 'Najdeš spet domov'];
 ---
 
 <section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900">
-  <div class="max-w-5xl mx-auto">
+  <div class="max-w-4xl mx-auto">
     <SectionHeading title={t('about.title')} />
 
     <div class="space-y-6 text-dark-200 leading-relaxed text-lg" data-animate>
@@ -24,24 +22,12 @@ const songs = ['Metulja sva', 'Ta trenutek', 'Sestro', 'Prava ženska', 'Dahni m
       <p class="text-dark-300 italic">{t('about.bio3')}</p>
       <p>{t('about.bio4')}</p>
       <p>{t('about.bio5')}</p>
-    </div>
-
-    <!-- Band -->
-    <div class="mt-16 bg-dark-800/30 border border-dark-700/30 rounded-2xl p-8" data-animate>
-      <h3 class="text-xl font-heading font-semibold text-gold mb-4">{t('about.band')}</h3>
-      <p class="text-dark-200 leading-relaxed">{t('about.bandDescription')}</p>
-    </div>
-
-    <!-- Songs -->
-    <div class="mt-8 bg-dark-800/30 border border-dark-700/30 rounded-2xl p-8" data-animate>
-      <h3 class="text-xl font-heading font-semibold text-gold mb-4">{t('about.songs')}</h3>
-      <div class="flex flex-wrap gap-3">
-        {songs.map((song) => (
-          <span class="px-4 py-2 bg-dark-700/50 border border-dark-600/50 rounded-full text-dark-200 text-sm italic">
-            {song}
-          </span>
-        ))}
-      </div>
+      <p>{t('about.bio6')}</p>
+      <p>{t('about.bio7')}</p>
+      <p>{t('about.bio8')}</p>
+      <p>{t('about.bio9')}</p>
+      <p>{t('about.bio10')}</p>
+      <p class="text-dark-300 italic">{t('about.bio11')}</p>
     </div>
   </div>
 </section>
