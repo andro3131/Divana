@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "music": "Music",
+    "gallery": "Gallery",
+    "services": "Services",
+    "danceEvenings": "Dance Evenings",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "A voice that touches your soul"
+  },
+  "about": {
+    "title": "About Me",
+    "bio1": "Maja Marinčič is a singer, born in spring – and that is no coincidence. Her very name carries the energy of awakening, tenderness and new beginnings. Within her lives a powerful intuition that she trusts and follows, and her inner strength is most beautifully expressed through music.",
+    "bio2": "Music is not just art for her, but a way of being. It is her medium for expressing the soul, emotions, sincerity and gentleness. But above all stands singing – as a calling. Through her voice, she creates vibrations that connect people, soften hearts and open space for deeper feeling.",
+    "bio3": "Singing is a form of therapy for her – and that is exactly what she wants to pass on to her listeners. So that a song awakens your most intimate feelings, memories and everything that often remains unspoken.",
+    "bio4": "In September 2023, she performed at the Tamburitza Mondovision as part of the World Tamburitza Festival, where she received the award for best female vocal among 15 representatives from 11 countries. She has performed at numerous festivals in Macedonia and Serbia, where she received several festival awards. She also presented her musical journey at an international festival in Kyrgyzstan.",
+    "bio5": "Her newest musical story carries the signature Maja Marinčič – Divana, with which she steps more clearly into her authentic expression.",
+    "band": "The Band",
+    "bandDescription": "She also performs with her band, consisting of Gašper Možina, Tilen Omerzel Macedoni, Domen Stražišar and Bogdan Turnšek – together they create powerful concert evenings and fill concert halls.",
+    "songs": "Released Songs",
+    "songsList": "Metulja sva, Ta trenutek, Sestro, Prava ženska, Dahni mi, Najdeš spet domov"
+  },
+  "music": {
+    "title": "Music",
+    "listenOn": "Listen on Spotify",
+    "watchOn": "Watch on YouTube"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "photoCredit": "Photo: Dejan Udovč"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Music for every moment",
+    "solo": {
+      "title": "Solo Concerts",
+      "description": "Intimate solo performances full of emotion and deep vibrations. Concerts at castles, halls and cultural venues."
+    },
+    "band": {
+      "title": "Band Concerts",
+      "description": "Powerful concert evenings with a full lineup. Energetic performances that fill halls and inspire audiences."
+    },
+    "wedding": {
+      "title": "Weddings & Anniversaries",
+      "description": "Together with guitarist Gašper Možina, they bring music to life on terraces, creating unforgettable atmospheres at weddings and celebrations."
+    },
+    "corporate": {
+      "title": "Corporate Events",
+      "description": "Musical enrichment for company jubilees, public events and grand openings."
+    },
+    "cta": "Inquire"
+  },
+  "danceEvenings": {
+    "title": "Dance Evenings",
+    "subtitle": "Your Connection",
+    "description": "This is not just a dance evening. It's a space for couples. For a gaze that doesn't look away. For a touch that awakens your movement. I believe that relationships deserve time. And space. And an evening just for two.",
+    "reserve": "Reserve a spot",
+    "spotsLeft": "{count} spots remaining",
+    "soldOut": "Sold out",
+    "price": "Price",
+    "perPair": "per couple",
+    "upcoming": "Upcoming Events"
+  },
+  "reservation": {
+    "title": "Reservation",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "pairs": "Number of Couples",
+    "message": "Message (optional)",
+    "submit": "Confirm Reservation",
+    "success": "Reservation confirmed! A confirmation will be sent to your email.",
+    "error": "Something went wrong. Please try again.",
+    "back": "Back to home"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "If you're looking for a voice that touches you – you've just found it.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "success": "Message sent! We'll get back to you as soon as possible.",
+    "error": "Error sending message. Please try again."
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

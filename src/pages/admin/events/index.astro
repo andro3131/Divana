@@ -1,0 +1,105 @@
+---
+export const prerender = false;
+
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { db, Event } from 'astro:db';
+import { nanoid } from 'nanoid';
+
+const session = Astro.cookies.get('admin-session');
+if (!session || session.value !== 'authenticated') {
+  return Astro.redirect('/admin/login');
+}
+
+// Handle form submission
+if (Astro.request.method === 'POST') {
+  const formData = await Astro.request.formData();
+  const id = nanoid();
+
+  await db.insert(Event).values({
+    id,
+    titleSl: formData.get('titleSl') as string,
+    titleEn: (formData.get('titleEn') as string) || null,
+    descriptionSl: (formData.get('descriptionSl') as string) || null,
+    descriptionEn: (formData.get('descriptionEn') as string) || null,
+    date: new Date(formData.get('date') as string),
+    location: formData.get('location') as string,
+    price: formData.get('price') ? Number(formData.get('price')) * 100 : null,
+    capacity: Number(formData.get('capacity')),
+    imageUrl: (formData.get('imageUrl') as string) || null,
+    isPublished: formData.get('isPublished') === 'on',
+    createdAt: new Date(),
+  });
+
+  return Astro.redirect('/admin');
+}
+---
+
+<AdminLayout title="Nov dogodek - Divana Admin">
+  <div class="max-w-2xl mx-auto">
+    <a href="/admin" class="inline-flex items-center text-dark-400 hover:text-gold transition-colors text-sm mb-6">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Nazaj
+    </a>
+
+    <h1 class="text-2xl font-heading text-gold mb-8">Nov dogodek</h1>
+
+    <form method="POST" class="space-y-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Naziv (SL) *</label>
+          <input type="text" name="titleSl" required class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none" />
+        </div>
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Naziv (EN)</label>
+          <input type="text" name="titleEn" class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Opis (SL)</label>
+          <textarea name="descriptionSl" rows="3" class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none resize-none"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Opis (EN)</label>
+          <textarea name="descriptionEn" rows="3" class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none resize-none"></textarea>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Datum in ura *</label>
+          <input type="datetime-local" name="date" required class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none" />
+        </div>
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Lokacija *</label>
+          <input type="text" name="location" required class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none" />
+        </div>
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Cena (EUR/par)</label>
+          <input type="number" name="price" step="1" min="0" class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">Kapaciteta (parov) *</label>
+          <input type="number" name="capacity" min="1" required class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none" />
+        </div>
+        <div>
+          <label class="block text-sm text-dark-300 mb-1.5">URL slike</label>
+          <input type="url" name="imageUrl" class="w-full px-4 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 outline-none" />
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <input type="checkbox" name="isPublished" id="isPublished" checked class="w-4 h-4 accent-primary-500" />
+        <label for="isPublished" class="text-sm text-dark-300">Objavljeno</label>
+      </div>
+
+      <button type="submit" class="w-full py-3 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300">
+        Ustvari dogodek
+      </button>
+    </form>
+  </div>
+</AdminLayout>

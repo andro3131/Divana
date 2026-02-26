@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "home": "Domov",
+    "about": "O meni",
+    "music": "Glasba",
+    "gallery": "Galerija",
+    "services": "Storitve",
+    "danceEvenings": "Plesni večeri",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "subtitle": "Glas, ki se vas dotakne"
+  },
+  "about": {
+    "title": "O meni",
+    "bio1": "Maja Marinčič je pevka, rojena spomladi – in to ni naključje. Že njeno ime nosi energijo prebujanja, nežnosti in novega začetka. V njej živi močna intuicija, ki ji zaupa in ji sledi, njena notranja moč pa se najlepše izraža skozi glasbo.",
+    "bio2": "Glasba zanjo ni le umetnost, temveč način bivanja. Je njen medij za izražanje duše, čustev, iskrenosti in miline. A nad vsem stoji petje – kot poslanstvo. Skozi glas želi ustvarjati vibracije, ki povezujejo ljudi, mehčajo srca in odpirajo prostor za globlje občutenje.",
+    "bio3": "Petje je zanjo oblika terapije – in prav to želi predati tudi poslušalcem. Da pesem v vas prebudi najintimnejše občutke, spomine in tisto, kar pogosto ostaja neizrečeno.",
+    "bio4": "Septembra 2023 je v okviru Svetovnega tamburaškega festivala nastopila na Tamburaški mondoviziji, kjer je med 15 predstavniki iz 11 držav prejela nagrado za najboljši ženski vokal. Nastopila je na številnih festivalih v Makedoniji in Srbiji, kjer je prejela več festivalskih nagrad. Svojo glasbeno pot je predstavila tudi na mednarodnem festivalu v Kirgizistanu.",
+    "bio5": "Njena najnovejša glasbena zgodba nosi podpis Maja Marinčič – Divana, s katerim še bolj jasno stopa v svoj avtentičen izraz.",
+    "band": "Band",
+    "bandDescription": "Ob tem deluje tudi s svojim bendom, ki ga sestavljajo Gašper Možina, Tilen Omerzel Macedoni, Domen Stražišar in Bogdan Turnšek – skupaj ustvarjajo močne koncertne večere in polnijo dvorane.",
+    "songs": "Izdane pesmi",
+    "songsList": "Metulja sva, Ta trenutek, Sestro, Prava ženska, Dahni mi, Najdeš spet domov"
+  },
+  "music": {
+    "title": "Glasba",
+    "listenOn": "Poslušaj na Spotify",
+    "watchOn": "Poglej na YouTube"
+  },
+  "gallery": {
+    "title": "Galerija",
+    "photoCredit": "Foto: Dejan Udovč"
+  },
+  "services": {
+    "title": "Storitve",
+    "subtitle": "Glasba za vsak trenutek",
+    "solo": {
+      "title": "Samostojni koncerti",
+      "description": "Intimni solo nastopi polni čustev in globokih vibracij. Koncerti na gradovih, v dvoranah in kulturnih domovih."
+    },
+    "band": {
+      "title": "Koncerti z bandom",
+      "description": "Močne koncertne večere s polno zasedbo. Energični nastopi, ki polnijo dvorane in navdušijo občinstvo."
+    },
+    "wedding": {
+      "title": "Poroke in obletnice",
+      "description": "Skupaj s kitaristom Gašperjem Možina z glasbo oživljata večere na terasah, ustvarja nepozabno vzdušje na porokah in rojstnih dnevih."
+    },
+    "corporate": {
+      "title": "Poslovni dogodki",
+      "description": "Glasbeno popestritev jubilejev manjših in večjih podjetij, javnih prireditev ter slavnostnih otvoritev."
+    },
+    "cta": "Povpraševanje"
+  },
+  "danceEvenings": {
+    "title": "Plesni večeri",
+    "subtitle": "Vajin stik",
+    "description": "To ni samo plesni večer. Je prostor za pare. Za pogled, ki se ne umakne. Za dotik, ki prebudi vajin gib. Verjamem, da si odnosi zaslužijo čas. In prostor. In večer samo za dva.",
+    "reserve": "Rezerviraj mesto",
+    "spotsLeft": "Še {count} prostih mest",
+    "soldOut": "Razprodano",
+    "price": "Cena",
+    "perPair": "na par",
+    "upcoming": "Prihajajoči dogodki"
+  },
+  "reservation": {
+    "title": "Rezervacija",
+    "name": "Ime in priimek",
+    "email": "E-pošta",
+    "phone": "Telefon",
+    "pairs": "Število parov",
+    "message": "Sporočilo (neobvezno)",
+    "submit": "Potrdi rezervacijo",
+    "success": "Rezervacija uspešna! Potrditev bo poslana na vaš e-poštni naslov.",
+    "error": "Prišlo je do napake. Prosimo, poskusite znova.",
+    "back": "Nazaj na domov"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Če iščete glas, ki se vas dotakne – ste ga pravkar našli.",
+    "name": "Ime",
+    "email": "E-pošta",
+    "message": "Sporočilo",
+    "send": "Pošlji sporočilo",
+    "success": "Sporočilo poslano! Odgovorili vam bomo v najkrajšem možnem času.",
+    "error": "Napaka pri pošiljanju. Prosimo, poskusite znova."
+  },
+  "footer": {
+    "rights": "Vse pravice pridržane."
+  }
+}

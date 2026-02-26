@@ -1,0 +1,83 @@
+---
+interface Props {
+  images: { src: string; alt: string }[];
+}
+
+const { images } = Astro.props;
+---
+
+<div id="lightbox" class="fixed inset-0 z-[100] hidden bg-dark-950/95 backdrop-blur-md">
+  <!-- Close button -->
+  <button id="lightbox-close" class="absolute top-4 right-4 z-10 text-white/70 hover:text-white transition-colors p-2" aria-label="Close">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Previous button -->
+  <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white/70 hover:text-white transition-colors p-2" aria-label="Previous">
+    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <!-- Next button -->
+  <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white/70 hover:text-white transition-colors p-2" aria-label="Next">
+    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+
+  <!-- Image container -->
+  <div class="flex items-center justify-center h-full p-12">
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+  </div>
+</div>
+
+<script define:vars={{ images }}>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+  let currentIndex = 0;
+
+  function showImage(index) {
+    currentIndex = (index + images.length) % images.length;
+    lightboxImg.src = images[currentIndex].src;
+    lightboxImg.alt = images[currentIndex].alt;
+  }
+
+  function openLightbox(index) {
+    showImage(index);
+    lightbox.classList.remove('hidden');
+    document.body.classList.add('lightbox-open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  document.querySelectorAll('.gallery-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const index = parseInt(btn.dataset.index, 10);
+      openLightbox(index);
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeLightbox);
+  prevBtn?.addEventListener('click', () => showImage(currentIndex - 1));
+  nextBtn?.addEventListener('click', () => showImage(currentIndex + 1));
+
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightbox.querySelector('.flex')) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+    if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+  });
+</script>

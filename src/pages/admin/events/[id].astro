@@ -1,0 +1,114 @@
+---
+export const prerender = false;
+
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { db, Event, Reservation, eq, sql } from 'astro:db';
+
+const session = Astro.cookies.get('admin-session');
+if (!session || session.value !== 'authenticated') {
+  return Astro.redirect('/admin/login');
+}
+
+const { id } = Astro.params;
+
+const [event] = await db.select().from(Event).where(eq(Event.id, id!));
+if (!event) {
+  return Astro.redirect('/admin');
+}
+
+const reservations = await db
+  .select()
+  .from(Reservation)
+  .where(eq(Reservation.eventId, id!))
+  .orderBy(Reservation.createdAt);
+
+const totalPairs = reservations.reduce((sum, r) => sum + r.numberOfPairs, 0);
+const remaining = event.capacity - totalPairs;
+---
+
+<AdminLayout title={`${event.titleSl} - Admin`}>
+  <div>
+    <a href="/admin" class="inline-flex items-center text-dark-400 hover:text-gold transition-colors text-sm mb-6">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Nazaj
+    </a>
+
+    <div class="flex items-start justify-between mb-8">
+      <div>
+        <h1 class="text-2xl font-heading text-gold mb-2">{event.titleSl}</h1>
+        <div class="flex gap-4 text-dark-400 text-sm">
+          <span>{new Intl.DateTimeFormat('sl-SI', { dateStyle: 'long', timeStyle: 'short' }).format(event.date)}</span>
+          <span>{event.location}</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <div class="text-2xl font-semibold">
+          <span class={remaining <= 0 ? 'text-red-400' : 'text-green-400'}>{remaining}</span>
+          <span class="text-dark-500 text-lg"> / {event.capacity}</span>
+        </div>
+        <p class="text-dark-500 text-xs">prostih mest</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-4 mb-10">
+      <div class="bg-dark-800/50 border border-dark-700/50 rounded-xl p-4 text-center">
+        <p class="text-2xl font-semibold text-primary-400">{reservations.length}</p>
+        <p class="text-dark-400 text-xs mt-1">Rezervacij</p>
+      </div>
+      <div class="bg-dark-800/50 border border-dark-700/50 rounded-xl p-4 text-center">
+        <p class="text-2xl font-semibold text-primary-400">{totalPairs}</p>
+        <p class="text-dark-400 text-xs mt-1">Parov</p>
+      </div>
+      <div class="bg-dark-800/50 border border-dark-700/50 rounded-xl p-4 text-center">
+        <p class="text-2xl font-semibold text-primary-400">
+          {event.price ? `${((event.price / 100) * totalPairs).toFixed(0)}€` : '-'}
+        </p>
+        <p class="text-dark-400 text-xs mt-1">Prihodek</p>
+      </div>
+    </div>
+
+    <!-- Reservations table -->
+    <h2 class="text-xl font-heading text-gold mb-4">Rezervacije</h2>
+    {reservations.length === 0 ? (
+      <p class="text-dark-400">Ni rezervacij za ta dogodek.</p>
+    ) : (
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-dark-700">
+              <th class="text-left py-3 px-4 text-dark-400 font-medium">Ime</th>
+              <th class="text-left py-3 px-4 text-dark-400 font-medium">Email</th>
+              <th class="text-left py-3 px-4 text-dark-400 font-medium">Telefon</th>
+              <th class="text-center py-3 px-4 text-dark-400 font-medium">Parov</th>
+              <th class="text-left py-3 px-4 text-dark-400 font-medium">Sporočilo</th>
+              <th class="text-left py-3 px-4 text-dark-400 font-medium">Datum</th>
+              <th class="text-center py-3 px-4 text-dark-400 font-medium">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reservations.map((res) => (
+              <tr class="border-b border-dark-800 hover:bg-dark-800/50 transition-colors">
+                <td class="py-3 px-4 text-dark-100">{res.name}</td>
+                <td class="py-3 px-4 text-dark-300">
+                  <a href={`mailto:${res.email}`} class="hover:text-gold transition-colors">{res.email}</a>
+                </td>
+                <td class="py-3 px-4 text-dark-300">{res.phone}</td>
+                <td class="py-3 px-4 text-center text-primary-400 font-semibold">{res.numberOfPairs}</td>
+                <td class="py-3 px-4 text-dark-400 text-xs max-w-[200px] truncate">{res.message || '-'}</td>
+                <td class="py-3 px-4 text-dark-400 text-xs">
+                  {new Intl.DateTimeFormat('sl-SI', { dateStyle: 'medium', timeStyle: 'short' }).format(res.createdAt)}
+                </td>
+                <td class="py-3 px-4 text-center">
+                  <span class={`px-2 py-0.5 rounded text-xs ${res.status === 'confirmed' ? 'bg-green-900/50 text-green-400' : 'bg-red-900/50 text-red-400'}`}>
+                    {res.status === 'confirmed' ? 'Potrjeno' : 'Preklicano'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+  </div>
+</AdminLayout>

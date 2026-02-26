@@ -1,0 +1,38 @@
+---
+import { useTranslations, type Locale } from '../../i18n/ui';
+import { sectionIds } from '../../i18n/utils';
+import { GALLERY_IMAGES } from '../../lib/constants';
+import SectionHeading from '../ui/SectionHeading.astro';
+import GalleryImage from '../ui/GalleryImage.astro';
+import LightboxModal from '../ui/LightboxModal.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const sectionId = sectionIds.gallery[locale];
+
+const images = GALLERY_IMAGES.map((src, i) => ({
+  src,
+  alt: `Divana - Maja Marinčič ${i + 1}`,
+}));
+---
+
+<section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900">
+  <div class="max-w-7xl mx-auto">
+    <SectionHeading title={t('gallery.title')} />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {images.map((img, idx) => (
+        <GalleryImage src={img.src} alt={img.alt} index={idx} />
+      ))}
+    </div>
+
+    <!-- Photo credit -->
+    <p class="text-center text-dark-500 text-sm mt-6 italic">{t('gallery.photoCredit')}</p>
+  </div>
+
+  <LightboxModal images={images} />
+</section>

@@ -1,0 +1,65 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ReservationForm from '../../../components/forms/ReservationForm.astro';
+import { db, Event, Reservation, eq, sql } from 'astro:db';
+import { useTranslations } from '../../../i18n/ui';
+
+const { eventId } = Astro.params;
+const locale = 'en' as const;
+const t = useTranslations(locale);
+
+const [event] = await db.select().from(Event).where(eq(Event.id, eventId!));
+if (!event) {
+  return Astro.redirect('/en/');
+}
+
+const [{ totalPairs }] = await db
+  .select({ totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)` })
+  .from(Reservation)
+  .where(eq(Reservation.eventId, eventId!));
+
+const remaining = event.capacity - totalPairs;
+const title = event.titleEn || event.titleSl;
+const description = event.descriptionEn || event.descriptionSl;
+
+const dateStr = new Intl.DateTimeFormat('en-GB', {
+  dateStyle: 'long',
+  timeStyle: 'short',
+}).format(event.date);
+---
+
+<BaseLayout title={`Reservation - ${title}`} description={`Reserve your spot for ${title}`}>
+  <section class="min-h-screen py-28 px-4 bg-dark-900">
+    <div class="max-w-2xl mx-auto">
+      <a href="/en/" class="inline-flex items-center text-dark-400 hover:text-gold transition-colors text-sm mb-8">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        {t('reservation.back')}
+      </a>
+
+      <h1 class="text-3xl md:text-4xl font-heading font-semibold text-gold-gradient text-center mb-4">
+        {title}
+      </h1>
+
+      <div class="text-center text-dark-300 mb-10 space-y-1.5">
+        <p>{dateStr}</p>
+        <p>{event.location}</p>
+        {event.price && (
+          <p class="text-lg font-semibold text-primary-300">{(event.price / 100).toFixed(0)}&euro; per couple</p>
+        )}
+        <p class="text-primary-400 font-semibold mt-2">{remaining} spots remaining</p>
+      </div>
+
+      {description && (
+        <p class="text-dark-300 text-center italic mb-10 max-w-lg mx-auto">&ldquo;{description}&rdquo;</p>
+      )}
+
+      {remaining > 0 ? (
+        <ReservationForm locale={locale} eventId={eventId!} remainingCapacity={remaining} />
+      ) : (
+        <p class="text-center text-xl text-red-400 font-semibold">Sold out</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,105 @@
+---
+import { useTranslations, type Locale } from '../../i18n/ui';
+import { sectionIds, getLocalizedPath } from '../../i18n/utils';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const sectionId = sectionIds.danceEvenings[locale];
+const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
+---
+
+<section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900">
+  <div class="max-w-5xl mx-auto">
+    <SectionHeading title={t('danceEvenings.title')} subtitle={t('danceEvenings.subtitle')} />
+
+    <div class="max-w-3xl mx-auto text-center mb-16" data-animate>
+      <p class="text-dark-200 text-lg leading-relaxed italic">
+        &ldquo;{t('danceEvenings.description')}&rdquo;
+      </p>
+    </div>
+
+    <!-- Events loaded via client-side fetch -->
+    <div id="events-container" data-animate>
+      <h3 class="text-lg text-dark-300 text-center mb-8 tracking-wider uppercase">{t('danceEvenings.upcoming')}</h3>
+      <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Loading skeleton -->
+        <div class="event-skeleton bg-dark-800/50 border border-dark-700/50 rounded-2xl p-6 animate-pulse">
+          <div class="h-6 bg-dark-700 rounded w-3/4 mb-4"></div>
+          <div class="h-4 bg-dark-700 rounded w-1/2 mb-2"></div>
+          <div class="h-4 bg-dark-700 rounded w-2/3 mb-2"></div>
+          <div class="h-4 bg-dark-700 rounded w-1/3"></div>
+        </div>
+      </div>
+      <p id="no-events" class="hidden text-center text-dark-400 text-lg py-8">
+        {locale === 'sl' ? 'Trenutno ni razpisanih dogodkov. Spremljajte nas za novice!' : 'No upcoming events at the moment. Stay tuned!'}
+      </p>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ locale, reservePath }}>
+  async function loadEvents() {
+    try {
+      const res = await fetch('/api/events');
+      if (!res.ok) throw new Error('Failed to fetch');
+      const events = await res.json();
+      const grid = document.getElementById('events-grid');
+      const noEvents = document.getElementById('no-events');
+
+      // Remove skeleton
+      document.querySelectorAll('.event-skeleton').forEach(el => el.remove());
+
+      if (events.length === 0) {
+        noEvents?.classList.remove('hidden');
+        return;
+      }
+
+      const titleKey = locale === 'sl' ? 'titleSl' : 'titleEn';
+      const soldOutText = locale === 'sl' ? 'Razprodano' : 'Sold out';
+      const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
+      const perPairText = locale === 'sl' ? 'na par' : 'per couple';
+
+      events.forEach(event => {
+        const isSoldOut = event.remainingCapacity <= 0;
+        const dateStr = new Intl.DateTimeFormat(locale === 'sl' ? 'sl-SI' : 'en-GB', {
+          dateStyle: 'long',
+          timeStyle: 'short',
+        }).format(new Date(event.date));
+
+        const spotsText = locale === 'sl'
+          ? `Še ${event.remainingCapacity} prostih mest`
+          : `${event.remainingCapacity} spots remaining`;
+
+        const card = document.createElement('div');
+        card.className = 'bg-dark-800/50 border border-dark-700/50 rounded-2xl p-6 hover:border-gold/30 transition-all duration-300';
+        card.innerHTML = `
+          <h3 class="text-xl font-heading font-semibold text-dark-50 mb-3">${event[titleKey] || event.titleSl}</h3>
+          <div class="space-y-2 text-dark-300 text-sm mb-5">
+            <p>${dateStr}</p>
+            <p>${event.location}</p>
+            ${event.price ? `<p>${(event.price / 100).toFixed(0)}&euro; ${perPairText}</p>` : ''}
+          </div>
+          <div class="flex items-center justify-between">
+            ${isSoldOut
+              ? `<span class="text-red-400 font-semibold text-sm">${soldOutText}</span>`
+              : `<span class="text-primary-400 text-sm font-medium">${spotsText}</span>
+                 <a href="${reservePath}/${event.id}" class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-medium text-sm rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300">${reserveText}</a>`
+            }
+          </div>
+        `;
+        grid?.appendChild(card);
+      });
+    } catch (e) {
+      document.querySelectorAll('.event-skeleton').forEach(el => el.remove());
+      const noEvents = document.getElementById('no-events');
+      noEvents?.classList.remove('hidden');
+    }
+  }
+
+  loadEvents();
+</script>

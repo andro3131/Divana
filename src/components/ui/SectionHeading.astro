@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<div class="text-center mb-16" data-animate>
+  <h2 class="text-3xl md:text-5xl font-heading font-semibold text-gold-gradient inline-block mb-4">
+    {title}
+  </h2>
+  <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+  {subtitle && (
+    <p class="text-dark-300 text-lg mt-4 max-w-2xl mx-auto">{subtitle}</p>
+  )}
+</div>

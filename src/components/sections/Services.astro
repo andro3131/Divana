@@ -1,0 +1,46 @@
+---
+import { useTranslations, type Locale } from '../../i18n/ui';
+import { sectionIds } from '../../i18n/utils';
+import SectionHeading from '../ui/SectionHeading.astro';
+import ServiceCard from '../ui/ServiceCard.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const sectionId = sectionIds.services[locale];
+
+const services = [
+  { icon: '🎤', titleKey: 'services.solo.title', descKey: 'services.solo.description' },
+  { icon: '🎸', titleKey: 'services.band.title', descKey: 'services.band.description' },
+  { icon: '💍', titleKey: 'services.wedding.title', descKey: 'services.wedding.description' },
+  { icon: '🏢', titleKey: 'services.corporate.title', descKey: 'services.corporate.description' },
+];
+---
+
+<section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-950">
+  <div class="max-w-7xl mx-auto">
+    <SectionHeading title={t('services.title')} subtitle={t('services.subtitle')} />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((service) => (
+        <ServiceCard
+          icon={service.icon}
+          title={t(service.titleKey)}
+          description={t(service.descKey)}
+        />
+      ))}
+    </div>
+
+    <div class="text-center mt-12" data-animate>
+      <a
+        href={`#${sectionIds.contact[locale]}`}
+        class="inline-flex items-center px-8 py-3 border border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-lg font-medium text-sm tracking-wider uppercase transition-all duration-300"
+      >
+        {t('services.cta')}
+      </a>
+    </div>
+  </div>
+</section>
