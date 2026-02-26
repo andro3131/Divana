@@ -4,7 +4,7 @@
     "about": "O meni",
     "music": "Glasba",
     "gallery": "Galerija",
-    "services": "Storitve",
+    "services": "Nastopi",
     "danceEvenings": "Plesni večeri",
     "contact": "Kontakt"
   },
@@ -33,7 +33,7 @@
     "photoCredit": "Foto: Dejan Udovč"
   },
   "services": {
-    "title": "Storitve",
+    "title": "Nastopi",
     "subtitle": "Glasba za vsak trenutek",
     "solo": {
       "title": "Samostojni koncerti",

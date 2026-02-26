@@ -4,7 +4,7 @@
     "about": "About",
     "music": "Music",
     "gallery": "Gallery",
-    "services": "Services",
+    "services": "Performances",
     "danceEvenings": "Dance Evenings",
     "contact": "Contact"
   },
@@ -33,7 +33,7 @@
     "photoCredit": "Photo: Dejan Udovč"
   },
   "services": {
-    "title": "Services",
+    "title": "Performances",
     "subtitle": "Music for every moment",
     "solo": {
       "title": "Solo Concerts",
