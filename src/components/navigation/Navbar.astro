@@ -1,6 +1,7 @@
 ---
 import { useTranslations, type Locale } from '../../i18n/ui';
 import { sectionIds, getLocalizedPath } from '../../i18n/utils';
+import { LOGO_IMAGE } from '../../lib/constants';
 
 interface Props {
   locale: Locale;
@@ -25,8 +26,8 @@ const navItems = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href={getLocalizedPath('/', locale)} class="text-gold font-heading text-2xl font-semibold tracking-wide hover:text-gold-light transition-colors">
-        Divana
+      <a href={getLocalizedPath('/', locale)} class="hover:opacity-80 transition-opacity">
+        <img src={LOGO_IMAGE} alt="Divana" class="h-10 md:h-12 w-auto" />
       </a>
 
       <!-- Desktop nav -->
