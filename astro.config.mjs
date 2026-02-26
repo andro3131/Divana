@@ -1,12 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 import db from '@astrojs/db';
 
 export default defineConfig({
   site: 'https://divana.si',
-  adapter: node({ mode: 'standalone' }),
+  adapter: vercel(),
   integrations: [db()],
   vite: {
     plugins: [tailwindcss()],
