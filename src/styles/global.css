@@ -90,6 +90,16 @@ body {
   animation: star-float 3s ease-in-out infinite;
 }
 
+/* Button float - slower, smaller, offset timing */
+@keyframes btn-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.btn-float {
+  animation: btn-float 4s ease-in-out 1.5s infinite;
+}
+
 /* Lightbox */
 .lightbox-open {
   overflow: hidden;

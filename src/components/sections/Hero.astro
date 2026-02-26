@@ -36,12 +36,12 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
     </p>
   </div>
 
-  <!-- Dance Evening Star Banner - moved more left, vertically centered -->
+  <!-- Dance Evening Star Banner - right side, vertically centered -->
   <div class="hidden md:block absolute right-20 lg:right-32 xl:right-40 top-1/2 -translate-y-1/2 animate-fade-in-delay">
-    <div class="star-float flex flex-col items-center">
-      <!-- Star - even proportions, thinner arms -->
-      <div class="relative w-[280px] lg:w-[340px] xl:w-[380px] aspect-square group">
-        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_40px_rgba(201,168,76,0.3)] group-hover:drop-shadow-[0_0_60px_rgba(201,168,76,0.5)] transition-all duration-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <div class="flex flex-col items-center">
+      <!-- Star - floats independently -->
+      <div class="star-float relative w-[280px] lg:w-[340px] xl:w-[380px] aspect-square group">
+        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_60px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_80px_rgba(224,200,114,0.6)] transition-all duration-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f5e8a0"/>
@@ -58,35 +58,39 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
           />
         </svg>
 
-        <!-- Star text - bigger -->
-        <div class="absolute inset-0 flex items-center justify-center z-10">
+        <!-- Star text - bigger fonts, shifted down -->
+        <div class="absolute inset-0 flex items-center justify-center z-10 pt-4">
           <div class="text-center px-[18%]">
-            <p class="text-dark-900 text-xs lg:text-sm xl:text-base font-bold tracking-widest uppercase mb-2 lg:mb-3">
+            <p class="text-dark-900 text-sm lg:text-base xl:text-lg font-bold tracking-widest uppercase mb-1 lg:mb-2">
               {locale === 'sl' ? 'Plesni večer' : 'Dance Evening'}
             </p>
-            <p class="text-dark-900 text-3xl lg:text-4xl xl:text-5xl font-heading font-bold tracking-wide mb-3 lg:mb-4">
+            <p class="text-dark-900 text-4xl lg:text-5xl xl:text-6xl font-heading font-bold tracking-wide mb-2 lg:mb-3">
               Divana
             </p>
-            <p class="text-dark-800 text-xs lg:text-sm xl:text-base font-medium leading-snug">
+            <p class="text-dark-800 text-sm lg:text-base xl:text-lg font-medium leading-snug">
               Dvorana Stik
             </p>
-            <p class="text-dark-800 text-xs lg:text-sm xl:text-base font-medium mt-0.5">
+            <p class="text-dark-800 text-sm lg:text-base xl:text-lg font-medium mt-0.5">
               {locale === 'sl' ? '8. marec 2026 ob 18h' : 'March 8, 2026 at 18h'}
             </p>
           </div>
         </div>
 
-        <!-- Sparkle decorations -->
-        <div class="absolute -top-4 -right-2 text-gold text-2xl animate-pulse">&#10022;</div>
-        <div class="absolute -bottom-3 -left-3 text-gold-light text-xl animate-pulse" style="animation-delay: 0.7s">&#10022;</div>
-        <div class="absolute top-[20%] -left-5 text-gold-dark/70 text-sm animate-pulse" style="animation-delay: 1.2s">&#10023;</div>
-        <div class="absolute bottom-[20%] -right-4 text-gold/60 text-base animate-pulse" style="animation-delay: 0.4s">&#10023;</div>
+        <!-- Sparkle decorations - more stars -->
+        <div class="absolute -top-5 -right-3 text-gold text-2xl animate-pulse">&#10022;</div>
+        <div class="absolute -bottom-4 -left-4 text-gold-light text-xl animate-pulse" style="animation-delay: 0.7s">&#10022;</div>
+        <div class="absolute top-[18%] -left-6 text-gold-dark/70 text-base animate-pulse" style="animation-delay: 1.2s">&#10023;</div>
+        <div class="absolute bottom-[18%] -right-5 text-gold/60 text-lg animate-pulse" style="animation-delay: 0.4s">&#10023;</div>
+        <div class="absolute -top-2 left-[20%] text-gold-light/50 text-xs animate-pulse" style="animation-delay: 1.8s">&#10022;</div>
+        <div class="absolute -bottom-1 right-[15%] text-gold/40 text-xs animate-pulse" style="animation-delay: 2.2s">&#10022;</div>
+        <div class="absolute top-[40%] -right-7 text-gold-light/40 text-sm animate-pulse" style="animation-delay: 0.9s">&#10023;</div>
+        <div class="absolute top-[55%] -left-8 text-gold/30 text-xs animate-pulse" style="animation-delay: 1.6s">&#10022;</div>
       </div>
 
-      <!-- Reservation button below star -->
+      <!-- Reservation button - floats independently, different color -->
       <a
         href={`#${danceId}`}
-        class="mt-4 lg:mt-6 inline-block px-8 lg:px-10 py-3 lg:py-3.5 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-dark-900 text-sm lg:text-base font-bold tracking-widest uppercase rounded-full hover:scale-105 hover:shadow-[0_0_30px_rgba(201,168,76,0.4)] transition-all duration-300"
+        class="btn-float mt-6 lg:mt-8 inline-block px-8 lg:px-10 py-3 lg:py-3.5 bg-dark-950/90 backdrop-blur-sm border border-gold/40 text-gold-light text-sm lg:text-base font-bold tracking-widest uppercase rounded-full hover:border-gold/70 hover:bg-dark-900 hover:scale-105 hover:shadow-[0_0_25px_rgba(201,168,76,0.3)] transition-all duration-300"
       >
         {reserveText}
       </a>
