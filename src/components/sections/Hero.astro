@@ -12,7 +12,7 @@ const t = useTranslations(locale);
 ---
 
 <!-- Scroll zone: extra height creates scroll space for zoom effect before page moves -->
-<div id="hero-scroll-zone" class="relative" style="height: 130vh;">
+<div id="hero-scroll-zone" class="relative" style="height: 170vh;">
 <section id="hero" class="sticky top-0 h-screen w-full overflow-hidden">
   <!-- Background image -->
   <div class="absolute inset-0">
@@ -82,12 +82,12 @@ const t = useTranslations(locale);
           const scrollY = window.scrollY;
 
           if (scrollY <= zoomDistance && zoomDistance > 0) {
-            // Within zoom zone: scale from 1 to 1.1
+            // Within zoom zone: scale from 1 to 1.15
             const progress = scrollY / zoomDistance;
-            const scale = 1 + progress * 0.1;
+            const scale = 1 + progress * 0.15;
             heroImg.style.transform = `scale(${scale})`;
           } else if (scrollY < scrollZone.offsetHeight) {
-            heroImg.style.transform = `scale(1.1)`;
+            heroImg.style.transform = `scale(1.15)`;
           }
 
           ticking = false;
