@@ -138,6 +138,13 @@ const eventLocation = 'Dvorana Stik, Trebnje';
         <a class="cta-btn" href={`#${danceId}`}>{ctaText}</a>
       </div>
 
+      <!-- NOVO!! Pulse Badge -->
+      <div class="pulse-badge">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring ring2"></div>
+        <span>NOVO!!</span>
+      </div>
+
     </div>
   </div>
 </div>
@@ -204,7 +211,7 @@ const eventLocation = 'Dvorana Stik, Trebnje';
     height: 100%;
     background: rgba(18, 14, 10, 0.75);
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid rgba(201,162,78,0.18);
     z-index: 1;
     backdrop-filter: blur(10px);
@@ -219,7 +226,7 @@ const eventLocation = 'Dvorana Stik, Trebnje';
   }
 
   /* Corner ornaments */
-  .corner { position: absolute; width: 50px; height: 50px; z-index: 5; }
+  .corner { position: absolute; width: 40px; height: 40px; z-index: 5; }
   .corner svg { width: 100%; height: 100%; }
   .corner.tl { top: 10px; left: 10px; }
   .corner.tr { top: 10px; right: 10px; transform: scaleX(-1); }
@@ -374,6 +381,58 @@ const eventLocation = 'Dvorana Stik, Trebnje';
   @media (max-width: 400px) {
     .banner-content { padding: 20px 16px; }
     .cta-btn { padding: 10px 28px; font-size: 11px; }
+  }
+
+  /* NOVO!! Pulse Badge */
+  .pulse-badge {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    z-index: 20;
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 45% 40%, #E74C3C, #9B2335);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(12deg);
+    animation: pulseIn 0.5s ease-out 1.8s both;
+    box-shadow: 0 4px 18px rgba(192,57,43,0.4);
+  }
+
+  .pulse-badge span {
+    color: #FFF;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4), 0 0 10px rgba(231,76,60,0.3);
+    z-index: 2;
+    position: relative;
+  }
+
+  .pulse-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(231,76,60,0.5);
+    animation: ringPulse 2.5s ease-out 2.3s infinite;
+  }
+
+  .pulse-ring.ring2 {
+    animation-delay: 3.3s;
+  }
+
+  @keyframes ringPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  @keyframes pulseIn {
+    0% { opacity: 0; transform: rotate(12deg) scale(0); }
+    60% { transform: rotate(12deg) scale(1.1); }
+    100% { opacity: 1; transform: rotate(12deg) scale(1); }
   }
 </style>
 

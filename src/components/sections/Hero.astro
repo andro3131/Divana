@@ -1,6 +1,5 @@
 ---
 import { useTranslations, type Locale } from '../../i18n/ui';
-import { sectionIds } from '../../i18n/utils';
 import { HERO_IMAGE } from '../../lib/constants';
 import DanceEveningBanner from '../ui/DanceEveningBanner.astro';
 
@@ -37,7 +36,7 @@ const t = useTranslations(locale);
   </div>
 
   <!-- Dance Evening Banner - slides in from right -->
-  <div class="absolute right-2 bottom-20 sm:right-4 sm:bottom-24 md:right-6 md:top-[55%] md:bottom-auto md:-translate-y-1/2 lg:right-12 xl:right-16 z-20">
+  <div class="absolute right-2 bottom-20 sm:right-4 sm:bottom-24 md:right-[18%] md:top-[55%] md:bottom-auto md:-translate-y-1/2 lg:right-[20%] xl:right-[22%] z-20">
     <DanceEveningBanner locale={locale} />
   </div>
 
