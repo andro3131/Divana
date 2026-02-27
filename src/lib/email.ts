@@ -23,7 +23,7 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
   }).format(new Date(event.date));
 
   await resend.emails.send({
-    from: 'Divana <rezervacije@divana.si>',
+    from: 'Divana <onboarding@resend.dev>',
     to: email,
     subject: `Potrditev rezervacije - ${event.titleSl}`,
     html: `
@@ -57,7 +57,7 @@ export async function sendContactNotification(data: { name: string; email: strin
   const resend = new Resend(apiKey);
 
   await resend.emails.send({
-    from: 'Divana Website <info@divana.si>',
+    from: 'Divana <onboarding@resend.dev>',
     to: 'carobnizvok@gmail.com',
     subject: `Novo sporočilo od ${data.name}`,
     html: `
