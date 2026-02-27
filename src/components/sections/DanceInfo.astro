@@ -225,45 +225,47 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
 </section>
 
 <style>
-  /* Horizontal sway on the whole banner */
-  @keyframes diSway {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(10px); }
-    50% { transform: translateX(0); }
-    75% { transform: translateX(-10px); }
-    100% { transform: translateX(0); }
-  }
-
-  /* Outer glow that pulses */
+  /* Outer glow that pulses and shifts color */
   .di-glow-wrap {
     position: relative;
-    animation: diSway 6s ease-in-out infinite;
   }
 
   .di-glow-wrap::before {
     content: '';
     position: absolute;
-    inset: -40px;
-    background: radial-gradient(ellipse at center, rgba(201,162,78,0.14) 0%, rgba(201,162,78,0.06) 40%, transparent 70%);
+    inset: -50px;
     border-radius: 30px;
     z-index: 0;
-    animation: diGlowPulse 4s ease-in-out infinite;
-    filter: blur(8px);
+    filter: blur(12px);
+    animation: diGlowShift 8s ease-in-out infinite;
   }
 
   .di-glow-wrap::after {
     content: '';
     position: absolute;
-    inset: -20px;
-    background: radial-gradient(ellipse at center, rgba(201,162,78,0.1) 0%, transparent 60%);
+    inset: -25px;
     border-radius: 20px;
     z-index: 0;
-    animation: diGlowPulse 4s ease-in-out 2s infinite;
+    filter: blur(6px);
+    animation: diGlowShift 8s ease-in-out 4s infinite;
   }
 
-  @keyframes diGlowPulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.04); }
+  @keyframes diGlowShift {
+    0%, 100% {
+      opacity: 0.3;
+      background: radial-gradient(ellipse at center, rgba(201,162,78,0.15) 0%, transparent 70%);
+      transform: scale(1);
+    }
+    33% {
+      opacity: 0.7;
+      background: radial-gradient(ellipse at 30% 50%, rgba(224,200,114,0.2) 0%, rgba(201,162,78,0.08) 50%, transparent 70%);
+      transform: scale(1.03);
+    }
+    66% {
+      opacity: 0.5;
+      background: radial-gradient(ellipse at 70% 50%, rgba(160,126,42,0.18) 0%, rgba(201,162,78,0.1) 50%, transparent 70%);
+      transform: scale(1.05);
+    }
   }
 
   .di-banner {
