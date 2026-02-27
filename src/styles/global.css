@@ -146,6 +146,37 @@ body {
   animation: novo-pulse 2s ease-in-out infinite;
 }
 
+/* Star text staggered entrance */
+@keyframes star-text-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.star-text-line {
+  opacity: 0;
+  animation: star-text-appear 0.6s ease forwards;
+}
+
+/* Shimmer effect on "Divana" text inside star */
+@keyframes star-shimmer {
+  0%, 100% {
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(160, 126, 42, 0.4), 0 0 16px rgba(201, 168, 76, 0.2);
+  }
+}
+
+.star-text-shimmer {
+  animation: star-text-appear 0.6s ease forwards, star-shimmer 4s ease-in-out 1.5s infinite;
+}
+
 /* About section - rotated photos */
 .about-photo {
   transition: transform 0.4s ease, box-shadow 0.4s ease;

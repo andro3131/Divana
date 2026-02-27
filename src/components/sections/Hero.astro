@@ -63,22 +63,22 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
           />
         </svg>
 
-        <!-- Star text - fits within star shape -->
-        <div class="absolute inset-0 flex items-center justify-center z-10">
-          <div class="text-center px-[22%] md:px-[24%]">
-            <p class="text-dark-900 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-wider uppercase leading-tight mb-0.5 md:mb-1">
+        <!-- Star text - counter-rotated to stay horizontal -->
+        <div class="absolute inset-0 flex items-center justify-center z-10 -rotate-[5deg]">
+          <div class="text-center px-[22%] md:px-[24%] pt-[8%]">
+            <p class="text-dark-900 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-wider uppercase leading-tight mb-0.5 md:mb-1 star-text-line" style="animation-delay: 0.3s">
               {locale === 'sl' ? 'Plesni večer' : 'Dance Evening'}
             </p>
-            <p class="text-dark-900 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-heading font-black tracking-wide mb-0.5 md:mb-1">
+            <p class="text-dark-900 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-heading font-black tracking-wide mb-0.5 md:mb-1 star-text-line star-text-shimmer" style="animation-delay: 0.6s">
               Divana
             </p>
-            <p class="text-dark-800/80 text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm font-semibold italic leading-tight mb-0.5 md:mb-1.5">
+            <p class="text-dark-800/80 text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm font-semibold italic leading-tight mb-0.5 md:mb-1.5 star-text-line" style="animation-delay: 0.9s">
               {locale === 'sl' ? '– Vajin stik –' : '– Your Connection –'}
             </p>
-            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight">
+            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight star-text-line" style="animation-delay: 1.2s">
               Dvorana Stik (Trebnje)
             </p>
-            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight">
+            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight star-text-line" style="animation-delay: 1.4s">
               {locale === 'sl' ? '8. 3. 2026 ob 18h' : '8. 3. 2026 at 18h'}
             </p>
           </div>
