@@ -483,23 +483,44 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
 
   .di-cta-link {
     display: inline-block;
-    padding: 9px 28px;
-    border: 1px solid rgba(201,162,78,0.35);
-    color: #C9A24E;
+    padding: 14px 40px;
+    border: 2px solid #C9A24E;
+    color: #FFF;
     font-family: 'Playfair Display', serif;
-    font-size: 12px; font-weight: 600;
+    font-size: 15px; font-weight: 700;
     letter-spacing: 0.25em; text-transform: uppercase;
     text-decoration: none; cursor: pointer;
-    background: linear-gradient(135deg, rgba(201,162,78,0.06), rgba(201,162,78,0.02));
+    background: linear-gradient(135deg, rgba(201,162,78,0.25), rgba(138,106,32,0.2));
     transition: all 0.4s ease;
     position: relative; overflow: hidden;
-    box-shadow: 0 0 12px rgba(201,162,78,0.06);
+    box-shadow: 0 0 20px rgba(201,162,78,0.15), inset 0 0 15px rgba(201,162,78,0.08);
+    animation: diCtaPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes diCtaPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(201,162,78,0.15), inset 0 0 15px rgba(201,162,78,0.08); }
+    50% { box-shadow: 0 0 35px rgba(201,162,78,0.3), inset 0 0 20px rgba(201,162,78,0.12); }
+  }
+
+  .di-cta-link::after {
+    content: '';
+    position: absolute; top: -50%; left: -50%;
+    width: 30px; height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: rotate(25deg);
+    animation: diCtaShine 4s ease-in-out 1s infinite;
+  }
+
+  @keyframes diCtaShine {
+    0%, 100% { left: -50%; }
+    50% { left: 150%; }
   }
 
   .di-cta-link:hover {
-    border-color: #E2C77A; color: #E2C77A;
-    box-shadow: 0 0 25px rgba(201,162,78,0.18);
-    background: linear-gradient(135deg, rgba(201,162,78,0.2), rgba(201,162,78,0.1));
+    border-color: #E2C77A; color: #FFF;
+    box-shadow: 0 0 40px rgba(201,162,78,0.35), inset 0 0 25px rgba(201,162,78,0.15);
+    background: linear-gradient(135deg, rgba(201,162,78,0.4), rgba(138,106,32,0.3));
+    transform: translateY(-2px);
   }
 
   /* NOVO!! Badge */
