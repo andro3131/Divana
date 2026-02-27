@@ -63,10 +63,11 @@ export const SERVICE_SOLO_IMAGES = [
 ];
 
 export const SERVICE_BAND_IMAGES = [
-  { src: `${CDN_BASE}/divana2.jpg`, alt: 'Koncert z bandom - Divana' },
-  { src: `${CDN_BASE}/divana5.jpg`, alt: 'Koncert z bandom - Divana' },
-  { src: `${CDN_BASE}/Galerija/596548353_10236179603903226_7315947033233608792_n.jpg`, alt: 'Koncert z bandom - Divana' },
-  { src: `${CDN_BASE}/Galerija/642742084_10237202575236870_4718934463200127882_n.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/PONUDBA/589723483_122171483390784629_4394423904053417200_n.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/PONUDBA/590431116_122171483204784629_1822284055479484534_n.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/PONUDBA/590442759_122171483594784629_3811275188146475286_n.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/PONUDBA/591913408_122171483402784629_3785550888394690673_n.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/PONUDBA/592106383_122171483558784629_5594523380118323630_n.jpg`, alt: 'Koncert z bandom - Divana' },
 ];
 
 export const YOUTUBE_VIDEOS = [
