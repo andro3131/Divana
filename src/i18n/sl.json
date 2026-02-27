@@ -28,7 +28,8 @@
   "music": {
     "title": "Glasba",
     "listenOn": "Poslušaj na Spotify",
-    "watchOn": "Poglej na YouTube"
+    "watchOn": "Poglej na YouTube",
+    "showAll": "Poglej vse"
   },
   "gallery": {
     "title": "Galerija",

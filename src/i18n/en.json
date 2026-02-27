@@ -28,7 +28,8 @@
   "music": {
     "title": "Music",
     "listenOn": "Listen on Spotify",
-    "watchOn": "Watch on YouTube"
+    "watchOn": "Watch on YouTube",
+    "showAll": "See all"
   },
   "gallery": {
     "title": "Gallery",
