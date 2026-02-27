@@ -20,18 +20,27 @@ const musicPageUrl = locale === 'sl' ? '/glasba' : '/en/music';
   <div class="max-w-7xl mx-auto">
     <SectionHeading title={t('music.title')} />
 
-    <!-- 4 Featured YouTube Videos - 2x2 grid -->
+    <!-- 4 Featured YouTube Videos - 2x2 grid (lite embed: thumbnail + play button) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8" data-animate>
       {previewVideos.map((videoId) => (
-        <div class="aspect-video rounded-xl overflow-hidden bg-dark-800">
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}`}
-            title="YouTube video"
-            class="w-full h-full"
+        <div
+          class="yt-lite aspect-video rounded-xl overflow-hidden bg-dark-800 relative cursor-pointer group"
+          data-videoid={videoId}
+        >
+          <img
+            src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+            alt="YouTube video"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          />
+          <div class="absolute inset-0 bg-dark-950/30 group-hover:bg-dark-950/10 transition-colors duration-300"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+              <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
         </div>
       ))}
     </div>
@@ -50,3 +59,20 @@ const musicPageUrl = locale === 'sl' ? '/glasba' : '/en/music';
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll('.yt-lite').forEach((el) => {
+    el.addEventListener('click', () => {
+      const videoId = el.getAttribute('data-videoid');
+      if (!videoId) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      iframe.className = 'w-full h-full absolute inset-0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      el.innerHTML = '';
+      el.classList.remove('cursor-pointer', 'group');
+      el.appendChild(iframe);
+    });
+  });
+</script>

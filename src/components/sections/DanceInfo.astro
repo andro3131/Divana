@@ -10,7 +10,7 @@ const t = useTranslations(locale);
 const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en/reservation/plesni-vecer-2026-03';
 ---
 
-<section class="py-24 px-4 md:px-8 bg-dark-900">
+<section id={locale === 'sl' ? 'plesni-veceri' : 'dance-evenings'} class="py-24 px-4 md:px-8 bg-dark-900">
   <div class="max-w-[1400px] mx-auto">
     <!-- Outer glow wrapper -->
     <div class="di-glow-wrap">
