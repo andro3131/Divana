@@ -174,15 +174,14 @@ const photoClass = (side: 'left' | 'right') =>
 </section>
 
 <script>
-  // IntersectionObserver for slide-in/out animations on about photos
-  // Photos slide in when visible, slide back out when scrolled away
+  // IntersectionObserver for slide-in animations on about photos
+  // Photos slide in when visible and stay in place
   const slideObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('slide-in');
-        } else {
-          entry.target.classList.remove('slide-in');
+          slideObserver.unobserve(entry.target);
         }
       });
     },
@@ -192,4 +191,37 @@ const photoClass = (side: 'left' | 'right') =>
   document.querySelectorAll('[data-slide]').forEach((el) => {
     slideObserver.observe(el);
   });
+
+  // Random glow effect cycling between about photos
+  const aboutPhotos = document.querySelectorAll('.about-photo');
+  let currentGlow: Element | null = null;
+
+  function randomGlow() {
+    // Remove glow from previous photo
+    if (currentGlow) {
+      currentGlow.classList.remove('about-photo-glow');
+    }
+
+    // Pick a random photo that has slide-in (is visible)
+    const visible = Array.from(aboutPhotos).filter((p) =>
+      p.classList.contains('slide-in')
+    );
+
+    if (visible.length > 0) {
+      // Pick random, avoid same one twice
+      let next: Element;
+      do {
+        next = visible[Math.floor(Math.random() * visible.length)];
+      } while (next === currentGlow && visible.length > 1);
+
+      next.classList.add('about-photo-glow');
+      currentGlow = next;
+    }
+  }
+
+  // Start glow cycle after initial slide-ins
+  setTimeout(() => {
+    randomGlow();
+    setInterval(randomGlow, 3000);
+  }, 1500);
 </script>

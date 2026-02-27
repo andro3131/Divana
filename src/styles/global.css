@@ -209,6 +209,17 @@ body {
   z-index: 10;
 }
 
+/* Random glow behind about photos */
+.about-photo-glow > div {
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.35), 0 0 60px rgba(201, 168, 76, 0.15);
+  transition: box-shadow 1s ease-in-out;
+}
+
+.about-photo:not(.about-photo-glow) > div {
+  box-shadow: none;
+  transition: box-shadow 1s ease-in-out;
+}
+
 /* Lightbox */
 .lightbox-open {
   overflow: hidden;
