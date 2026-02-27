@@ -2,6 +2,7 @@
 import { useTranslations, type Locale } from '../../i18n/ui';
 import { sectionIds } from '../../i18n/utils';
 import { HERO_IMAGE } from '../../lib/constants';
+import DanceEveningBanner from '../ui/DanceEveningBanner.astro';
 
 interface Props {
   locale: Locale;
@@ -9,8 +10,6 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const danceId = sectionIds.danceEvenings[locale];
-const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
 ---
 
 <section id="hero" class="relative h-screen w-full overflow-hidden">
@@ -36,67 +35,10 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
     </p>
   </div>
 
-  {/* <!-- ZAČASNO SKRITO: Dance Evening Star Banner
-  <div class="absolute right-4 bottom-40 sm:right-8 sm:bottom-44 md:right-20 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:right-32 xl:right-40 animate-fade-in-delay z-20">
-    <div class="flex flex-col items-center">
-      <div class="star-float relative w-[180px] sm:w-[220px] md:w-[280px] lg:w-[340px] xl:w-[380px] aspect-square">
-        <div class="absolute -top-3 sm:-top-4 md:-top-5 left-1/2 -translate-x-1/2 z-30">
-          <span class="inline-block bg-red-600 text-white text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-black tracking-wider uppercase px-2.5 sm:px-3 md:px-4 py-0.5 sm:py-1 rounded-full shadow-lg shadow-red-900/40 novo-pulse">
-            NOVO!!
-          </span>
-        </div>
-        <svg class="absolute inset-0 w-full h-full star-glow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f5e8a0"/>
-              <stop offset="25%" stop-color="#e0c872"/>
-              <stop offset="50%" stop-color="#c9a84c"/>
-              <stop offset="75%" stop-color="#dcc26a"/>
-              <stop offset="100%" stop-color="#f0dc8a"/>
-            </linearGradient>
-          </defs>
-          <polygon
-            points="100,2 124,68 193,70 138,112 158,179 100,140 42,179 62,112 7,70 77,68"
-            fill="url(#starGold)"
-          />
-        </svg>
-        <div class="absolute inset-0 flex items-center justify-center z-10">
-          <div class="text-center px-[22%] md:px-[24%] pt-[8%]">
-            <p class="text-dark-900 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-wider uppercase leading-tight mb-0.5 md:mb-1 star-text-line" style="animation-delay: 0.3s">
-              {locale === 'sl' ? 'Plesni večer' : 'Dance Evening'}
-            </p>
-            <p class="text-dark-900 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-heading font-black tracking-wide mb-0.5 md:mb-1 star-text-line star-text-shimmer" style="animation-delay: 0.6s">
-              Divana
-            </p>
-            <p class="text-dark-800/80 text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm font-semibold italic leading-tight mb-0.5 md:mb-1.5 star-text-line" style="animation-delay: 0.9s">
-              {locale === 'sl' ? '– Vajin stik –' : '– Your Connection –'}
-            </p>
-            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight star-text-line" style="animation-delay: 1.2s">
-              Dvorana Stik (Trebnje)
-            </p>
-            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight star-text-line" style="animation-delay: 1.4s">
-              {locale === 'sl' ? '8. 3. 2026 ob 18h' : '8. 3. 2026 at 18h'}
-            </p>
-          </div>
-        </div>
-        <div class="absolute -top-5 -right-3 text-gold text-2xl sparkle-pulse">&#10022;</div>
-        <div class="absolute -bottom-4 -left-4 text-gold-light text-xl sparkle-pulse" style="animation-delay: 0.7s">&#10022;</div>
-        <div class="absolute top-[18%] -left-6 text-gold-dark/70 text-base sparkle-pulse" style="animation-delay: 1.2s">&#10023;</div>
-        <div class="absolute bottom-[18%] -right-5 text-gold/60 text-lg sparkle-pulse" style="animation-delay: 0.4s">&#10023;</div>
-        <div class="absolute -top-2 left-[20%] text-gold-light/50 text-xs sparkle-pulse" style="animation-delay: 1.8s">&#10022;</div>
-        <div class="absolute -bottom-1 right-[15%] text-gold/40 text-xs sparkle-pulse" style="animation-delay: 2.2s">&#10022;</div>
-        <div class="absolute top-[40%] -right-7 text-gold-light/40 text-sm sparkle-pulse" style="animation-delay: 0.9s">&#10023;</div>
-        <div class="absolute top-[55%] -left-8 text-gold/30 text-xs sparkle-pulse" style="animation-delay: 1.6s">&#10022;</div>
-      </div>
-      <a
-        href={`#${danceId}`}
-        class="btn-float mt-4 sm:mt-5 md:mt-6 lg:mt-8 inline-block px-6 sm:px-7 md:px-8 lg:px-10 py-2.5 sm:py-3 lg:py-3.5 bg-dark-950/90 backdrop-blur-sm border border-gold/40 text-gold-light text-xs sm:text-sm lg:text-base font-bold tracking-widest uppercase rounded-full hover:border-gold/70 hover:bg-dark-900 hover:scale-105 hover:shadow-[0_0_25px_rgba(201,168,76,0.3)] transition-all duration-300"
-      >
-        {reserveText}
-      </a>
-    </div>
+  <!-- Dance Evening Banner - slides in from right after 2s -->
+  <div class="absolute right-2 bottom-28 sm:right-6 sm:bottom-32 md:right-10 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:right-16 xl:right-24 z-20">
+    <DanceEveningBanner locale={locale} />
   </div>
-  KONEC ZAČASNO SKRITEGA --> */}
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
