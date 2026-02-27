@@ -19,7 +19,7 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
     <img
       src={HERO_IMAGE}
       alt="Divana - Maja Marinčič"
-      class="w-full h-full object-cover object-top"
+      class="w-full h-full object-cover object-[center_top] md:object-top"
       loading="eager"
       fetchpriority="high"
     />
@@ -27,7 +27,7 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
   </div>
 
   <!-- Title - centered on singer, lower -->
-  <div class="absolute z-10 left-[22%] md:left-[28%] lg:left-[30%] -translate-x-1/2 bottom-24 md:bottom-32 lg:bottom-36 animate-fade-in text-center">
+  <div class="absolute z-10 left-[35%] sm:left-[30%] md:left-[28%] lg:left-[30%] -translate-x-1/2 bottom-24 md:bottom-32 lg:bottom-36 animate-fade-in text-center">
     <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-semibold text-gold-gradient mb-3 tracking-wide">
       Divana
     </h1>
@@ -36,12 +36,12 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
     </p>
   </div>
 
-  <!-- Dance Evening Star Banner - right side, vertically centered -->
-  <div class="hidden md:block absolute right-20 lg:right-32 xl:right-40 top-1/2 -translate-y-1/2 animate-fade-in-delay">
+  <!-- Dance Evening Star Banner - right side on desktop, bottom center on mobile -->
+  <div class="absolute right-4 bottom-40 sm:right-8 sm:bottom-44 md:right-20 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:right-32 xl:right-40 animate-fade-in-delay z-20">
     <div class="flex flex-col items-center">
       <!-- Star - floats independently -->
-      <div class="star-float relative w-[280px] lg:w-[340px] xl:w-[380px] aspect-square group">
-        <svg class="absolute inset-0 w-full h-full drop-shadow-[0_0_60px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_80px_rgba(224,200,114,0.6)] transition-all duration-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <div class="star-float relative w-[180px] sm:w-[220px] md:w-[280px] lg:w-[340px] xl:w-[380px] aspect-square">
+        <svg class="absolute inset-0 w-full h-full star-glow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f5e8a0"/>
@@ -54,43 +54,45 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
           <polygon
             points="100,2 124,68 193,70 138,112 158,179 100,140 42,179 62,112 7,70 77,68"
             fill="url(#starGold)"
-            class="group-hover:opacity-100 opacity-90 transition-opacity duration-300"
           />
         </svg>
 
         <!-- Star text - fits within star shape -->
         <div class="absolute inset-0 flex items-center justify-center z-10">
-          <div class="text-center px-[26%]">
-            <p class="text-dark-900 text-sm lg:text-lg xl:text-xl font-extrabold tracking-wider uppercase mb-1 whitespace-nowrap">
+          <div class="text-center px-[22%] md:px-[24%]">
+            <p class="text-dark-900 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-wider uppercase leading-tight mb-0.5 md:mb-1">
               {locale === 'sl' ? 'Plesni večer' : 'Dance Evening'}
             </p>
-            <p class="text-dark-900 text-2xl lg:text-3xl xl:text-4xl font-heading font-bold tracking-wide mb-1.5 lg:mb-2">
+            <p class="text-dark-900 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-heading font-black tracking-wide mb-0.5 md:mb-1">
               Divana
             </p>
-            <p class="text-dark-800/90 text-[10px] lg:text-xs xl:text-sm font-medium leading-tight">
-              Dvorana Stik
+            <p class="text-dark-800/80 text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm font-semibold italic leading-tight mb-0.5 md:mb-1.5">
+              {locale === 'sl' ? '– Vajin stik –' : '– Your Connection –'}
             </p>
-            <p class="text-dark-800/90 text-[10px] lg:text-xs xl:text-sm font-medium leading-tight">
+            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight">
+              Dvorana Stik (Trebnje)
+            </p>
+            <p class="text-dark-800/90 text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs xl:text-sm font-bold leading-tight">
               {locale === 'sl' ? '8. 3. 2026 ob 18h' : '8. 3. 2026 at 18h'}
             </p>
           </div>
         </div>
 
         <!-- Sparkle decorations - more stars -->
-        <div class="absolute -top-5 -right-3 text-gold text-2xl animate-pulse">&#10022;</div>
-        <div class="absolute -bottom-4 -left-4 text-gold-light text-xl animate-pulse" style="animation-delay: 0.7s">&#10022;</div>
-        <div class="absolute top-[18%] -left-6 text-gold-dark/70 text-base animate-pulse" style="animation-delay: 1.2s">&#10023;</div>
-        <div class="absolute bottom-[18%] -right-5 text-gold/60 text-lg animate-pulse" style="animation-delay: 0.4s">&#10023;</div>
-        <div class="absolute -top-2 left-[20%] text-gold-light/50 text-xs animate-pulse" style="animation-delay: 1.8s">&#10022;</div>
-        <div class="absolute -bottom-1 right-[15%] text-gold/40 text-xs animate-pulse" style="animation-delay: 2.2s">&#10022;</div>
-        <div class="absolute top-[40%] -right-7 text-gold-light/40 text-sm animate-pulse" style="animation-delay: 0.9s">&#10023;</div>
-        <div class="absolute top-[55%] -left-8 text-gold/30 text-xs animate-pulse" style="animation-delay: 1.6s">&#10022;</div>
+        <div class="absolute -top-5 -right-3 text-gold text-2xl sparkle-pulse">&#10022;</div>
+        <div class="absolute -bottom-4 -left-4 text-gold-light text-xl sparkle-pulse" style="animation-delay: 0.7s">&#10022;</div>
+        <div class="absolute top-[18%] -left-6 text-gold-dark/70 text-base sparkle-pulse" style="animation-delay: 1.2s">&#10023;</div>
+        <div class="absolute bottom-[18%] -right-5 text-gold/60 text-lg sparkle-pulse" style="animation-delay: 0.4s">&#10023;</div>
+        <div class="absolute -top-2 left-[20%] text-gold-light/50 text-xs sparkle-pulse" style="animation-delay: 1.8s">&#10022;</div>
+        <div class="absolute -bottom-1 right-[15%] text-gold/40 text-xs sparkle-pulse" style="animation-delay: 2.2s">&#10022;</div>
+        <div class="absolute top-[40%] -right-7 text-gold-light/40 text-sm sparkle-pulse" style="animation-delay: 0.9s">&#10023;</div>
+        <div class="absolute top-[55%] -left-8 text-gold/30 text-xs sparkle-pulse" style="animation-delay: 1.6s">&#10022;</div>
       </div>
 
       <!-- Reservation button - floats independently, different color -->
       <a
         href={`#${danceId}`}
-        class="btn-float mt-6 lg:mt-8 inline-block px-8 lg:px-10 py-3 lg:py-3.5 bg-dark-950/90 backdrop-blur-sm border border-gold/40 text-gold-light text-sm lg:text-base font-bold tracking-widest uppercase rounded-full hover:border-gold/70 hover:bg-dark-900 hover:scale-105 hover:shadow-[0_0_25px_rgba(201,168,76,0.3)] transition-all duration-300"
+        class="btn-float mt-4 sm:mt-5 md:mt-6 lg:mt-8 inline-block px-6 sm:px-7 md:px-8 lg:px-10 py-2.5 sm:py-3 lg:py-3.5 bg-dark-950/90 backdrop-blur-sm border border-gold/40 text-gold-light text-xs sm:text-sm lg:text-base font-bold tracking-widest uppercase rounded-full hover:border-gold/70 hover:bg-dark-900 hover:scale-105 hover:shadow-[0_0_25px_rgba(201,168,76,0.3)] transition-all duration-300"
       >
         {reserveText}
       </a>

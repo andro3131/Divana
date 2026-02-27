@@ -3,7 +3,7 @@
 @theme {
   --color-primary-50: #fdf8e8;
   --color-primary-100: #f9ecc4;
-  --color-primary-200: #f3d98a;
+  --color-primary-200: #f0dca0;
   --color-primary-300: #e8c14e;
   --color-primary-400: #d4a529;
   --color-primary-500: #b8891a;
@@ -12,9 +12,9 @@
   --color-primary-800: #553b0d;
   --color-primary-900: #3d2a0a;
 
-  --color-dark-50: #e8eef2;
-  --color-dark-100: #c5d4de;
-  --color-dark-200: #9fb8c8;
+  --color-dark-50: #f5f0e6;
+  --color-dark-100: #e8dece;
+  --color-dark-200: #d4c6ae;
   --color-dark-300: #7a9cb2;
   --color-dark-400: #5e879f;
   --color-dark-500: #3d6b85;
@@ -98,6 +98,36 @@ body {
 
 .btn-float {
   animation: btn-float 4s ease-in-out 1.5s infinite;
+}
+
+/* Star glow pulse - synced with sparkles */
+@keyframes star-glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 40px rgba(201, 168, 76, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 80px rgba(224, 200, 114, 0.7));
+  }
+}
+
+.star-glow {
+  animation: star-glow-pulse 3s ease-in-out infinite;
+}
+
+/* Sparkle pulse animation - synced with star glow */
+@keyframes sparkle-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.sparkle-pulse {
+  animation: sparkle-pulse 2.5s ease-in-out infinite;
 }
 
 /* Lightbox */
