@@ -39,11 +39,11 @@
   "services": {
     "title": "Nastopi",
     "subtitle": "Glasba za vsak trenutek",
-    "intro": "Nastopam solo s kitaristom Gašperjem Možina ali s polno zasedbo banda. Najdite pravo obliko za vaš dogodek.",
+    "intro": "Nastopam solo s kitaristom ali s polno zasedbo banda. Najdite pravo obliko za vaš dogodek.",
     "solo": {
       "title": "Solo nastopi",
       "shortDescription": "Intimni nastopi z glasom in kitaro za poroke, terase, obletnice in posebne trenutke.",
-      "description": "Skupaj s kitaristom Gašperjem Možina z glasbo oživljava večere na terasah, ustvarjava nepozabno vzdušje na porokah, rojstnih dnevih, posebnih dogodkih in koncertih. Glasbeno popestrimo tudi jubileje manjših in večjih podjetij, javne prireditve ter slavnostne otvoritve. Intimni nastopi polni čustev in globokih vibracij."
+      "description": "S kitaristom z glasbo oživljava večere na terasah, ustvarjava nepozabno vzdušje na porokah, rojstnih dnevih, posebnih dogodkih in koncertih. Glasbeno popestrimo tudi jubileje manjših in večjih podjetij, javne prireditve ter slavnostne otvoritve. Intimni nastopi polni čustev in globokih vibracij."
     },
     "band": {
       "title": "Koncerti z bandom",
