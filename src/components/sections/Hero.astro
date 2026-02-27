@@ -65,14 +65,17 @@ const t = useTranslations(locale);
 </style>
 
 <script>
-  // Zoom on scroll within the sticky scroll zone
-  // The extra 30vh of scroll space is used for zoom before page scrolls past
   const heroImg = document.getElementById('hero-img');
   const scrollZone = document.getElementById('hero-scroll-zone');
 
   if (heroImg && scrollZone) {
+    // After intro animation ends, remove class so JS can control transform
+    heroImg.addEventListener('animationend', () => {
+      heroImg.classList.remove('hero-zoom-in');
+      heroImg.style.transform = 'scale(1)';
+    }, { once: true });
+
     const viewportH = window.innerHeight;
-    // Extra scroll distance = total zone height - viewport
     const zoomDistance = scrollZone.offsetHeight - viewportH;
     let ticking = false;
 
@@ -82,7 +85,6 @@ const t = useTranslations(locale);
           const scrollY = window.scrollY;
 
           if (scrollY <= zoomDistance && zoomDistance > 0) {
-            // Within zoom zone: scale from 1 to 1.15
             const progress = scrollY / zoomDistance;
             const scale = 1 + progress * 0.15;
             heroImg.style.transform = `scale(${scale})`;

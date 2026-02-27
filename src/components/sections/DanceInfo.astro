@@ -11,278 +11,364 @@ const t = useTranslations(locale);
 
 <section class="py-24 px-4 md:px-8 bg-dark-900">
   <div class="max-w-[1200px] mx-auto">
-    <div class="dance-info-banner" data-animate>
+    <!-- Outer glow wrapper -->
+    <div class="di-glow-wrap">
+      <div class="di-banner" data-animate>
 
-      <!-- Flowing curves background -->
-      <div class="di-flow-lines">
-        <svg viewBox="0 0 1200 500" preserveAspectRatio="none">
-          <path d="M0,120 Q300,80 600,140 T1200,100" stroke="rgba(201,162,78,0.5)" fill="none" stroke-width="0.7">
-            <animate attributeName="d" dur="9s" repeatCount="indefinite"
-              values="M0,120 Q300,80 600,140 T1200,100;M0,140 Q300,110 600,80 T1200,130;M0,120 Q300,80 600,140 T1200,100" />
-          </path>
-          <path d="M0,250 Q400,210 800,270 T1200,230" stroke="rgba(201,162,78,0.3)" fill="none" stroke-width="0.5">
-            <animate attributeName="d" dur="11s" repeatCount="indefinite"
-              values="M0,250 Q400,210 800,270 T1200,230;M0,230 Q400,260 800,220 T1200,260;M0,250 Q400,210 800,270 T1200,230" />
-          </path>
-          <path d="M0,380 Q350,350 700,400 T1200,370" stroke="rgba(201,162,78,0.2)" fill="none" stroke-width="0.4">
-            <animate attributeName="d" dur="13s" repeatCount="indefinite"
-              values="M0,380 Q350,350 700,400 T1200,370;M0,360 Q350,390 700,355 T1200,390;M0,380 Q350,350 700,400 T1200,370" />
-          </path>
-        </svg>
-      </div>
+        <!-- Top gold line -->
+        <div class="di-line-top"></div>
+        <!-- Bottom gold line -->
+        <div class="di-line-bottom"></div>
 
-      <!-- Canvas for particles -->
-      <canvas id="di-particles"></canvas>
+        <!-- Ambient lights -->
+        <div class="di-ambient"></div>
 
-      <!-- Corner ornaments -->
-      <div class="di-corner tl"><svg viewBox="0 0 50 50"><path d="M4,4 L24,4" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><path d="M4,4 L4,24" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><circle cx="4" cy="4" r="1.5" fill="#C9A24E" opacity="0.35"/><path d="M4,12 Q8,8 12,4" stroke="#C9A24E" fill="none" stroke-width="0.5" opacity="0.3"/></svg></div>
-      <div class="di-corner tr"><svg viewBox="0 0 50 50"><path d="M4,4 L24,4" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><path d="M4,4 L4,24" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><circle cx="4" cy="4" r="1.5" fill="#C9A24E" opacity="0.35"/></svg></div>
-      <div class="di-corner bl"><svg viewBox="0 0 50 50"><path d="M4,4 L24,4" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><path d="M4,4 L4,24" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><circle cx="4" cy="4" r="1.5" fill="#C9A24E" opacity="0.35"/></svg></div>
-      <div class="di-corner br"><svg viewBox="0 0 50 50"><path d="M4,4 L24,4" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><path d="M4,4 L4,24" stroke="#C9A24E" fill="none" stroke-width="0.8" opacity="0.5"/><circle cx="4" cy="4" r="1.5" fill="#C9A24E" opacity="0.35"/></svg></div>
-
-      <!-- Dancing couple SVG - positioned at left -->
-      <div class="di-dancers">
-        <svg viewBox="0 0 340 380" preserveAspectRatio="xMidYMax meet">
-          <defs>
-            <linearGradient id="diBodyGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="rgba(201,162,78,0.32)"/>
-              <stop offset="50%" stop-color="rgba(201,162,78,0.16)"/>
-              <stop offset="100%" stop-color="rgba(201,162,78,0.02)"/>
-            </linearGradient>
-            <linearGradient id="diDressGrad" x1="0.2" y1="0" x2="0.8" y2="1">
-              <stop offset="0%" stop-color="rgba(201,162,78,0.22)"/>
-              <stop offset="100%" stop-color="rgba(201,162,78,0.02)"/>
-            </linearGradient>
-            <linearGradient id="diHairGrad" x1="0.5" y1="0" x2="0.2" y2="1">
-              <stop offset="0%" stop-color="rgba(201,162,78,0.28)"/>
-              <stop offset="100%" stop-color="rgba(201,162,78,0.05)"/>
-            </linearGradient>
-            <radialGradient id="diFloorLight" cx="50%" cy="0%" r="80%">
-              <stop offset="0%" stop-color="rgba(201,162,78,0.08)"/>
-              <stop offset="100%" stop-color="transparent"/>
-            </radialGradient>
-            <filter id="diSoftGlow">
-              <feGaussianBlur stdDeviation="1.5" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <ellipse cx="170" cy="360" rx="150" ry="20" fill="url(#diFloorLight)"/>
-          <g filter="url(#diSoftGlow)">
-            <!-- Her -->
-            <g>
-              <ellipse cx="130" cy="68" rx="13" ry="16" fill="url(#diBodyGrad)"/>
-              <path d="M122,55 Q108,50 98,58 Q88,68 85,85 Q80,105 78,130 Q75,160 80,185 Q83,195 88,190 Q86,165 88,140 Q90,115 95,95 Q100,78 112,65 Z" fill="url(#diHairGrad)"/>
-              <path d="M118,52 Q106,44 95,52 Q82,62 76,82 Q70,108 68,140 Q65,170 70,195 Q73,200 76,195 Q72,168 74,140 Q78,108 85,85 Q92,65 108,55 Z" fill="url(#diHairGrad)" opacity="0.6"/>
-              <path d="M76,130 Q72,155 70,185 Q68,200 72,210" stroke="rgba(201,162,78,0.1)" fill="none" stroke-width="1.2">
-                <animate attributeName="d" dur="6s" repeatCount="indefinite" values="M76,130 Q72,155 70,185 Q68,200 72,210;M76,130 Q70,155 65,185 Q62,200 66,212;M76,130 Q72,155 70,185 Q68,200 72,210"/>
-              </path>
-              <path d="M124,83 Q120,100 118,120 Q116,140 114,160" stroke="url(#diBodyGrad)" fill="none" stroke-width="9" stroke-linecap="round"/>
-              <path d="M120,86 Q116,115 114,145 Q112,160 110,175 L140,175 Q140,160 139,145 Q138,115 136,86 Z" fill="url(#diBodyGrad)" opacity="0.6"/>
-              <path d="M134,95 Q150,92 168,90 Q180,88 188,94" stroke="url(#diBodyGrad)" fill="none" stroke-width="5" stroke-linecap="round"/>
-              <path d="M122,98 Q140,100 158,98" stroke="url(#diBodyGrad)" fill="none" stroke-width="4.5" stroke-linecap="round" opacity="0.6"/>
-              <path d="M110,175 Q100,210 85,260 Q70,305 55,355 L95,358 Q108,315 118,270 Q124,240 126,215 L130,215 Q132,240 138,272 Q148,318 160,358 L195,355 Q178,305 162,258 Q150,215 140,175 Z" fill="url(#diDressGrad)"/>
-              <path d="M55,355 Q65,350 75,355 Q85,360 95,358" stroke="rgba(201,162,78,0.1)" fill="none" stroke-width="0.6">
-                <animate attributeName="d" dur="5s" repeatCount="indefinite" values="M55,355 Q65,350 75,355 Q85,360 95,358;M53,357 Q63,352 75,357 Q87,362 95,358;M55,355 Q65,350 75,355 Q85,360 95,358"/>
-              </path>
-            </g>
-            <!-- Him -->
-            <g>
-              <ellipse cx="192" cy="60" rx="13" ry="15" fill="url(#diBodyGrad)"/>
-              <path d="M180,50 Q185,42 195,42 Q204,42 206,50" stroke="rgba(201,162,78,0.15)" fill="rgba(201,162,78,0.08)" stroke-width="1"/>
-              <path d="M192,74 Q190,95 188,120 Q186,145 184,170" stroke="url(#diBodyGrad)" fill="none" stroke-width="11" stroke-linecap="round"/>
-              <path d="M182,76 Q178,110 176,145 Q175,162 174,180 L208,180 Q208,162 207,145 Q206,110 204,76 Z" fill="url(#diBodyGrad)" opacity="0.6"/>
-              <path d="M180,92 Q160,98 142,102 Q130,106 120,110" stroke="url(#diBodyGrad)" fill="none" stroke-width="6" stroke-linecap="round"/>
-              <path d="M204,94 Q220,102 238,96 Q252,88 262,78" stroke="url(#diBodyGrad)" fill="none" stroke-width="5.5" stroke-linecap="round"/>
-              <path d="M262,78 L266,74" stroke="rgba(201,162,78,0.2)" fill="none" stroke-width="3" stroke-linecap="round"/>
-              <path d="M174,180 Q172,215 170,260 Q168,300 166,355 L184,357 Q184,315 185,275 Q186,235 188,205 L192,205 Q194,235 196,275 Q198,315 200,357 L218,355 Q215,300 210,260 Q206,215 208,180 Z" fill="url(#diBodyGrad)"/>
-            </g>
-            <circle cx="264" cy="76" r="2.5" fill="rgba(226,199,122,0.25)">
-              <animate attributeName="r" dur="3s" repeatCount="indefinite" values="1.5;3;1.5"/>
-              <animate attributeName="opacity" dur="3s" repeatCount="indefinite" values="0.15;0.35;0.15"/>
-            </circle>
-            <circle cx="155" cy="96" r="8" fill="rgba(201,162,78,0.04)">
-              <animate attributeName="r" dur="4s" repeatCount="indefinite" values="6;10;6"/>
-            </circle>
-          </g>
-          <text x="55" y="110" font-size="15" fill="rgba(201,162,78,0.1)" font-family="serif">&#9834;
-            <animate attributeName="y" dur="7s" repeatCount="indefinite" values="110;90;110"/>
-            <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0.06;0.15;0.06"/>
-          </text>
-          <text x="268" y="130" font-size="13" fill="rgba(201,162,78,0.08)" font-family="serif">&#9835;
-            <animate attributeName="y" dur="9s" repeatCount="indefinite" values="130;108;130"/>
-          </text>
-        </svg>
-      </div>
-
-      <!-- Content -->
-      <div class="di-content">
-        <!-- Header -->
-        <div class="di-header">
-          <div class="di-brand-label">{locale === 'sl' ? 'Divana plesni večer' : 'Divana dance evening'}</div>
-          <h2 class="di-title">{t('danceInfo.title')}</h2>
-          <p class="di-subtitle">{t('danceInfo.subtitle')}</p>
-          <div class="di-divider"></div>
+        <!-- Flowing curves -->
+        <div class="di-flow-lines">
+          <svg viewBox="0 0 960 540" preserveAspectRatio="none">
+            <path d="M0,120 Q240,80 480,140 T960,100" stroke="rgba(201,162,78,0.5)" fill="none" stroke-width="0.6">
+              <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                values="M0,120 Q240,80 480,140 T960,100;M0,140 Q240,110 480,90 T960,130;M0,120 Q240,80 480,140 T960,100"/>
+            </path>
+            <path d="M0,320 Q200,280 400,340 T960,300" stroke="rgba(201,162,78,0.3)" fill="none" stroke-width="0.4">
+              <animate attributeName="d" dur="12s" repeatCount="indefinite"
+                values="M0,320 Q200,280 400,340 T960,300;M0,300 Q200,330 400,290 T960,320;M0,320 Q200,280 400,340 T960,300"/>
+            </path>
+            <path d="M0,460 Q300,430 600,470 T960,440" stroke="rgba(201,162,78,0.2)" fill="none" stroke-width="0.3">
+              <animate attributeName="d" dur="14s" repeatCount="indefinite"
+                values="M0,460 Q300,430 600,470 T960,440;M0,440 Q300,460 600,430 T960,455;M0,460 Q300,430 600,470 T960,440"/>
+            </path>
+          </svg>
         </div>
 
-        <!-- Intro text -->
-        <p class="di-intro">{t('danceInfo.intro')}</p>
+        <!-- Particles -->
+        <canvas id="di-particles"></canvas>
 
-        <!-- Info blocks -->
-        <div class="di-blocks">
-          <div class="di-block">
-            <div class="di-block-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128H5.228A2 2 0 013 17.208V17.128a4.002 4.002 0 013.636-3.976A8.966 8.966 0 0112 11.128a8.966 8.966 0 015.364 1.773M15 19.128H5.228" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="di-block-title">{t('danceInfo.block1Title')}</h3>
-            <p class="di-block-text">{t('danceInfo.block1Text')}</p>
-          </div>
-
-          <div class="di-block">
-            <div class="di-block-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="di-block-title">{t('danceInfo.block2Title')}</h3>
-            <p class="di-block-text">{t('danceInfo.block2Text')}</p>
-          </div>
-
-          <div class="di-block">
-            <div class="di-block-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="di-block-title">{t('danceInfo.block3Title')}</h3>
-            <p class="di-block-text">{t('danceInfo.block3Text')}</p>
-          </div>
+        <!-- Background dancer silhouette -->
+        <div class="di-dancers">
+          <svg viewBox="0 0 320 380" preserveAspectRatio="xMidYMax meet">
+            <defs>
+              <linearGradient id="diBgBody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(201,162,78,1)"/>
+                <stop offset="50%" stop-color="rgba(201,162,78,0.6)"/>
+                <stop offset="100%" stop-color="rgba(201,162,78,0.1)"/>
+              </linearGradient>
+              <linearGradient id="diBgDress" x1="0.2" y1="0" x2="0.8" y2="1">
+                <stop offset="0%" stop-color="rgba(201,162,78,0.8)"/>
+                <stop offset="100%" stop-color="rgba(201,162,78,0.1)"/>
+              </linearGradient>
+              <linearGradient id="diBgHair" x1="0.5" y1="0" x2="0.2" y2="1">
+                <stop offset="0%" stop-color="rgba(201,162,78,0.9)"/>
+                <stop offset="100%" stop-color="rgba(201,162,78,0.15)"/>
+              </linearGradient>
+              <radialGradient id="diBgFloor" cx="50%" cy="0%" r="80%">
+                <stop offset="0%" stop-color="rgba(201,162,78,0.3)"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+              <filter id="diDancerGlow">
+                <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <ellipse cx="160" cy="360" rx="140" ry="20" fill="url(#diBgFloor)"/>
+            <g filter="url(#diDancerGlow)">
+              <!-- Her -->
+              <g>
+                <ellipse cx="128" cy="62" rx="13" ry="16" fill="url(#diBgBody)"/>
+                <path d="M122,55 Q108,50 98,58 Q88,68 85,85 Q80,105 78,130 Q75,160 80,185 Q83,195 88,190 Q86,165 88,140 Q90,115 95,95 Q100,78 112,65 Z" fill="url(#diBgHair)"/>
+                <path d="M118,52 Q106,44 95,52 Q82,62 76,82 Q70,108 68,140 Q65,170 70,195 Q73,200 76,195 Q72,168 74,140 Q78,108 85,85 Q92,65 108,55 Z" fill="url(#diBgHair)" opacity="0.6"/>
+                <path d="M125,55 Q115,45 105,48 Q92,54 82,72" stroke="rgba(201,162,78,0.4)" fill="none" stroke-width="1.5"/>
+                <path d="M76,130 Q72,155 70,185 Q68,200 72,210" stroke="rgba(201,162,78,0.3)" fill="none" stroke-width="1.2">
+                  <animate attributeName="d" dur="6s" repeatCount="indefinite"
+                    values="M76,130 Q72,155 70,185 Q68,200 72,210;M76,130 Q70,155 65,185 Q62,200 66,212;M76,130 Q72,155 70,185 Q68,200 72,210"/>
+                </path>
+                <path d="M124,83 Q120,100 118,120 Q116,140 114,160" stroke="url(#diBgBody)" fill="none" stroke-width="9" stroke-linecap="round"/>
+                <path d="M120,86 Q116,115 114,145 Q112,160 110,175 L140,175 Q140,160 139,145 Q138,115 136,86 Z" fill="url(#diBgBody)" opacity="0.6"/>
+                <path d="M134,95 Q150,92 168,90 Q180,88 188,94" stroke="url(#diBgBody)" fill="none" stroke-width="5" stroke-linecap="round"/>
+                <path d="M122,98 Q140,100 158,98" stroke="url(#diBgBody)" fill="none" stroke-width="4.5" stroke-linecap="round" opacity="0.6"/>
+                <path d="M110,175 Q100,210 85,260 Q70,305 55,355 L95,358 Q108,315 118,270 Q124,240 126,215 L130,215 Q132,240 138,272 Q148,318 160,358 L195,355 Q178,305 162,258 Q150,215 140,175 Z" fill="url(#diBgDress)"/>
+                <path d="M110,175 Q92,225 70,310" stroke="rgba(201,162,78,0.2)" fill="none" stroke-width="0.8"/>
+                <path d="M55,355 Q65,350 75,355 Q85,360 95,358" stroke="rgba(201,162,78,0.3)" fill="none" stroke-width="0.6">
+                  <animate attributeName="d" dur="5s" repeatCount="indefinite"
+                    values="M55,355 Q65,350 75,355 Q85,360 95,358;M53,357 Q63,352 75,357 Q87,362 95,358;M55,355 Q65,350 75,355 Q85,360 95,358"/>
+                </path>
+              </g>
+              <!-- Him -->
+              <g>
+                <ellipse cx="192" cy="55" rx="13" ry="15" fill="url(#diBgBody)"/>
+                <path d="M180,50 Q185,42 195,42 Q204,42 206,50" stroke="rgba(201,162,78,0.5)" fill="rgba(201,162,78,0.25)" stroke-width="1"/>
+                <path d="M192,70 Q190,95 188,120 Q186,145 184,170" stroke="url(#diBgBody)" fill="none" stroke-width="11" stroke-linecap="round"/>
+                <path d="M182,72 Q178,105 176,145 Q175,162 174,180 L208,180 Q208,162 207,145 Q206,105 204,72 Z" fill="url(#diBgBody)" opacity="0.6"/>
+                <path d="M180,88 Q160,92 142,96 Q130,100 120,105" stroke="url(#diBgBody)" fill="none" stroke-width="6" stroke-linecap="round"/>
+                <path d="M204,90 Q220,98 238,92 Q252,84 262,74" stroke="url(#diBgBody)" fill="none" stroke-width="5.5" stroke-linecap="round"/>
+                <path d="M262,74 L266,70" stroke="rgba(201,162,78,0.6)" fill="none" stroke-width="3" stroke-linecap="round"/>
+                <path d="M174,180 Q172,215 170,260 Q168,300 166,355 L184,357 Q184,315 185,275 Q186,235 188,205 L192,205 Q194,235 196,275 Q198,315 200,357 L218,355 Q215,300 210,260 Q206,215 208,180 Z" fill="url(#diBgBody)"/>
+              </g>
+              <circle cx="264" cy="72" r="2.5" fill="rgba(226,199,122,0.5)">
+                <animate attributeName="r" dur="3s" repeatCount="indefinite" values="1.5;3;1.5"/>
+                <animate attributeName="opacity" dur="3s" repeatCount="indefinite" values="0.3;0.6;0.3"/>
+              </circle>
+              <circle cx="155" cy="96" r="8" fill="rgba(201,162,78,0.08)">
+                <animate attributeName="r" dur="4s" repeatCount="indefinite" values="6;10;6"/>
+              </circle>
+            </g>
+          </svg>
         </div>
-      </div>
 
+        <!-- Corner ornaments -->
+        <div class="di-corner tl"><svg viewBox="0 0 50 50"><path d="M4,4 L20,4 M4,4 L4,20" stroke="rgba(201,162,78,0.5)" fill="none" stroke-width="0.8"/><circle cx="4" cy="4" r="1.5" fill="rgba(201,162,78,0.35)"/><path d="M4,10 Q7,7 10,4" stroke="rgba(201,162,78,0.3)" fill="none" stroke-width="0.5"/></svg></div>
+        <div class="di-corner tr"><svg viewBox="0 0 50 50"><path d="M4,4 L20,4 M4,4 L4,20" stroke="rgba(201,162,78,0.5)" fill="none" stroke-width="0.8"/><circle cx="4" cy="4" r="1.5" fill="rgba(201,162,78,0.35)"/><path d="M4,10 Q7,7 10,4" stroke="rgba(201,162,78,0.3)" fill="none" stroke-width="0.5"/></svg></div>
+        <div class="di-corner bl"><svg viewBox="0 0 50 50"><path d="M4,4 L20,4 M4,4 L4,20" stroke="rgba(201,162,78,0.5)" fill="none" stroke-width="0.8"/><circle cx="4" cy="4" r="1.5" fill="rgba(201,162,78,0.35)"/></svg></div>
+        <div class="di-corner br"><svg viewBox="0 0 50 50"><path d="M4,4 L20,4 M4,4 L4,20" stroke="rgba(201,162,78,0.5)" fill="none" stroke-width="0.8"/><circle cx="4" cy="4" r="1.5" fill="rgba(201,162,78,0.35)"/></svg></div>
+
+        <!-- CONTENT LAYOUT -->
+        <div class="di-layout">
+
+          <!-- LEFT - Title & quote -->
+          <div class="di-left">
+            <div class="di-label">{t('danceInfo.label')}</div>
+            <h2 class="di-title">{t('danceInfo.title')}</h2>
+            <div class="di-subtitle">{t('danceInfo.subtitle')}</div>
+            <div class="di-divider"></div>
+            <div class="di-quote">
+              &ldquo;{t('danceInfo.quote')}&rdquo;
+            </div>
+            <div class="di-closing">{t('danceInfo.closing')}</div>
+          </div>
+
+          <!-- RIGHT - Details -->
+          <div class="di-right">
+            <div class="di-detail-row">
+              <div class="di-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              </div>
+              <div class="di-detail-content">
+                <div class="di-detail-label">{t('danceInfo.dateLabel')}</div>
+                <div class="di-detail-value">{t('danceInfo.dateValue')}</div>
+              </div>
+            </div>
+
+            <div class="di-separator"></div>
+
+            <div class="di-detail-row">
+              <div class="di-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="di-detail-content">
+                <div class="di-detail-label">{t('danceInfo.timeLabel')}</div>
+                <div class="di-detail-value">{t('danceInfo.timeValue')}</div>
+              </div>
+            </div>
+
+            <div class="di-separator"></div>
+
+            <div class="di-detail-row">
+              <div class="di-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="di-detail-content">
+                <div class="di-detail-label">{t('danceInfo.locationLabel')}</div>
+                <div class="di-detail-value">{t('danceInfo.locationValue')}</div>
+              </div>
+            </div>
+
+            <div class="di-separator"></div>
+
+            <div class="di-detail-row">
+              <div class="di-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              </div>
+              <div class="di-detail-content">
+                <div class="di-detail-label">{t('danceInfo.musicLabel')}</div>
+                <div class="di-detail-value">{t('danceInfo.musicValue')}</div>
+              </div>
+            </div>
+
+            <div class="di-separator"></div>
+
+            <div class="di-detail-row">
+              <div class="di-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              </div>
+              <div class="di-detail-content">
+                <div class="di-detail-label">{t('danceInfo.priceLabel')}</div>
+                <div class="di-detail-value">{t('danceInfo.priceValue')}</div>
+                <div class="di-detail-sub">{t('danceInfo.priceSub')}</div>
+              </div>
+            </div>
+
+            <div class="di-separator"></div>
+
+            <div class="di-limited">
+              <span class="di-limited-dot"></span>
+              {t('danceInfo.limited')}
+            </div>
+
+            <div class="di-cta-area">
+              <a class="di-cta-link" href={`mailto:${t('danceInfo.email')}`}>{t('danceInfo.cta')}</a>
+              <span class="di-cta-email">{t('danceInfo.email')}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- NOVO!! Badge -->
+        <div class="di-pulse-badge">
+          <div class="di-pulse-ring"></div>
+          <div class="di-pulse-ring di-ring2"></div>
+          <span>NOVO!!</span>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .dance-info-banner {
+  /* Outer glow that pulses */
+  .di-glow-wrap {
     position: relative;
-    width: 100%;
-    background: rgba(18, 14, 10, 0.75);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(201,162,78,0.18);
-    backdrop-filter: blur(10px);
-    min-height: 420px;
-    display: flex;
   }
 
-  .dance-info-banner::before {
+  .di-glow-wrap::before {
     content: '';
     position: absolute;
-    top: -20%; left: 30%; width: 40%; height: 60%;
-    background: radial-gradient(ellipse, rgba(180,130,50,0.06) 0%, transparent 70%);
+    inset: -20px;
+    background: radial-gradient(ellipse at center, rgba(201,162,78,0.06) 0%, transparent 70%);
+    border-radius: 24px;
     z-index: 0;
+    animation: diGlowPulse 5s ease-in-out infinite;
+  }
+
+  @keyframes diGlowPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+  }
+
+  .di-banner {
+    position: relative;
+    width: 100%;
+    background: rgba(16, 13, 10, 0.9);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(201,162,78,0.15);
+    box-shadow: 0 0 80px rgba(201,162,78,0.04), 0 20px 60px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+  }
+
+  /* Top / bottom gold lines */
+  .di-line-top {
+    position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, #C9A24E, transparent);
+    z-index: 5;
+  }
+  .di-line-bottom {
+    position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,162,78,0.4), transparent);
+    z-index: 5;
+  }
+
+  /* Ambient lights */
+  .di-ambient {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  }
+  .di-ambient::before {
+    content: ''; position: absolute;
+    top: -20%; left: 30%; width: 40%; height: 50%;
+    background: radial-gradient(ellipse, rgba(180,130,50,0.05) 0%, transparent 70%);
+  }
+  .di-ambient::after {
+    content: ''; position: absolute;
+    bottom: -10%; right: 20%; width: 30%; height: 40%;
+    background: radial-gradient(ellipse, rgba(180,130,50,0.03) 0%, transparent 70%);
   }
 
   /* Flow lines */
-  .di-flow-lines {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    opacity: 0.12;
-  }
+  .di-flow-lines { position: absolute; inset: 0; z-index: 1; opacity: 0.1; }
+  .di-flow-lines svg { width: 100%; height: 100%; }
 
-  .di-flow-lines svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Particles canvas */
-  #di-particles {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-  }
+  /* Particles */
+  #di-particles { position: absolute; inset: 0; z-index: 1; }
 
   /* Corner ornaments */
-  .di-corner { position: absolute; width: 44px; height: 44px; z-index: 5; }
+  .di-corner { position: absolute; width: 45px; height: 45px; z-index: 5; }
   .di-corner svg { width: 100%; height: 100%; }
-  .di-corner.tl { top: 12px; left: 12px; }
-  .di-corner.tr { top: 12px; right: 12px; transform: scaleX(-1); }
-  .di-corner.bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
-  .di-corner.br { bottom: 12px; right: 12px; transform: scale(-1); }
+  .di-corner.tl { top: 10px; left: 10px; }
+  .di-corner.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+  .di-corner.bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+  .di-corner.br { bottom: 10px; right: 10px; transform: scale(-1); }
 
-  /* Dancing couple */
+  /* Dancing couple - right side background */
   .di-dancers {
-    position: absolute;
-    bottom: 5%;
-    left: 3%;
-    width: 260px;
-    height: 340px;
-    z-index: 3;
-    opacity: 0.7;
-    display: none;
+    position: absolute; right: -2%; bottom: 0;
+    width: 34%; height: 95%; z-index: 2;
+    opacity: 0.2; display: none;
+    transform-origin: center bottom;
+  }
+  .di-dancers svg {
+    width: 100%; height: 100%;
+    animation: diDanceSway 6s ease-in-out infinite;
+    transform-origin: center bottom;
   }
 
-  .di-dancers svg { width: 100%; height: 100%; }
+  @keyframes diDanceSway {
+    0%, 100% { transform: rotate(-1.5deg) translateX(0); }
+    25% { transform: rotate(0.5deg) translateX(3px); }
+    50% { transform: rotate(1.5deg) translateX(0); }
+    75% { transform: rotate(0deg) translateX(-3px); }
+  }
 
-  @media (min-width: 1024px) {
-    .di-dancers {
-      display: block;
+  @media (min-width: 768px) {
+    .di-dancers { display: block; }
+  }
+
+  /* ============ LAYOUT ============ */
+  .di-layout {
+    position: relative; z-index: 10;
+    display: flex; flex-direction: column;
+    height: 100%; padding: 28px 24px;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .di-layout {
+      flex-direction: row;
+      padding: 32px 40px;
+      padding-right: 28%;
+      gap: 36px;
     }
   }
 
-  /* Content area */
-  .di-content {
-    position: relative;
-    z-index: 10;
-    padding: 40px 32px;
-    width: 100%;
+  /* LEFT */
+  .di-left {
+    flex: 1.1; display: flex; flex-direction: column; justify-content: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(201,162,78,0.1);
   }
 
-  @media (min-width: 1024px) {
-    .di-content {
-      margin-left: 240px;
-      padding: 48px 48px 48px 40px;
+  @media (min-width: 768px) {
+    .di-left {
+      border-bottom: none;
+      border-right: 1px solid rgba(201,162,78,0.1);
+      padding-right: 36px; padding-bottom: 0;
     }
   }
 
-  /* Header */
-  .di-header {
-    text-align: center;
-    margin-bottom: 28px;
-  }
-
-  @media (min-width: 1024px) {
-    .di-header {
-      text-align: left;
-    }
-  }
-
-  .di-brand-label {
+  .di-label {
     font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: #C9A24E;
-    font-weight: 700;
-    margin-bottom: 8px;
+    font-size: clamp(12px, 2.2vw, 16px);
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: #C9A24E; font-weight: 700; margin-bottom: 10px;
   }
 
   .di-title {
     font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 700;
-    font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.1;
+    font-style: italic; font-weight: 700;
+    font-size: clamp(32px, 5vw, 48px); line-height: 1.05;
     background: linear-gradient(160deg, #E2C77A 0%, #C9A24E 35%, #8A6A20 65%, #E2C77A 100%);
     background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     animation: diShimmer 5s ease-in-out infinite;
     margin-bottom: 6px;
   }
@@ -295,116 +381,168 @@ const t = useTranslations(locale);
   .di-subtitle {
     font-family: 'Playfair Display', serif;
     font-size: clamp(13px, 2vw, 16px);
-    letter-spacing: 0.2em;
-    color: #EDE0C4;
-    margin-bottom: 16px;
+    letter-spacing: 0.2em; color: #EDE0C4; margin-bottom: 18px;
   }
 
   .di-divider {
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #D4A853, transparent);
-    margin: 0 auto;
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, #D4A853, transparent);
+    margin-bottom: 16px;
   }
 
-  @media (min-width: 1024px) {
-    .di-divider {
-      margin: 0;
-    }
-  }
-
-  /* Intro text */
-  .di-intro {
+  .di-quote {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(14px, 1.8vw, 17px);
-    color: #D6C9AB;
-    line-height: 1.8;
-    letter-spacing: 0.02em;
-    margin-bottom: 32px;
-    max-width: 700px;
-    text-align: center;
+    font-size: clamp(13px, 1.8vw, 16px);
+    color: #9A8E78; line-height: 1.8;
   }
 
-  @media (min-width: 1024px) {
-    .di-intro {
-      text-align: left;
-    }
-  }
-
-  /* Info blocks grid */
-  .di-blocks {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  @media (min-width: 640px) {
-    .di-blocks {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-  }
-
-  .di-block {
-    padding: 20px;
-    border: 1px solid rgba(201,162,78,0.1);
-    border-radius: 10px;
-    background: rgba(201,162,78,0.03);
-    transition: border-color 0.4s ease, background 0.4s ease;
-    text-align: center;
-  }
-
-  @media (min-width: 1024px) {
-    .di-block {
-      text-align: left;
-    }
-  }
-
-  .di-block:hover {
-    border-color: rgba(201,162,78,0.25);
-    background: rgba(201,162,78,0.06);
-  }
-
-  .di-block-icon {
-    width: 36px;
-    height: 36px;
-    color: #C9A24E;
-    margin-bottom: 12px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media (min-width: 1024px) {
-    .di-block-icon {
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  .di-block-icon svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .di-block-title {
+  .di-closing {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(16px, 1.5vw, 19px);
-    font-weight: 600;
-    color: #E2C77A;
-    margin-bottom: 8px;
-    letter-spacing: 0.04em;
+    font-style: italic;
+    font-size: clamp(13px, 1.7vw, 15px);
+    color: #D4A853; margin-top: 14px;
+    letter-spacing: 0.03em;
   }
 
-  .di-block-text {
-    font-size: clamp(13px, 1.3vw, 15px);
-    color: #A89880;
-    line-height: 1.7;
+  /* RIGHT */
+  .di-right {
+    flex: 1; display: flex; flex-direction: column;
+    justify-content: center; gap: 14px;
+  }
+
+  .di-detail-row {
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+
+  .di-detail-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,162,78,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: #C9A24E; padding: 7px;
+  }
+  .di-detail-icon svg { width: 100%; height: 100%; }
+
+  .di-detail-content { flex: 1; }
+
+  .di-detail-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: #9A8E78; margin-bottom: 2px;
+  }
+
+  .di-detail-value {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(13px, 1.8vw, 16px);
+    color: #E2C77A; font-weight: 600; letter-spacing: 0.05em;
+  }
+
+  .di-detail-sub {
+    font-size: clamp(12px, 1.5vw, 14px);
+    color: #D6C9AB; margin-top: 1px;
+  }
+
+  .di-separator {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, rgba(201,162,78,0.08), rgba(201,162,78,0.06), transparent);
+  }
+
+  /* Limited badge */
+  .di-limited {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: #E8A04E;
+    padding: 6px 14px;
+    border: 1px solid rgba(232,160,78,0.25);
+    border-radius: 3px;
+    background: rgba(232,160,78,0.05);
+    width: fit-content;
+  }
+
+  .di-limited-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #E8A04E; flex-shrink: 0;
+    animation: diDotPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes diDotPulse {
+    0%, 100% { opacity: 0.5; box-shadow: 0 0 4px rgba(232,160,78,0.3); }
+    50% { opacity: 1; box-shadow: 0 0 10px rgba(232,160,78,0.6); }
+  }
+
+  /* CTA */
+  .di-cta-area {
+    display: flex; align-items: center; gap: 14px; margin-top: 4px;
+  }
+
+  .di-cta-link {
+    display: inline-block;
+    padding: 9px 28px;
+    border: 1px solid rgba(201,162,78,0.35);
+    color: #C9A24E;
+    font-family: 'Playfair Display', serif;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+    background: linear-gradient(135deg, rgba(201,162,78,0.06), rgba(201,162,78,0.02));
+    transition: all 0.4s ease;
+    position: relative; overflow: hidden;
+    box-shadow: 0 0 12px rgba(201,162,78,0.06);
+  }
+
+  .di-cta-link:hover {
+    border-color: #E2C77A; color: #E2C77A;
+    box-shadow: 0 0 25px rgba(201,162,78,0.18);
+    background: linear-gradient(135deg, rgba(201,162,78,0.2), rgba(201,162,78,0.1));
+  }
+
+  .di-cta-email {
+    font-size: 12px; color: #9A8E78; letter-spacing: 0.05em;
+  }
+
+  /* NOVO!! Badge */
+  .di-pulse-badge {
+    position: absolute; top: 22px; right: 22px; z-index: 20;
+    width: 84px; height: 84px; border-radius: 50%;
+    background: radial-gradient(circle at 45% 40%, #E74C3C, #9B2335);
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(12deg);
+    box-shadow: 0 4px 18px rgba(192,57,43,0.4);
+  }
+
+  .di-pulse-badge span {
+    color: #FFF;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 15px;
+    letter-spacing: 0.08em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4), 0 0 10px rgba(231,76,60,0.3);
+    z-index: 2; position: relative;
+  }
+
+  .di-pulse-ring {
+    position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid rgba(231,76,60,0.5);
+    animation: diRingPulse 2.5s ease-out infinite;
+  }
+  .di-pulse-ring.di-ring2 { animation-delay: 1s; }
+
+  @keyframes diRingPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .di-detail-icon { width: 32px; height: 32px; padding: 6px; }
+    .di-pulse-badge { width: 68px; height: 68px; top: 16px; right: 16px; }
+    .di-pulse-badge span { font-size: 12px; }
   }
 </style>
 
 <script>
-  // Particle system for dance info banner
   const canvas = document.getElementById('di-particles') as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext('2d')!;
@@ -434,7 +572,7 @@ const t = useTranslations(locale);
         this.size = Math.random() * 1.8 + 0.3;
         this.speedY = Math.random() * 0.25 + 0.08;
         this.speedX = (Math.random() - 0.5) * 0.2;
-        this.opacity = Math.random() * 0.4 + 0.06;
+        this.opacity = Math.random() * 0.4 + 0.05;
         this.flickerSpeed = Math.random() * 0.012 + 0.003;
         this.flickerOffset = Math.random() * Math.PI * 2;
         this.r = 180 + Math.random() * 50;
@@ -443,14 +581,11 @@ const t = useTranslations(locale);
         this.currentOpacity = this.opacity;
       }
 
-      reset() {
-        this.x = Math.random() * this.w;
-        this.y = -5;
-      }
+      reset() { this.x = Math.random() * this.w; this.y = -5; }
 
       update(t: number) {
         this.y += this.speedY;
-        this.x += this.speedX + Math.sin(t * 0.0008 + this.flickerOffset) * 0.1;
+        this.x += this.speedX + Math.sin(t * 0.0006 + this.flickerOffset) * 0.1;
         if (this.y > this.h + 5) this.reset();
         this.currentOpacity = this.opacity * (0.4 + 0.6 * Math.sin(t * this.flickerSpeed + this.flickerOffset));
       }
@@ -470,7 +605,7 @@ const t = useTranslations(locale);
     function init() {
       resize();
       const rect = canvas.parentElement!.getBoundingClientRect();
-      const count = Math.floor((rect.width * rect.height) / 6000);
+      const count = Math.floor((rect.width * rect.height) / 5000);
       particles = [];
       for (let i = 0; i < count; i++) {
         particles.push(new Particle(rect.width, rect.height));
