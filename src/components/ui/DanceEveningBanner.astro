@@ -167,13 +167,10 @@ const eventLocation = 'Dvorana Stik, Trebnje';
     animation: bannerSlideIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
   }
 
-  /* Banner float - vertical + horizontal sway */
+  /* Banner float - vertical only */
   @keyframes bannerFloat {
-    0% { transform: translateY(0) translateX(0); }
-    25% { transform: translateY(-10px) translateX(5px); }
-    50% { transform: translateY(-20px) translateX(0); }
-    75% { transform: translateY(-10px) translateX(-5px); }
-    100% { transform: translateY(0) translateX(0); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
   }
 
   .banner-wrapper {
