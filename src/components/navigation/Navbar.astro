@@ -25,9 +25,10 @@ const navItems = [
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
-      <!-- Logo - always visible -->
-      <a href={getLocalizedPath('/', locale)} class="hover:opacity-80 transition-opacity">
+      <!-- Logo + subtitle -->
+      <a href={getLocalizedPath('/', locale)} class="hover:opacity-80 transition-opacity flex flex-col">
         <img src={LOGO_IMAGE} alt="Divana" class="h-8 md:h-12 w-auto" />
+        <span class="md:hidden text-[9px] text-primary-200/60 font-light tracking-widest uppercase mt-0.5">{t('hero.subtitle')}</span>
       </a>
 
       <!-- Desktop nav -->
