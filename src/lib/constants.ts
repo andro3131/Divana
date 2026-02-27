@@ -10,6 +10,8 @@ export const ABOUT_IMAGES = [
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.33.52.png`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.33.15.png`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.32.49.png`, alt: 'Maja Marinčič' },
+  { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.45.09.png`, alt: 'Maja Marinčič' },
+  { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.45.23.png`, alt: 'Maja Marinčič' },
 ];
 
 export const GALLERY_IMAGES = [

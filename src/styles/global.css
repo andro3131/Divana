@@ -177,21 +177,35 @@ body {
   animation: star-text-appear 0.6s ease forwards, star-shimmer 4s ease-in-out 1.5s infinite;
 }
 
-/* About section - rotated photos */
+/* About section - rotated photos with directional slide-in */
 .about-photo {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .about-photo-left {
-  transform: rotate(var(--rotate, -3deg));
+  opacity: 0;
+  transform: translateX(-80px) rotate(var(--rotate, -3deg));
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .about-photo-right {
-  transform: rotate(var(--rotate, 3deg));
+  opacity: 0;
+  transform: translateX(80px) rotate(var(--rotate, 3deg));
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.about-photo-left.slide-in {
+  opacity: 1;
+  transform: translateX(0) rotate(var(--rotate, -3deg));
+}
+
+.about-photo-right.slide-in {
+  opacity: 1;
+  transform: translateX(0) rotate(var(--rotate, 3deg));
 }
 
 .about-photo:hover {
-  transform: rotate(0deg) scale(1.05);
+  transform: translateX(0) rotate(0deg) scale(1.05) !important;
   z-index: 10;
 }
 
