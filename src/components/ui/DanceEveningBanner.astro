@@ -12,8 +12,8 @@ const ctaText = locale === 'sl' ? 'Prijava' : 'Sign up';
 const subtitleText = locale === 'sl' ? 'ob živi glasbi' : 'with live music';
 const poem1 = locale === 'sl' ? 'Ko se pogled ne umakne.' : 'When gazes hold.';
 const poem2 = locale === 'sl' ? 'Ko dotik prebudi gib.' : 'When touch awakens movement.';
-const eventDate = '8. 3. 2026 · 18:00–20:00';
-const eventLocation = 'Dvorana Stik, Trebnje';
+const eventDate = '8. 3. 2026 · 18:00';
+const eventLocation = 'Trebnje';
 ---
 
 <div class="banner-slide-in">
@@ -230,7 +230,7 @@ const eventLocation = 'Dvorana Stik, Trebnje';
   .flow-lines svg { width: 100%; height: 100%; }
 
   .dancers {
-    position: absolute; bottom: 16%; right: 0; left: auto;
+    position: absolute; bottom: 16%; right: -15px; left: auto;
     width: 55%; height: 42%; z-index: 3;
     opacity: 0; animation: fadeInRight 1.8s ease-out 1.1s forwards;
   }
@@ -318,13 +318,13 @@ const eventLocation = 'Dvorana Stik, Trebnje';
     line-height: 1.7;
     font-weight: 600;
     margin-bottom: 8px;
-    text-align: left;
+    text-align: center;
   }
 
   /* CTA */
   .bottom-area {
-    position: absolute; bottom: 16px; left: 20px; right: 0;
-    text-align: left; z-index: 10;
+    position: absolute; bottom: 16px; left: 0; right: 0;
+    text-align: center; z-index: 10;
     opacity: 0; animation: fadeInBanner 1s ease-out 1.8s forwards;
   }
 

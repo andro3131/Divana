@@ -20,11 +20,16 @@ const t = useTranslations(locale);
       src={HERO_IMAGE}
       alt="Divana - Maja Marinčič"
       id="hero-img"
-      class="w-full h-full object-cover object-[42%_12%] md:object-top hero-zoom-in"
+      class="w-full h-full object-cover object-[18%_12%] md:object-top hero-zoom-in"
       loading="eager"
       fetchpriority="high"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/15 to-transparent"></div>
+  </div>
+
+  <!-- Mobile subtitle under navbar logo -->
+  <div class="absolute z-10 md:hidden top-20 left-1/2 -translate-x-1/2 text-center animate-fade-in-delay">
+    <p class="text-sm text-primary-200/70 font-light tracking-[0.25em] uppercase">{t('hero.subtitle')}</p>
   </div>
 
   <!-- Title - hidden on mobile (logo in navbar), shown on desktop -->
