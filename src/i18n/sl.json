@@ -90,6 +90,17 @@
     "success": "Sporočilo poslano! Odgovorili vam bomo v najkrajšem možnem času.",
     "error": "Napaka pri pošiljanju. Prosimo, poskusite znova."
   },
+  "danceInfo": {
+    "title": "O plesnem večeru",
+    "subtitle": "Več kot le ples",
+    "intro": "Plesni večer Divana ni klasični tečaj plesa. Je izkušnja, ki jo ustvarjamo skupaj – z glasbo, gibom in povezavo.",
+    "block1Title": "Za koga je?",
+    "block1Text": "Za pare, ki si želite večer zase. Ni pomembno, ali plešete dobro – pomembno je, da ste skupaj. Za tiste, ki iščete stik, ki presega besede.",
+    "block2Title": "Kaj vas čaka?",
+    "block2Text": "Živa glasba, vodeni plesni koraki, sproščeno vzdušje in prostor za najino povezovanje. Brez ocenjevanja, brez tekmovalnosti – le gib, ritem in bližina.",
+    "block3Title": "Kako poteka?",
+    "block3Text": "Večer se začne z uvodnim delom, kjer vas nežno popeljemo v ples. Sledi prosti del z živo glasbo, kjer plešete po svoje. Zaključimo z mirnim, intimnim plesnim ritualom."
+  },
   "heroBanner": {
     "title": "Plesni večer Divana – Vajin stik",
     "desc1": "To ni samo ples. Je prostor za poglede, dotike in globoko povezavo.",

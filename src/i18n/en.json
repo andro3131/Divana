@@ -90,6 +90,17 @@
     "success": "Message sent! We'll get back to you as soon as possible.",
     "error": "Error sending message. Please try again."
   },
+  "danceInfo": {
+    "title": "About the Dance Evening",
+    "subtitle": "More than just dance",
+    "intro": "Divana's dance evening is not a typical dance class. It's an experience we create together – with music, movement and connection.",
+    "block1Title": "Who is it for?",
+    "block1Text": "For couples who want an evening to yourselves. It doesn't matter if you dance well – what matters is being together. For those seeking a connection that goes beyond words.",
+    "block2Title": "What awaits you?",
+    "block2Text": "Live music, guided dance steps, a relaxed atmosphere and space for your connection. No judging, no competition – just movement, rhythm and closeness.",
+    "block3Title": "How does it work?",
+    "block3Text": "The evening begins with an introductory part where we gently guide you into dance. This is followed by a free session with live music, where you dance your own way. We close with a calm, intimate dance ritual."
+  },
   "heroBanner": {
     "title": "Dance Evening Divana – Your Connection",
     "desc1": "This is not just dance. It's space for gazes, touches and deep connection.",
