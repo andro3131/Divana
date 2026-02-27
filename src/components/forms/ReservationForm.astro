@@ -102,6 +102,7 @@ const t = useTranslations(locale);
         feedback.className = 'text-center py-3 rounded-lg bg-green-900/50 text-green-300 text-sm';
         feedback.textContent = result.message;
         form.reset();
+        setTimeout(() => { window.location.href = '/'; }, 3000);
       } else {
         feedback.className = 'text-center py-3 rounded-lg bg-red-900/50 text-red-300 text-sm';
         feedback.textContent = result.error || `Error ${res.status}`;
