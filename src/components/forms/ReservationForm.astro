@@ -94,20 +94,22 @@ const t = useTranslations(locale);
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      const result = await res.json();
       feedback.classList.remove('hidden');
+      const text = await res.text();
+      let result: any;
+      try { result = JSON.parse(text); } catch { result = { error: `Server error (${res.status}): ${text.slice(0, 200)}` }; }
       if (res.ok) {
         feedback.className = 'text-center py-3 rounded-lg bg-green-900/50 text-green-300 text-sm';
         feedback.textContent = result.message;
         form.reset();
       } else {
         feedback.className = 'text-center py-3 rounded-lg bg-red-900/50 text-red-300 text-sm';
-        feedback.textContent = result.error;
+        feedback.textContent = result.error || `Error ${res.status}`;
       }
-    } catch {
+    } catch (err: any) {
       feedback.classList.remove('hidden');
       feedback.className = 'text-center py-3 rounded-lg bg-red-900/50 text-red-300 text-sm';
-      feedback.textContent = 'Network error. Please try again.';
+      feedback.textContent = `Network error: ${err.message}`;
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
