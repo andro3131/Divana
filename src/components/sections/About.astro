@@ -108,6 +108,24 @@ const photoClass = (side: 'left' | 'right') =>
           </div>
         </div>
       </div>
+
+      <!-- Block 8 -->
+      <div class="space-y-5">
+        <div class={photoClass('right')} style="--rotate: 2deg" data-slide>
+          <div class="mx-auto w-3/4 max-w-[280px] aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
+            <img src={images[7].src} alt={images[7].alt} class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 9 -->
+      <div class="space-y-5">
+        <div class={photoClass('left')} style="--rotate: -4deg" data-slide>
+          <div class="mx-auto w-3/4 max-w-[280px] aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
+            <img src={images[8].src} alt={images[8].alt} class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Desktop layout: 3-column with images on sides -->
@@ -132,6 +150,11 @@ const photoClass = (side: 'left' | 'right') =>
         <div class={photoClass('left')} style="--rotate: -2deg" data-slide>
           <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
             <img src={images[6].src} alt={images[6].alt} class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+        <div class={photoClass('left')} style="--rotate: -3deg" data-slide>
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
+            <img src={images[8].src} alt={images[8].alt} class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </div>
@@ -166,6 +189,11 @@ const photoClass = (side: 'left' | 'right') =>
         <div class={photoClass('right')} style="--rotate: 4deg" data-slide>
           <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
             <img src={images[5].src} alt={images[5].alt} class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+        <div class={photoClass('right')} style="--rotate: 2deg" data-slide>
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
+            <img src={images[7].src} alt={images[7].alt} class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </div>

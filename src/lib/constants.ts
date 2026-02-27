@@ -5,9 +5,13 @@ export const LOGO_IMAGE = `${CDN_BASE}/logo-divana-transparent.png`;
 
 // About section images - story from childhood to singer
 export const ABOUT_IMAGES = [
-  { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.31.21.png`, alt: 'Maja Marinčič' },
-  { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.31.43.png`, alt: 'Maja Marinčič' },
+  // First 4 - new primary images
+  { src: `${CDN_BASE}/OMENI/276aea38-13e5-4fa8-bed8-e45cfaa67e97.jpeg`, alt: 'Maja Marinčič' },
+  { src: `${CDN_BASE}/OMENI/189f9300-a8aa-4ddb-bd5c-3d0ad087e8be.jpeg`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.33.52.png`, alt: 'Maja Marinčič' },
+  { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.31.43.png`, alt: 'Maja Marinčič' },
+  // Rest
+  { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.31.21.png`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.33.15.png`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.32.49.png`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.45.09.png`, alt: 'Maja Marinčič' },
