@@ -167,13 +167,10 @@ const eventLocation = 'Dvorana Stik, Trebnje';
     animation: bannerSlideIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
   }
 
-  /* Banner float - vertical + horizontal sway */
+  /* Banner float - vertical only */
   @keyframes bannerFloat {
-    0% { transform: translateY(0) translateX(0); }
-    25% { transform: translateY(-14px) translateX(8px); }
-    50% { transform: translateY(-18px) translateX(0); }
-    75% { transform: translateY(-14px) translateX(-8px); }
-    100% { transform: translateY(0) translateX(0); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
   }
 
   .banner-wrapper {
@@ -181,33 +178,22 @@ const eventLocation = 'Dvorana Stik, Trebnje';
     width: min(374px, 80vw);
     aspect-ratio: 3/4.2;
     max-height: 88vh;
-    animation: bannerFloat 5s ease-in-out 2.3s infinite;
+    animation: bannerFloat 4s ease-in-out 2.3s infinite;
   }
 
   .banner-wrapper::before {
     content: '';
     position: absolute;
-    inset: -50px;
-    background: radial-gradient(ellipse at center, rgba(201,162,78,0.14) 0%, rgba(201,162,78,0.06) 40%, transparent 70%);
-    border-radius: 40px;
+    inset: -40px;
+    background: radial-gradient(ellipse at center, rgba(201,162,78,0.08) 0%, transparent 70%);
+    border-radius: 30px;
     z-index: 0;
-    animation: pulseGlow 4s ease-in-out infinite;
-    filter: blur(8px);
-  }
-
-  .banner-wrapper::after {
-    content: '';
-    position: absolute;
-    inset: -25px;
-    background: radial-gradient(ellipse at center, rgba(201,162,78,0.1) 0%, transparent 60%);
-    border-radius: 20px;
-    z-index: 0;
-    animation: pulseGlow 4s ease-in-out 2s infinite;
+    animation: pulseGlow 5s ease-in-out infinite;
   }
 
   @keyframes pulseGlow {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.06); }
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.04); }
   }
 
   .dance-banner {
