@@ -1,16 +1,21 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ReservationForm from '../../../components/forms/ReservationForm.astro';
 import { db, Event, Reservation, eq, sql } from 'astro:db';
 import { useTranslations } from '../../../i18n/ui';
 
-const { eventId } = Astro.params;
+export async function getStaticPaths() {
+  const events = await db.select().from(Event).where(eq(Event.isPublished, true));
+  return events.map((event) => ({
+    params: { eventid: event.id },
+  }));
+}
+
+const { eventid } = Astro.params;
 const locale = 'en' as const;
 const t = useTranslations(locale);
 
-const [event] = await db.select().from(Event).where(eq(Event.id, eventId!));
+const [event] = await db.select().from(Event).where(eq(Event.id, eventid!));
 if (!event) {
   return Astro.redirect('/en/');
 }
@@ -18,7 +23,7 @@ if (!event) {
 const [{ totalPairs }] = await db
   .select({ totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)` })
   .from(Reservation)
-  .where(eq(Reservation.eventId, eventId!));
+  .where(eq(Reservation.eventId, eventid!));
 
 const remaining = event.capacity - totalPairs;
 const title = event.titleEn || event.titleSl;
@@ -56,7 +61,7 @@ const dateStr = new Intl.DateTimeFormat('en-GB', {
       )}
 
       {remaining > 0 ? (
-        <ReservationForm locale={locale} eventId={eventId!} remainingCapacity={remaining} />
+        <ReservationForm locale={locale} eventId={eventid!} remainingCapacity={remaining} />
       ) : (
         <p class="text-center text-xl text-red-400 font-semibold">Sold out</p>
       )}
