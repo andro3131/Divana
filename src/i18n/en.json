@@ -39,22 +39,18 @@
   "services": {
     "title": "Performances",
     "subtitle": "Music for every moment",
+    "intro": "I perform solo with guitarist Gašper Možina or with a full band lineup. Find the right format for your event.",
     "solo": {
-      "title": "Solo Concerts",
-      "description": "Intimate solo performances full of emotion and deep vibrations. Concerts at castles, halls and cultural venues."
+      "title": "Solo Performances",
+      "shortDescription": "Intimate performances with voice and guitar for weddings, terraces, anniversaries and special moments.",
+      "description": "Together with guitarist Gašper Možina, we bring music to life on terraces, create unforgettable atmospheres at weddings, birthdays, special events and concerts. We also enrich jubilees of small and large companies, public events and grand openings. Intimate performances full of emotion and deep vibrations."
     },
     "band": {
       "title": "Band Concerts",
-      "description": "Powerful concert evenings with a full lineup. Energetic performances that fill halls and inspire audiences."
+      "shortDescription": "Powerful concert evenings with a full lineup for halls, festivals and larger events.",
+      "description": "With a full band lineup – Gašper Možina, Tilen Omerzel Macedoni, Domen Stražišar and Bogdan Turnšek – together we create energetic concert evenings that fill halls and inspire audiences. Performances at festivals, concert halls and larger events."
     },
-    "wedding": {
-      "title": "Weddings & Anniversaries",
-      "description": "Together with guitarist Gašper Možina, they bring music to life on terraces, creating unforgettable atmospheres at weddings and celebrations."
-    },
-    "corporate": {
-      "title": "Corporate Events",
-      "description": "Musical enrichment for company jubilees, public events and grand openings."
-    },
+    "more": "More",
     "cta": "Inquire"
   },
   "danceEvenings": {

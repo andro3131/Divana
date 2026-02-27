@@ -1,0 +1,128 @@
+---
+interface Props {
+  servicesData: Record<string, {
+    title: string;
+    description: string;
+    images: { src: string; alt: string }[];
+  }>;
+  contactSectionId: string;
+  ctaLabel: string;
+}
+
+const { servicesData, contactSectionId, ctaLabel } = Astro.props;
+---
+
+<div id="service-modal" class="fixed inset-0 z-[100] hidden bg-dark-950/95 backdrop-blur-md overflow-y-auto">
+  <div class="min-h-full flex items-center justify-center p-4 md:p-8" id="service-modal-backdrop">
+    <div class="relative bg-dark-800 rounded-2xl max-w-3xl w-full overflow-hidden border border-dark-700/50 shadow-2xl" id="service-modal-content">
+
+      <!-- Close button -->
+      <button id="service-modal-close" class="absolute top-4 right-4 z-10 bg-dark-950/70 backdrop-blur-sm rounded-full p-2 text-white/70 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Main image -->
+      <div class="relative aspect-[16/9] bg-dark-900">
+        <img id="service-modal-img" src="" alt="" class="w-full h-full object-cover transition-opacity duration-300" />
+      </div>
+
+      <!-- Thumbnail strip -->
+      <div id="service-modal-thumbs" class="flex gap-2 px-6 pt-4 overflow-x-auto"></div>
+
+      <!-- Text content -->
+      <div class="p-6 pt-4">
+        <h3 id="service-modal-title" class="text-2xl md:text-3xl font-heading font-semibold text-gold-gradient inline-block mb-4"></h3>
+        <p id="service-modal-desc" class="text-dark-200 leading-relaxed mb-6"></p>
+        <a id="service-modal-cta" href="#" class="inline-flex items-center px-6 py-2.5 border border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-lg font-medium text-sm tracking-wider uppercase transition-all duration-300">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ servicesData, contactSectionId, ctaLabel }}>
+  const modal = document.getElementById('service-modal');
+  const content = document.getElementById('service-modal-content');
+  const mainImg = document.getElementById('service-modal-img');
+  const thumbStrip = document.getElementById('service-modal-thumbs');
+  const titleEl = document.getElementById('service-modal-title');
+  const descEl = document.getElementById('service-modal-desc');
+  const ctaEl = document.getElementById('service-modal-cta');
+  const closeBtn = document.getElementById('service-modal-close');
+  const backdrop = document.getElementById('service-modal-backdrop');
+
+  let currentImages = [];
+
+  function selectImage(index) {
+    mainImg.style.opacity = '0';
+    setTimeout(() => {
+      mainImg.src = currentImages[index].src;
+      mainImg.alt = currentImages[index].alt;
+      mainImg.style.opacity = '1';
+    }, 150);
+
+    thumbStrip.querySelectorAll('button').forEach((btn, i) => {
+      if (i === index) {
+        btn.classList.add('border-gold', 'opacity-100');
+        btn.classList.remove('border-transparent', 'opacity-60');
+      } else {
+        btn.classList.remove('border-gold', 'opacity-100');
+        btn.classList.add('border-transparent', 'opacity-60');
+      }
+    });
+  }
+
+  window.openServiceModal = function(serviceId) {
+    const service = servicesData[serviceId];
+    if (!service) return;
+
+    titleEl.textContent = service.title;
+    descEl.textContent = service.description;
+    ctaEl.textContent = ctaLabel;
+    ctaEl.href = '#' + contactSectionId;
+    ctaEl.addEventListener('click', () => closeServiceModal(), { once: true });
+
+    currentImages = service.images;
+    thumbStrip.innerHTML = '';
+    service.images.forEach((img, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer ' +
+        (i === 0 ? 'border-gold opacity-100' : 'border-transparent opacity-60 hover:opacity-80');
+      const imgEl = document.createElement('img');
+      imgEl.src = img.src;
+      imgEl.alt = img.alt;
+      imgEl.className = 'w-full h-full object-cover';
+      btn.appendChild(imgEl);
+      btn.addEventListener('click', () => selectImage(i));
+      thumbStrip.appendChild(btn);
+    });
+
+    mainImg.src = service.images[0].src;
+    mainImg.alt = service.images[0].alt;
+    mainImg.style.opacity = '1';
+
+    modal.classList.remove('hidden');
+    content.classList.add('modal-enter');
+    document.body.classList.add('lightbox-open');
+  };
+
+  function closeServiceModal() {
+    modal.classList.add('hidden');
+    content.classList.remove('modal-enter');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  closeBtn?.addEventListener('click', closeServiceModal);
+
+  backdrop?.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeServiceModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closeServiceModal();
+    }
+  });
+</script>

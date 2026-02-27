@@ -1,15 +1,54 @@
 ---
 interface Props {
+  serviceId: string;
   title: string;
-  description: string;
-  icon: string;
+  shortDescription: string;
+  images: { src: string; alt: string }[];
+  moreLabel: string;
+  delay?: number;
 }
 
-const { title, description, icon } = Astro.props;
+const { serviceId, title, shortDescription, images, moreLabel, delay = 0 } = Astro.props;
 ---
 
-<div class="group bg-dark-800/50 border border-dark-700/50 rounded-2xl p-8 hover:border-gold/30 hover:bg-dark-800/80 transition-all duration-300" data-animate>
-  <div class="text-4xl mb-5">{icon}</div>
-  <h3 class="text-xl font-heading font-semibold text-dark-50 mb-3 group-hover:text-gold-light transition-colors">{title}</h3>
-  <p class="text-dark-300 leading-relaxed">{description}</p>
+<div
+  class="group bg-dark-800/50 border border-dark-700/50 rounded-2xl overflow-hidden cursor-pointer hover:border-gold/30 hover:shadow-[0_0_30px_rgba(201,168,76,0.12)] transition-all duration-400"
+  data-animate
+  data-service-id={serviceId}
+  style={delay > 0 ? `--stagger-delay: ${delay}ms` : undefined}
+>
+  <!-- Hero image -->
+  <div class="relative aspect-[16/10] overflow-hidden">
+    <img
+      src={images[0].src}
+      alt={images[0].alt}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-dark-950/70 via-dark-950/10 to-transparent"></div>
+
+    <!-- Image count badge -->
+    <div class="absolute top-3 right-3 bg-dark-950/60 backdrop-blur-sm text-dark-200 text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      {images.length}
+    </div>
+  </div>
+
+  <!-- Text content -->
+  <div class="p-6">
+    <h3 class="text-xl font-heading font-semibold text-dark-50 mb-2 group-hover:text-gold-light transition-colors duration-300">
+      {title}
+    </h3>
+    <p class="text-dark-300 text-sm leading-relaxed mb-4">
+      {shortDescription}
+    </p>
+    <span class="inline-flex items-center gap-1.5 text-gold text-sm font-medium group-hover:gap-3 transition-all duration-300">
+      {moreLabel}
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </span>
+  </div>
 </div>

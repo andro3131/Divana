@@ -54,6 +54,21 @@ export const GALLERY_IMAGES = [
   `${CDN_BASE}/Galerija/643446400_10237202575596879_1993265225850368144_n.jpg`,
 ];
 
+// Service section placeholder images (replace with real photos later)
+export const SERVICE_SOLO_IMAGES = [
+  { src: `${CDN_BASE}/divana1.jpg`, alt: 'Solo nastop - Divana' },
+  { src: `${CDN_BASE}/divana3.jpg`, alt: 'Solo nastop - Divana' },
+  { src: `${CDN_BASE}/Galerija/505543645_10232556330543312_3639845977018840339_n.jpg`, alt: 'Solo nastop - Divana' },
+  { src: `${CDN_BASE}/Galerija/508549258_10233770799364618_5845490752102948994_n.jpg`, alt: 'Solo nastop - Divana' },
+];
+
+export const SERVICE_BAND_IMAGES = [
+  { src: `${CDN_BASE}/divana2.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/divana5.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/Galerija/596548353_10236179603903226_7315947033233608792_n.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/Galerija/642742084_10237202575236870_4718934463200127882_n.jpg`, alt: 'Koncert z bandom - Divana' },
+];
+
 export const YOUTUBE_VIDEOS = [
   '9mWZ5hJKpGQ',
   'Zb5P_9-zNYA',

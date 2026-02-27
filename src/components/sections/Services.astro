@@ -3,6 +3,8 @@ import { useTranslations, type Locale } from '../../i18n/ui';
 import { sectionIds } from '../../i18n/utils';
 import SectionHeading from '../ui/SectionHeading.astro';
 import ServiceCard from '../ui/ServiceCard.astro';
+import ServiceModal from '../ui/ServiceModal.astro';
+import { SERVICE_SOLO_IMAGES, SERVICE_BAND_IMAGES } from '../../lib/constants';
 
 interface Props {
   locale: Locale;
@@ -13,23 +15,51 @@ const t = useTranslations(locale);
 const sectionId = sectionIds.services[locale];
 
 const services = [
-  { icon: '🎤', titleKey: 'services.solo.title', descKey: 'services.solo.description' },
-  { icon: '🎸', titleKey: 'services.band.title', descKey: 'services.band.description' },
-  { icon: '💍', titleKey: 'services.wedding.title', descKey: 'services.wedding.description' },
-  { icon: '🏢', titleKey: 'services.corporate.title', descKey: 'services.corporate.description' },
+  {
+    id: 'solo',
+    images: SERVICE_SOLO_IMAGES,
+    titleKey: 'services.solo.title',
+    shortDescKey: 'services.solo.shortDescription',
+    descKey: 'services.solo.description',
+  },
+  {
+    id: 'band',
+    images: SERVICE_BAND_IMAGES,
+    titleKey: 'services.band.title',
+    shortDescKey: 'services.band.shortDescription',
+    descKey: 'services.band.description',
+  },
 ];
+
+const servicesData = Object.fromEntries(
+  services.map((s) => [
+    s.id,
+    {
+      title: t(s.titleKey),
+      description: t(s.descKey),
+      images: s.images,
+    },
+  ])
+);
 ---
 
 <section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-950">
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-5xl mx-auto">
     <SectionHeading title={t('services.title')} subtitle={t('services.subtitle')} />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {services.map((service) => (
+    <p class="text-dark-300 text-center text-lg max-w-2xl mx-auto mb-12 -mt-6" data-animate>
+      {t('services.intro')}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {services.map((service, index) => (
         <ServiceCard
-          icon={service.icon}
+          serviceId={service.id}
           title={t(service.titleKey)}
-          description={t(service.descKey)}
+          shortDescription={t(service.shortDescKey)}
+          images={service.images}
+          moreLabel={t('services.more')}
+          delay={index * 150}
         />
       ))}
     </div>
@@ -43,4 +73,17 @@ const services = [
       </a>
     </div>
   </div>
+
+  <ServiceModal servicesData={servicesData} contactSectionId={sectionIds.contact[locale]} ctaLabel={t('services.cta')} />
 </section>
+
+<script>
+  document.querySelectorAll('[data-service-id]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const serviceId = card.getAttribute('data-service-id');
+      if (serviceId && (window as any).openServiceModal) {
+        (window as any).openServiceModal(serviceId);
+      }
+    });
+  });
+</script>

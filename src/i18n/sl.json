@@ -39,22 +39,18 @@
   "services": {
     "title": "Nastopi",
     "subtitle": "Glasba za vsak trenutek",
+    "intro": "Nastopam solo s kitaristom Gašperjem Možina ali s polno zasedbo banda. Najdite pravo obliko za vaš dogodek.",
     "solo": {
-      "title": "Samostojni koncerti",
-      "description": "Intimni solo nastopi polni čustev in globokih vibracij. Koncerti na gradovih, v dvoranah in kulturnih domovih."
+      "title": "Solo nastopi",
+      "shortDescription": "Intimni nastopi z glasom in kitaro za poroke, terase, obletnice in posebne trenutke.",
+      "description": "Skupaj s kitaristom Gašperjem Možina z glasbo oživljava večere na terasah, ustvarjava nepozabno vzdušje na porokah, rojstnih dnevih, posebnih dogodkih in koncertih. Glasbeno popestrimo tudi jubileje manjših in večjih podjetij, javne prireditve ter slavnostne otvoritve. Intimni nastopi polni čustev in globokih vibracij."
     },
     "band": {
       "title": "Koncerti z bandom",
-      "description": "Močne koncertne večere s polno zasedbo. Energični nastopi, ki polnijo dvorane in navdušijo občinstvo."
+      "shortDescription": "Močni koncertni večeri s polno zasedbo za dvorane, festivale in večje dogodke.",
+      "description": "Ob polni zasedbi banda – Gašper Možina, Tilen Omerzel Macedoni, Domen Stražišar in Bogdan Turnšek – skupaj ustvarjamo energične koncertne večere, ki polnijo dvorane in navdušijo občinstvo. Nastopi na festivalih, v koncertnih dvoranah in na večjih prireditvah."
     },
-    "wedding": {
-      "title": "Poroke in obletnice",
-      "description": "Skupaj s kitaristom Gašperjem Možina z glasbo oživljata večere na terasah, ustvarja nepozabno vzdušje na porokah in rojstnih dnevih."
-    },
-    "corporate": {
-      "title": "Poslovni dogodki",
-      "description": "Glasbeno popestritev jubilejev manjših in večjih podjetij, javnih prireditev ter slavnostnih otvoritev."
-    },
+    "more": "Več",
     "cta": "Povpraševanje"
   },
   "danceEvenings": {
