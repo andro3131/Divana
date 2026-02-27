@@ -33,7 +33,8 @@
   },
   "gallery": {
     "title": "Gallery",
-    "photoCredit": "Photo: Dejan Udovč"
+    "photoCredit": "Photo: Dejan Udovč",
+    "showAll": "See all"
   },
   "services": {
     "title": "Performances",

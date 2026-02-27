@@ -14,25 +14,40 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 const sectionId = sectionIds.gallery[locale];
 
-const images = GALLERY_IMAGES.map((src, i) => ({
+const previewImages = GALLERY_IMAGES.slice(0, 6).map((src, i) => ({
   src,
   alt: `Divana - Maja Marinčič ${i + 1}`,
 }));
+
+const galleryPageUrl = locale === 'sl' ? '/galerija' : '/en/gallery';
 ---
 
 <section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900">
   <div class="max-w-7xl mx-auto">
     <SectionHeading title={t('gallery.title')} />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {images.map((img, idx) => (
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      {previewImages.map((img, idx) => (
         <GalleryImage src={img.src} alt={img.alt} index={idx} />
       ))}
+    </div>
+
+    <!-- Show all button - links to separate page -->
+    <div class="text-center mt-8" data-animate>
+      <a
+        href={galleryPageUrl}
+        class="inline-flex items-center gap-2 px-8 py-3 bg-dark-950 border border-gold/30 text-gold-light text-sm font-bold tracking-widest uppercase rounded-full hover:border-gold/60 hover:bg-dark-800 hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.2)] transition-all duration-300"
+      >
+        {t('gallery.showAll')}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
     </div>
 
     <!-- Photo credit -->
     <p class="text-center text-dark-500 text-sm mt-6 italic">{t('gallery.photoCredit')}</p>
   </div>
 
-  <LightboxModal images={images} />
+  <LightboxModal images={previewImages} />
 </section>

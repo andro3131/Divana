@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/ui';
+import { GALLERY_IMAGES } from '../lib/constants';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import GalleryImage from '../components/ui/GalleryImage.astro';
+import LightboxModal from '../components/ui/LightboxModal.astro';
+
+const locale = 'sl' as const;
+const t = useTranslations(locale);
+
+const images = GALLERY_IMAGES.map((src, i) => ({
+  src,
+  alt: `Divana - Maja Marinčič ${i + 1}`,
+}));
+---
+
+<BaseLayout title="Galerija - Divana" description="Foto galerija Maje Marinčič - Divana. Foto: Dejan Udovč.">
+  <section class="py-24 px-4 md:px-8 bg-dark-900 min-h-screen">
+    <div class="max-w-7xl mx-auto">
+      <!-- Back link -->
+      <a href="/#galerija" class="inline-flex items-center gap-2 text-gold-light/70 hover:text-gold-light text-sm tracking-wider uppercase mb-8 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Nazaj
+      </a>
+
+      <SectionHeading title={t('gallery.title')} />
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {images.map((img, idx) => (
+          <GalleryImage src={img.src} alt={img.alt} index={idx} />
+        ))}
+      </div>
+
+      <!-- Photo credit -->
+      <p class="text-center text-dark-500 text-sm mt-8 italic">{t('gallery.photoCredit')}</p>
+    </div>
+
+    <LightboxModal images={images} />
+  </section>
+</BaseLayout>

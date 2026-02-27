@@ -12,17 +12,17 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 const sectionId = sectionIds.music[locale];
 
-const featuredVideos = YOUTUBE_VIDEOS.slice(0, 3);
-const moreVideos = YOUTUBE_VIDEOS.slice(3);
+const previewVideos = YOUTUBE_VIDEOS.slice(0, 4);
+const musicPageUrl = locale === 'sl' ? '/glasba' : '/en/music';
 ---
 
 <section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-950">
   <div class="max-w-7xl mx-auto">
     <SectionHeading title={t('music.title')} />
 
-    <!-- 3 Featured YouTube Videos in a row -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" data-animate>
-      {featuredVideos.map((videoId) => (
+    <!-- 4 Featured YouTube Videos - 2x2 grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8" data-animate>
+      {previewVideos.map((videoId) => (
         <div class="aspect-video rounded-xl overflow-hidden bg-dark-800">
           <iframe
             src={`https://www.youtube.com/embed/${videoId}`}
@@ -36,32 +36,17 @@ const moreVideos = YOUTUBE_VIDEOS.slice(3);
       ))}
     </div>
 
-    <!-- Hidden videos - toggled by button -->
-    <div id="more-videos" class="hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" data-animate>
-      {moreVideos.map((videoId) => (
-        <div class="aspect-video rounded-xl overflow-hidden bg-dark-800 more-video-item">
-          <iframe
-            data-src={`https://www.youtube.com/embed/${videoId}`}
-            title="YouTube video"
-            class="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      ))}
-    </div>
-
-    <!-- Show all button -->
+    <!-- Show all button - links to separate page -->
     <div class="text-center mb-16" data-animate>
-      <button
-        id="show-all-videos"
+      <a
+        href={musicPageUrl}
         class="inline-flex items-center gap-2 px-8 py-3 bg-dark-900 border border-gold/30 text-gold-light text-sm font-bold tracking-widest uppercase rounded-full hover:border-gold/60 hover:bg-dark-800 hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.2)] transition-all duration-300"
       >
         {t('music.showAll')}
-        <svg class="w-4 h-4 transition-transform duration-300" id="show-all-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-      </button>
+      </a>
     </div>
 
     <!-- Spotify Player -->
@@ -82,33 +67,3 @@ const moreVideos = YOUTUBE_VIDEOS.slice(3);
     </div>
   </div>
 </section>
-
-<script>
-  const btn = document.getElementById('show-all-videos');
-  const container = document.getElementById('more-videos');
-  const icon = document.getElementById('show-all-icon');
-
-  if (btn && container && icon) {
-    let expanded = false;
-
-    btn.addEventListener('click', () => {
-      expanded = !expanded;
-
-      if (expanded) {
-        // Load iframes on first expand
-        container.querySelectorAll('iframe[data-src]').forEach((iframe) => {
-          iframe.setAttribute('src', iframe.getAttribute('data-src')!);
-          iframe.removeAttribute('data-src');
-        });
-
-        container.classList.remove('hidden');
-        container.classList.add('grid');
-        icon.style.transform = 'rotate(180deg)';
-      } else {
-        container.classList.add('hidden');
-        container.classList.remove('grid');
-        icon.style.transform = 'rotate(0deg)';
-      }
-    });
-  }
-</script>

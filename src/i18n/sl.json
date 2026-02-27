@@ -29,11 +29,12 @@
     "title": "Glasba",
     "listenOn": "Poslušaj na Spotify",
     "watchOn": "Poglej na YouTube",
-    "showAll": "Poglej vse"
+    "showAll": "Pokaži vse"
   },
   "gallery": {
     "title": "Galerija",
-    "photoCredit": "Foto: Dejan Udovč"
+    "photoCredit": "Foto: Dejan Udovč",
+    "showAll": "Pokaži vse"
   },
   "services": {
     "title": "Nastopi",
