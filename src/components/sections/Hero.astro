@@ -18,7 +18,8 @@ const t = useTranslations(locale);
     <img
       src={HERO_IMAGE}
       alt="Divana - Maja Marinčič"
-      class="w-full h-full object-cover object-[center_top] md:object-top"
+      id="hero-img"
+      class="w-full h-full object-cover object-[center_top] md:object-top hero-zoom-in"
       loading="eager"
       fetchpriority="high"
     />
@@ -47,3 +48,44 @@ const t = useTranslations(locale);
     </svg>
   </div>
 </section>
+
+<style>
+  /* Initial zoom-out effect on page load */
+  @keyframes heroZoomIn {
+    from { transform: scale(1.15); }
+    to { transform: scale(1); }
+  }
+
+  .hero-zoom-in {
+    animation: heroZoomIn 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    will-change: transform;
+  }
+</style>
+
+<script>
+  // Parallax zoom on scroll - image slightly zooms in as you scroll down
+  const heroImg = document.getElementById('hero-img');
+  const heroSection = document.getElementById('hero');
+
+  if (heroImg && heroSection) {
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const heroHeight = heroSection.offsetHeight;
+
+          if (scrollY < heroHeight) {
+            const progress = scrollY / heroHeight;
+            const scale = 1 + progress * 0.12;
+            heroImg.style.transform = `scale(${scale})`;
+          }
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+</script>
