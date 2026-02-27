@@ -174,17 +174,19 @@ const photoClass = (side: 'left' | 'right') =>
 </section>
 
 <script>
-  // IntersectionObserver for slide-in animations on about photos
+  // IntersectionObserver for slide-in/out animations on about photos
+  // Photos slide in when visible, slide back out when scrolled away
   const slideObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('slide-in');
-          slideObserver.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('slide-in');
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.15 }
   );
 
   document.querySelectorAll('[data-slide]').forEach((el) => {
