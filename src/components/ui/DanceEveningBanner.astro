@@ -177,6 +177,7 @@ const eventLocation = 'Dvorana Stik, Trebnje';
     position: relative;
     width: min(374px, 80vw);
     aspect-ratio: 3/4.2;
+    max-height: 88vh;
     animation: bannerFloat 4s ease-in-out 2.3s infinite;
   }
 
@@ -244,22 +245,22 @@ const eventLocation = 'Dvorana Stik, Trebnje';
   /* Content */
   .banner-content {
     position: absolute; top: 0; left: 0; right: 0;
-    z-index: 10; text-align: center; padding: 28px 24px;
+    z-index: 10; text-align: center; padding: 22px 20px;
   }
 
   .brand-label {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(11px, 2.8vw, 16px);
-    letter-spacing: 0.4em; text-transform: uppercase;
+    font-size: clamp(12px, 3vw, 15px);
+    letter-spacing: 0.35em; text-transform: uppercase;
     color: #C9A24E;
     opacity: 0; animation: fadeInBanner 1s ease-out 0.7s forwards;
-    margin-bottom: 8px; font-weight: 600;
+    margin-bottom: 8px; font-weight: 700;
   }
 
   .event-name {
     font-family: 'Playfair Display', serif;
     font-style: italic; font-weight: 700;
-    font-size: clamp(38px, 10vw, 62px);
+    font-size: clamp(40px, 11vw, 56px);
     line-height: 1;
     background: linear-gradient(160deg, #E2C77A 0%, #C9A24E 35%, #8A6A20 65%, #E2C77A 100%);
     background-size: 200% 200%;
@@ -282,7 +283,7 @@ const eventLocation = 'Dvorana Stik, Trebnje';
 
   .banner-subtitle {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(12px, 3vw, 18px);
+    font-size: clamp(12px, 3vw, 15px);
     letter-spacing: 0.2em; color: #EDE0C4;
     opacity: 0; animation: fadeInBanner 1s ease-out 1.2s forwards;
     margin-bottom: 14px;
@@ -304,7 +305,7 @@ const eventLocation = 'Dvorana Stik, Trebnje';
   .poem {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(12px, 2.8vw, 17px);
+    font-size: clamp(12px, 2.8vw, 15px);
     color: #D6C9AB; line-height: 1.7;
     opacity: 0; animation: fadeInBanner 1s ease-out 1.6s forwards;
     letter-spacing: 0.02em; margin-bottom: 12px;
@@ -312,7 +313,7 @@ const eventLocation = 'Dvorana Stik, Trebnje';
 
   .event-info {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(10px, 2.5vw, 15px);
+    font-size: clamp(11px, 2.5vw, 13px);
     color: #E2C77A; letter-spacing: 0.1em;
     line-height: 1.7;
     opacity: 0; animation: fadeInBanner 1s ease-out 1.8s forwards;
@@ -328,11 +329,11 @@ const eventLocation = 'Dvorana Stik, Trebnje';
 
   .cta-btn {
     display: inline-block;
-    padding: 12px 36px;
+    padding: 11px 34px;
     border: 1.5px solid #C9A24E;
     color: #E2C77A;
     font-family: 'Playfair Display', serif;
-    font-size: 13px; font-weight: 600;
+    font-size: 12px; font-weight: 600;
     letter-spacing: 0.3em; text-transform: uppercase;
     text-decoration: none; cursor: pointer;
     background: linear-gradient(135deg, rgba(201,162,78,0.08), rgba(201,162,78,0.03));
