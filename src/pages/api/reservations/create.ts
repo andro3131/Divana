@@ -77,9 +77,10 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 201, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Reservation error:', error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('Reservation error:', message, error);
     return new Response(
-      JSON.stringify({ error: 'Prišlo je do napake. Prosimo, poskusite znova.' }),
+      JSON.stringify({ error: `Napaka: ${message}` }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
