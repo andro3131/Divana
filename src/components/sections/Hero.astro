@@ -11,7 +11,9 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 ---
 
-<section id="hero" class="relative h-screen w-full overflow-hidden">
+<!-- Scroll zone: extra height creates scroll space for zoom effect before page moves -->
+<div id="hero-scroll-zone" class="relative" style="height: 130vh;">
+<section id="hero" class="sticky top-0 h-screen w-full overflow-hidden">
   <!-- Background image -->
   <div class="absolute inset-0">
     <img
@@ -47,6 +49,7 @@ const t = useTranslations(locale);
     </svg>
   </div>
 </section>
+</div>
 
 <style>
   /* Initial zoom-out effect on page load */
@@ -62,23 +65,29 @@ const t = useTranslations(locale);
 </style>
 
 <script>
-  // Parallax zoom on scroll - image slightly zooms in as you scroll down
+  // Zoom on scroll within the sticky scroll zone
+  // The extra 30vh of scroll space is used for zoom before page scrolls past
   const heroImg = document.getElementById('hero-img');
-  const heroSection = document.getElementById('hero');
+  const scrollZone = document.getElementById('hero-scroll-zone');
 
-  if (heroImg && heroSection) {
+  if (heroImg && scrollZone) {
+    const viewportH = window.innerHeight;
+    // Extra scroll distance = total zone height - viewport
+    const zoomDistance = scrollZone.offsetHeight - viewportH;
     let ticking = false;
 
     window.addEventListener('scroll', () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY;
-          const heroHeight = heroSection.offsetHeight;
 
-          if (scrollY < heroHeight) {
-            const progress = scrollY / heroHeight;
-            const scale = 1 + progress * 0.12;
+          if (scrollY <= zoomDistance && zoomDistance > 0) {
+            // Within zoom zone: scale from 1 to 1.1
+            const progress = scrollY / zoomDistance;
+            const scale = 1 + progress * 0.1;
             heroImg.style.transform = `scale(${scale})`;
+          } else if (scrollY < scrollZone.offsetHeight) {
+            heroImg.style.transform = `scale(1.1)`;
           }
 
           ticking = false;
