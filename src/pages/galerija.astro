@@ -15,7 +15,7 @@ const images = GALLERY_IMAGES.map((src, i) => ({
 }));
 ---
 
-<BaseLayout title="Galerija - Divana" description="Foto galerija Maje Marinčič - Divana. Foto: Dejan Udovč.">
+<BaseLayout title="Galerija - Divana" description="Foto galerija Maje Marinčič - Divana.">
   <section class="py-24 px-4 md:px-8 bg-dark-900 min-h-screen">
     <div class="max-w-7xl mx-auto">
       <!-- Back link -->
@@ -33,9 +33,6 @@ const images = GALLERY_IMAGES.map((src, i) => ({
           <GalleryImage src={img.src} alt={img.alt} index={idx} />
         ))}
       </div>
-
-      <!-- Photo credit -->
-      <p class="text-center text-dark-500 text-sm mt-8 italic">{t('gallery.photoCredit')}</p>
     </div>
 
     <LightboxModal images={images} />
