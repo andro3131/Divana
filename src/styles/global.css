@@ -130,6 +130,40 @@ body {
   animation: sparkle-pulse 2.5s ease-in-out infinite;
 }
 
+/* NOVO badge pulse */
+@keyframes novo-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+  }
+}
+
+.novo-pulse {
+  animation: novo-pulse 2s ease-in-out infinite;
+}
+
+/* About section - rotated photos */
+.about-photo {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-photo-left {
+  transform: rotate(var(--rotate, -3deg));
+}
+
+.about-photo-right {
+  transform: rotate(var(--rotate, 3deg));
+}
+
+.about-photo:hover {
+  transform: rotate(0deg) scale(1.05);
+  z-index: 10;
+}
+
 /* Lightbox */
 .lightbox-open {
   overflow: hidden;

@@ -2,6 +2,7 @@
 import { useTranslations, type Locale } from '../../i18n/ui';
 import { sectionIds } from '../../i18n/utils';
 import SectionHeading from '../ui/SectionHeading.astro';
+import { ABOUT_IMAGES } from '../../lib/constants';
 
 interface Props {
   locale: Locale;
@@ -10,24 +11,142 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const sectionId = sectionIds.about[locale];
+
+const images = ABOUT_IMAGES;
 ---
 
-<section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900">
-  <div class="max-w-4xl mx-auto">
+<section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900 overflow-hidden">
+  <div class="max-w-6xl mx-auto">
     <SectionHeading title={t('about.title')} />
 
-    <div class="space-y-6 text-dark-200 leading-relaxed text-lg" data-animate>
-      <p>{t('about.bio1')}</p>
-      <p>{t('about.bio2')}</p>
-      <p class="text-dark-300 italic">{t('about.bio3')}</p>
-      <p>{t('about.bio4')}</p>
-      <p>{t('about.bio5')}</p>
-      <p>{t('about.bio6')}</p>
-      <p>{t('about.bio7')}</p>
-      <p>{t('about.bio8')}</p>
-      <p>{t('about.bio9')}</p>
-      <p>{t('about.bio10')}</p>
-      <p class="text-dark-300 italic">{t('about.bio11')}</p>
+    <!-- Mobile layout: alternating image + text blocks -->
+    <div class="md:hidden space-y-10" data-animate>
+      <!-- Block 1: image + bio 1-2 -->
+      <div class="space-y-5">
+        <div class="about-photo about-photo-left mx-auto w-3/4 max-w-[280px]" data-animate>
+          <div class="aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[0].src} alt={images[0].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 1</span>'" />
+          </div>
+        </div>
+        <div class="text-dark-200 leading-relaxed text-base space-y-4">
+          <p>{t('about.bio1')}</p>
+          <p>{t('about.bio2')}</p>
+          <p class="text-dark-100 italic">{t('about.bio3')}</p>
+        </div>
+      </div>
+
+      <!-- Block 2: image + bio 4-5 -->
+      <div class="space-y-5">
+        <div class="about-photo about-photo-right mx-auto w-3/4 max-w-[280px]" data-animate>
+          <div class="aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[1].src} alt={images[1].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 2</span>'" />
+          </div>
+        </div>
+        <div class="text-dark-200 leading-relaxed text-base space-y-4">
+          <p>{t('about.bio4')}</p>
+          <p>{t('about.bio5')}</p>
+        </div>
+      </div>
+
+      <!-- Block 3: image + bio 6-7 -->
+      <div class="space-y-5">
+        <div class="about-photo about-photo-left mx-auto w-3/4 max-w-[280px]" data-animate>
+          <div class="aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[2].src} alt={images[2].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 3</span>'" />
+          </div>
+        </div>
+        <div class="text-dark-200 leading-relaxed text-base space-y-4">
+          <p>{t('about.bio6')}</p>
+          <p>{t('about.bio7')}</p>
+        </div>
+      </div>
+
+      <!-- Block 4: image + bio 8-9 -->
+      <div class="space-y-5">
+        <div class="about-photo about-photo-right mx-auto w-3/4 max-w-[280px]" data-animate>
+          <div class="aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[3].src} alt={images[3].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 4</span>'" />
+          </div>
+        </div>
+        <div class="text-dark-200 leading-relaxed text-base space-y-4">
+          <p>{t('about.bio8')}</p>
+          <p>{t('about.bio9')}</p>
+        </div>
+      </div>
+
+      <!-- Block 5: image + bio 10-11 -->
+      <div class="space-y-5">
+        <div class="about-photo about-photo-left mx-auto w-3/4 max-w-[280px]" data-animate>
+          <div class="aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[4].src} alt={images[4].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 5</span>'" />
+          </div>
+        </div>
+        <div class="text-dark-200 leading-relaxed text-base space-y-4">
+          <p>{t('about.bio10')}</p>
+          <p class="text-dark-100 italic">{t('about.bio11')}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop layout: 3-column with images on sides -->
+    <div class="hidden md:grid md:grid-cols-[200px_1fr_200px] lg:grid-cols-[240px_1fr_240px] gap-8 lg:gap-12 items-start">
+      <!-- Left column: images 1, 3, 5 -->
+      <div class="space-y-16 pt-8">
+        <div class="about-photo about-photo-left" data-animate>
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[0].src} alt={images[0].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 1</span>'" />
+          </div>
+        </div>
+        <div class="about-photo about-photo-left" data-animate style="--rotate: -2deg">
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[2].src} alt={images[2].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 3</span>'" />
+          </div>
+        </div>
+        <div class="about-photo about-photo-left" data-animate style="--rotate: -4deg">
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[4].src} alt={images[4].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 5</span>'" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Center column: text -->
+      <div class="space-y-6 text-dark-200 leading-relaxed text-lg" data-animate>
+        <p>{t('about.bio1')}</p>
+        <p>{t('about.bio2')}</p>
+        <p class="text-dark-100 italic">{t('about.bio3')}</p>
+        <p>{t('about.bio4')}</p>
+        <p>{t('about.bio5')}</p>
+        <p>{t('about.bio6')}</p>
+        <p>{t('about.bio7')}</p>
+        <p>{t('about.bio8')}</p>
+        <p>{t('about.bio9')}</p>
+        <p>{t('about.bio10')}</p>
+        <p class="text-dark-100 italic">{t('about.bio11')}</p>
+      </div>
+
+      <!-- Right column: images 2, 4 -->
+      <div class="space-y-16 pt-32">
+        <div class="about-photo about-photo-right" data-animate>
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[1].src} alt={images[1].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 2</span>'" />
+          </div>
+        </div>
+        <div class="about-photo about-photo-right" data-animate style="--rotate: 2deg">
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800 flex items-center justify-center">
+            <img src={images[3].src} alt={images[3].alt} class="w-full h-full object-cover" loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-gold/40 text-sm\'>Foto 4</span>'" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

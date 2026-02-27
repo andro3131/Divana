@@ -39,8 +39,14 @@ const reserveText = locale === 'sl' ? 'Rezerviraj mesto' : 'Reserve a spot';
   <!-- Dance Evening Star Banner - right side on desktop, bottom center on mobile -->
   <div class="absolute right-4 bottom-40 sm:right-8 sm:bottom-44 md:right-20 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:right-32 xl:right-40 animate-fade-in-delay z-20">
     <div class="flex flex-col items-center">
-      <!-- Star - floats independently -->
-      <div class="star-float relative w-[180px] sm:w-[220px] md:w-[280px] lg:w-[340px] xl:w-[380px] aspect-square">
+      <!-- Star - floats independently, slightly rotated -->
+      <div class="star-float relative w-[180px] sm:w-[220px] md:w-[280px] lg:w-[340px] xl:w-[380px] aspect-square rotate-[5deg]">
+        <!-- NOVO!! badge -->
+        <div class="absolute -top-3 sm:-top-4 md:-top-5 left-1/2 -translate-x-1/2 z-30 -rotate-[5deg]">
+          <span class="inline-block bg-red-600 text-white text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-black tracking-wider uppercase px-2.5 sm:px-3 md:px-4 py-0.5 sm:py-1 rounded-full shadow-lg shadow-red-900/40 novo-pulse">
+            NOVO!!
+          </span>
+        </div>
         <svg class="absolute inset-0 w-full h-full star-glow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
