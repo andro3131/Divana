@@ -20,7 +20,7 @@ const t = useTranslations(locale);
       src={HERO_IMAGE}
       alt="Divana - Maja Marinčič"
       id="hero-img"
-      class="w-full h-full object-cover object-[58%_15%] md:object-top hero-zoom-in"
+      class="w-full h-full object-cover object-[25%_12%] md:object-top hero-zoom-in"
       loading="eager"
       fetchpriority="high"
     />
@@ -29,8 +29,11 @@ const t = useTranslations(locale);
 
   <!-- Title - logo top-right on mobile, text on desktop -->
   <div class="absolute z-10 right-4 top-12 sm:right-6 sm:top-16 md:left-[28%] md:right-auto md:top-auto md:-translate-x-1/2 md:bottom-32 lg:left-[30%] lg:bottom-36 animate-fade-in text-right md:text-center">
-    <!-- Logo on mobile -->
+    <!-- Logo + subtitle on mobile -->
     <img src={LOGO_IMAGE} alt="Divana" class="block md:hidden w-32 sm:w-40 ml-auto mb-1 drop-shadow-lg" />
+    <p class="block md:hidden text-xs sm:text-sm text-primary-200/70 font-light tracking-widest uppercase animate-fade-in-delay">
+      {t('hero.subtitle')}
+    </p>
     <!-- Text on desktop -->
     <h1 class="hidden md:block text-7xl lg:text-8xl font-heading font-semibold text-gold-gradient mb-3 tracking-wide">
       Divana
