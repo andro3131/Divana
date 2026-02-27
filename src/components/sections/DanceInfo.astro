@@ -7,10 +7,11 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en/reservation/plesni-vecer-2026-03';
 ---
 
 <section class="py-24 px-4 md:px-8 bg-dark-900">
-  <div class="max-w-[1200px] mx-auto">
+  <div class="max-w-[1400px] mx-auto">
     <!-- Outer glow wrapper -->
     <div class="di-glow-wrap">
       <div class="di-banner" data-animate>
@@ -205,8 +206,7 @@ const t = useTranslations(locale);
             </div>
 
             <div class="di-cta-area">
-              <a class="di-cta-link" href={`mailto:${t('danceInfo.email')}`}>{t('danceInfo.cta')}</a>
-              <span class="di-cta-email">{t('danceInfo.email')}</span>
+              <a class="di-cta-link" href={reservePath}>{t('danceInfo.cta')}</a>
             </div>
           </div>
 
@@ -497,10 +497,6 @@ const t = useTranslations(locale);
     border-color: #E2C77A; color: #E2C77A;
     box-shadow: 0 0 25px rgba(201,162,78,0.18);
     background: linear-gradient(135deg, rgba(201,162,78,0.2), rgba(201,162,78,0.1));
-  }
-
-  .di-cta-email {
-    font-size: 12px; color: #9A8E78; letter-spacing: 0.05em;
   }
 
   /* NOVO!! Badge */
