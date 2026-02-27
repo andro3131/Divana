@@ -15,7 +15,14 @@ export const ABOUT_IMAGES = [
 ];
 
 export const GALLERY_IMAGES = [
+  // First 6 shown on homepage preview
+  `${CDN_BASE}/divana1.jpg`,
+  `${CDN_BASE}/divana2.jpg`,
+  `${CDN_BASE}/divana3.jpg`,
   `${CDN_BASE}/divana4.jpg`,
+  `${CDN_BASE}/divana5.jpg`,
+  `${CDN_BASE}/divana6.jpg`,
+  // Rest on /galerija page
   `${CDN_BASE}/Galerija/456133216_10230044030117716_5755526803108075178_n.jpg`,
   `${CDN_BASE}/Galerija/471205773_10231807214636227_541313840800505154_n.jpg`,
   `${CDN_BASE}/Galerija/471274937_10231807214836232_483847351603642680_n.jpg`,
