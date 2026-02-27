@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "ASTRO_DATABASE_FILE=file:local.db astro build",
+    "build": "astro build --remote",
+    "build:local": "ASTRO_DATABASE_FILE=file:local.db astro build",
     "preview": "ASTRO_DATABASE_FILE=file:local.db astro preview",
     "astro": "astro"
   },
