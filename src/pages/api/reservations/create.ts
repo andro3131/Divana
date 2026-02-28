@@ -60,10 +60,13 @@ export const POST: APIRoute = async ({ request }) => {
       createdAt: new Date(),
     });
 
-    // Try to send email (non-blocking)
+    // Try to send emails (non-blocking)
     try {
-      const { sendConfirmationEmail } = await import('../../../lib/email');
-      await sendConfirmationEmail({ email, name, event, numberOfPairs, reservationId });
+      const { sendConfirmationEmail, sendReservationNotification } = await import('../../../lib/email');
+      await Promise.all([
+        sendConfirmationEmail({ email, name, event, numberOfPairs, reservationId }),
+        sendReservationNotification({ email, name, event, numberOfPairs, reservationId }),
+      ]);
     } catch (emailErr) {
       console.error('Email sending failed (non-critical):', emailErr);
     }

@@ -55,15 +55,19 @@ export const POST: APIRoute = async ({ request }) => {
             .where(eq(Event.id, reservation.eventId));
 
           if (eventData) {
-            const { sendConfirmationEmail } = await import('../../../lib/email');
-            await sendConfirmationEmail({
+            const { sendConfirmationEmail, sendReservationNotification } = await import('../../../lib/email');
+            const emailData = {
               email: reservation.email,
               name: reservation.name,
               event: eventData,
               numberOfPairs: reservation.numberOfPairs,
               reservationId,
               isPaid: true,
-            });
+            };
+            await Promise.all([
+              sendConfirmationEmail(emailData),
+              sendReservationNotification(emailData),
+            ]);
           }
         }
       } catch (emailErr) {
