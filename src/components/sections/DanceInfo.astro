@@ -258,6 +258,12 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
     box-shadow: 0 0 80px rgba(201,162,78,0.04), 0 20px 60px rgba(0,0,0,0.4);
     backdrop-filter: blur(10px);
     z-index: 1;
+    animation: diBannerFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes diBannerFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 
   /* Top / bottom gold lines */
