@@ -5,7 +5,7 @@ import vercel from '@astrojs/vercel';
 import db from '@astrojs/db';
 
 export default defineConfig({
-  site: 'https://divana.si',
+  site: 'https://divana-tvwt.vercel.app',
   adapter: vercel(),
   integrations: [db()],
   vite: {
