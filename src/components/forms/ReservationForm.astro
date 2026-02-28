@@ -5,13 +5,17 @@ interface Props {
   locale: Locale;
   eventId: string;
   remainingCapacity: number;
+  price?: number | null;
+  onlinePrice?: number | null;
 }
 
-const { locale, eventId, remainingCapacity } = Astro.props;
+const { locale, eventId, remainingCapacity, price, onlinePrice } = Astro.props;
 const t = useTranslations(locale);
+const hasOnlinePayment = onlinePrice && onlinePrice > 0;
+const pairLabel = locale === 'sl' ? 'par' : 'couple';
 ---
 
-<form id="reservation-form" class="space-y-5 max-w-lg mx-auto" data-event-id={eventId}>
+<form id="reservation-form" class="space-y-5 max-w-lg mx-auto" data-event-id={eventId} data-locale={locale}>
   <div>
     <label for="res-name" class="block text-sm font-medium text-dark-200 mb-1.5">{t('reservation.name')}</label>
     <input
@@ -64,56 +68,129 @@ const t = useTranslations(locale);
       class="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg text-dark-50 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none resize-none"
     ></textarea>
   </div>
-  <button
-    type="submit"
-    class="w-full py-3 px-6 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300 transform hover:scale-[1.02] tracking-wider uppercase text-sm"
-  >
-    {t('reservation.submit')}
-  </button>
+
+  {hasOnlinePayment ? (
+    <div class="space-y-3 pt-2">
+      <button
+        type="button"
+        id="btn-stripe-pay"
+        class="w-full py-3.5 px-6 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300 transform hover:scale-[1.02] tracking-wider uppercase text-sm flex items-center justify-center gap-2"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+        {t('reservation.submitPay')} ({(onlinePrice / 100).toFixed(0)}&euro;/{pairLabel})
+      </button>
+      <div class="flex items-center gap-3">
+        <div class="flex-1 h-px bg-dark-600"></div>
+        <span class="text-dark-400 text-xs uppercase tracking-wider">{t('reservation.orSeparator')}</span>
+        <div class="flex-1 h-px bg-dark-600"></div>
+      </div>
+      <button
+        type="button"
+        id="btn-free-reserve"
+        class="w-full py-3 px-6 bg-dark-800 border border-dark-600 text-dark-200 font-medium rounded-lg hover:border-primary-500/50 hover:text-primary-300 transition-all duration-300 tracking-wider uppercase text-sm"
+      >
+        {t('reservation.submitFree')} ({price ? `${(price / 100).toFixed(0)}\u20AC/${pairLabel}` : ''} &ndash; {t('reservation.submitFreeNote')})
+      </button>
+    </div>
+  ) : (
+    <button
+      type="submit"
+      class="w-full py-3 px-6 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300 transform hover:scale-[1.02] tracking-wider uppercase text-sm"
+    >
+      {t('reservation.submit')}
+    </button>
+  )}
+
   <div id="reservation-feedback" class="hidden text-center py-3 rounded-lg text-sm"></div>
 </form>
 
 <script>
   const form = document.getElementById('reservation-form') as HTMLFormElement;
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const feedback = document.getElementById('reservation-feedback')!;
+  const freeBtn = document.getElementById('btn-free-reserve');
+  const stripeBtn = document.getElementById('btn-stripe-pay');
+  const feedback = document.getElementById('reservation-feedback')!;
+
+  function getFormData() {
     const formData = new FormData(form);
     const data: Record<string, any> = Object.fromEntries(formData);
     data.eventId = form.dataset.eventId!;
     data.numberOfPairs = Number(data.numberOfPairs);
+    data.locale = form.dataset.locale || 'sl';
+    return data;
+  }
 
-    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = '...';
+  function showFeedback(type: 'success' | 'error', message: string) {
+    feedback.classList.remove('hidden');
+    feedback.className = type === 'success'
+      ? 'text-center py-3 rounded-lg bg-green-900/50 text-green-300 text-sm'
+      : 'text-center py-3 rounded-lg bg-red-900/50 text-red-300 text-sm';
+    feedback.textContent = message;
+  }
 
+  async function handleFreeReservation(btn: HTMLElement) {
+    if (!form.reportValidity()) return;
+    const data = getFormData();
+    const originalText = btn.textContent;
+    btn.setAttribute('disabled', '');
+    btn.textContent = '...';
     try {
       const res = await fetch('/api/reservations/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      feedback.classList.remove('hidden');
       const text = await res.text();
       let result: any;
-      try { result = JSON.parse(text); } catch { result = { error: `Server error (${res.status}): ${text.slice(0, 200)}` }; }
+      try { result = JSON.parse(text); } catch { result = { error: `Server error (${res.status})` }; }
       if (res.ok) {
-        feedback.className = 'text-center py-3 rounded-lg bg-green-900/50 text-green-300 text-sm';
-        feedback.textContent = result.message;
+        showFeedback('success', result.message);
         form.reset();
-        setTimeout(() => { window.location.href = '/'; }, 3000);
+        setTimeout(() => { window.location.href = data.locale === 'en' ? '/en/' : '/'; }, 3000);
       } else {
-        feedback.className = 'text-center py-3 rounded-lg bg-red-900/50 text-red-300 text-sm';
-        feedback.textContent = result.error || `Error ${res.status}`;
+        showFeedback('error', result.error || `Error ${res.status}`);
       }
     } catch (err: any) {
-      feedback.classList.remove('hidden');
-      feedback.className = 'text-center py-3 rounded-lg bg-red-900/50 text-red-300 text-sm';
-      feedback.textContent = `Network error: ${err.message}`;
+      showFeedback('error', `Network error: ${err.message}`);
     } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalText;
+      btn.removeAttribute('disabled');
+      btn.textContent = originalText;
     }
-  });
+  }
+
+  async function handleStripePayment(btn: HTMLElement) {
+    if (!form.reportValidity()) return;
+    const data = getFormData();
+    const originalText = btn.textContent;
+    btn.setAttribute('disabled', '');
+    btn.textContent = '...';
+    try {
+      const res = await fetch('/api/checkout/create-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (res.ok && result.url) {
+        window.location.href = result.url;
+      } else {
+        showFeedback('error', result.error || `Error ${res.status}`);
+        btn.removeAttribute('disabled');
+        btn.textContent = originalText;
+      }
+    } catch (err: any) {
+      showFeedback('error', `Network error: ${err.message}`);
+      btn.removeAttribute('disabled');
+      btn.textContent = originalText;
+    }
+  }
+
+  if (freeBtn) freeBtn.addEventListener('click', () => handleFreeReservation(freeBtn));
+  if (stripeBtn) stripeBtn.addEventListener('click', () => handleStripePayment(stripeBtn));
+  if (!freeBtn && !stripeBtn) {
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      await handleFreeReservation(submitBtn);
+    });
+  }
 </script>

@@ -72,9 +72,23 @@
     "pairs": "Number of Couples",
     "message": "Message (optional)",
     "submit": "Confirm Reservation",
+    "submitFree": "Reserve a spot",
+    "submitFreeNote": "pay at the venue",
+    "submitPay": "Buy ticket online",
+    "orSeparator": "or",
     "success": "Reservation confirmed! A confirmation will be sent to your email.",
     "error": "Something went wrong. Please try again.",
     "back": "Back to home"
+  },
+  "payment": {
+    "successTitle": "Payment successful!",
+    "successMessage": "Your ticket is confirmed. A confirmation will be sent to your email.",
+    "errorTitle": "Error",
+    "errorMessage": "Payment could not be verified. Please check your email or contact us.",
+    "cancelTitle": "Payment cancelled",
+    "cancelMessage": "Payment was not completed. Your reservation was not created.",
+    "cancelRetry": "Try again",
+    "backHome": "Back to home"
   },
   "contact": {
     "title": "Contact",

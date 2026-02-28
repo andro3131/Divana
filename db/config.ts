@@ -10,6 +10,7 @@ const Event = defineTable({
     date: column.date(),
     location: column.text(),
     price: column.number({ optional: true }),
+    onlinePrice: column.number({ optional: true }),
     capacity: column.number(),
     imageUrl: column.text({ optional: true }),
     isPublished: column.boolean({ default: true }),
@@ -27,6 +28,8 @@ const Reservation = defineTable({
     numberOfPairs: column.number(),
     message: column.text({ optional: true }),
     status: column.text({ default: 'confirmed' }),
+    stripeSessionId: column.text({ optional: true }),
+    paymentStatus: column.text({ optional: true }),
     createdAt: column.date(),
   },
 });

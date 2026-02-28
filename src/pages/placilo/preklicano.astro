@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const locale = 'sl' as const;
+const t = useTranslations(locale);
+---
+
+<BaseLayout title="Plačilo preklicano - Divana">
+  <section class="min-h-screen py-28 px-4 bg-dark-900 flex items-center">
+    <div class="max-w-lg mx-auto text-center">
+      <div class="w-20 h-20 bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-8">
+        <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+        </svg>
+      </div>
+      <h1 class="text-3xl font-heading font-semibold text-yellow-400 mb-4">{t('payment.cancelTitle')}</h1>
+      <p class="text-dark-300 mb-8">{t('payment.cancelMessage')}</p>
+      <a href="/" class="inline-flex items-center text-gold hover:text-gold-light transition-colors gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        {t('payment.backHome')}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

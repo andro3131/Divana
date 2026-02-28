@@ -3,11 +3,12 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { db, Reservation, Event, eq, sql } from 'astro:db';
 import { nanoid } from 'nanoid';
+import { getStripe } from '../../../lib/stripe';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const { eventId, name, email, phone, numberOfPairs, message } = body;
+    const { eventId, name, email, phone, numberOfPairs, message, locale } = body;
 
     if (!eventId || !name || !email || !phone || !numberOfPairs) {
       return new Response(
@@ -23,16 +24,15 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Get event
     const [event] = await db.select().from(Event).where(eq(Event.id, eventId));
-    if (!event) {
+    if (!event || !event.onlinePrice) {
       return new Response(
-        JSON.stringify({ error: 'Dogodek ne obstaja.' }),
+        JSON.stringify({ error: 'Dogodek ne obstaja ali nima online cene.' }),
         { status: 404, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Check capacity
+    // Check capacity (exclude expired reservations)
     const [{ totalPairs }] = await db
       .select({ totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)` })
       .from(Reservation)
@@ -46,7 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Create reservation
+    // Create pending reservation
     const reservationId = nanoid();
     await db.insert(Reservation).values({
       id: reservationId,
@@ -56,29 +56,60 @@ export const POST: APIRoute = async ({ request }) => {
       phone: phone.trim(),
       numberOfPairs: Number(numberOfPairs),
       message: message?.trim() || null,
-      status: 'confirmed',
+      status: 'pending',
+      paymentStatus: 'pending',
       createdAt: new Date(),
     });
 
-    // Try to send email (non-blocking)
-    try {
-      const { sendConfirmationEmail } = await import('../../../lib/email');
-      await sendConfirmationEmail({ email, name, event, numberOfPairs, reservationId });
-    } catch (emailErr) {
-      console.error('Email sending failed (non-critical):', emailErr);
-    }
+    // Build URLs
+    const baseUrl = import.meta.env.SITE || 'https://divana.si';
+    const successPath = locale === 'en' ? '/en/payment/success' : '/placilo/uspeh';
+    const cancelPath = locale === 'en' ? '/en/payment/cancelled' : '/placilo/preklicano';
+
+    // Create Stripe Checkout Session
+    const stripe = getStripe();
+    const eventTitle = locale === 'en' && event.titleEn ? event.titleEn : event.titleSl;
+
+    const session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      payment_method_types: ['card'],
+      customer_email: email.trim().toLowerCase(),
+      line_items: [
+        {
+          price_data: {
+            currency: 'eur',
+            product_data: {
+              name: eventTitle,
+              description: `${numberOfPairs} ${numberOfPairs === 1 ? 'par' : 'parov'} – ${event.location}`,
+            },
+            unit_amount: event.onlinePrice,
+          },
+          quantity: numberOfPairs,
+        },
+      ],
+      metadata: {
+        reservationId,
+        eventId,
+        numberOfPairs: String(numberOfPairs),
+      },
+      success_url: `${baseUrl}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}${cancelPath}?reservation_id=${reservationId}`,
+      locale: locale === 'sl' ? 'sl' : 'en',
+    });
+
+    // Store stripe session ID
+    await db
+      .update(Reservation)
+      .set({ stripeSessionId: session.id })
+      .where(eq(Reservation.id, reservationId));
 
     return new Response(
-      JSON.stringify({
-        success: true,
-        message: 'Rezervacija uspešna! Potrditev bo poslana na vaš e-poštni naslov.',
-        reservationId,
-      }),
-      { status: 201, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ url: session.url, reservationId }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    console.error('Reservation error:', message, error);
+    console.error('Checkout session error:', message, error);
     return new Response(
       JSON.stringify({ error: `Napaka: ${message}` }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }

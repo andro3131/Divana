@@ -22,11 +22,12 @@ const eventsWithCounts = await Promise.all(
       .from(Reservation)
       .where(eq(Reservation.eventId, event.id));
 
-    const totalPairs = reservations.reduce((sum, r) => sum + r.numberOfPairs, 0);
+    const activeReservations = reservations.filter((r) => r.status !== 'expired');
+    const totalPairs = activeReservations.reduce((sum, r) => sum + r.numberOfPairs, 0);
 
     return {
       ...event,
-      reservationCount: reservations.length,
+      reservationCount: activeReservations.length,
       reservedPairs: totalPairs,
       remainingCapacity: event.capacity - totalPairs,
     };

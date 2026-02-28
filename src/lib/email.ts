@@ -1,9 +1,10 @@
 interface ConfirmationEmailData {
   email: string;
   name: string;
-  event: { titleSl: string; date: Date; location: string; price: number | null };
+  event: { titleSl: string; date: Date; location: string; price: number | null; onlinePrice?: number | null };
   numberOfPairs: number;
   reservationId: string;
+  isPaid?: boolean;
 }
 
 export async function sendConfirmationEmail(data: ConfirmationEmailData) {
@@ -16,7 +17,7 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
   const { Resend } = await import('resend');
   const resend = new Resend(apiKey);
 
-  const { email, name, event, numberOfPairs, reservationId } = data;
+  const { email, name, event, numberOfPairs, reservationId, isPaid } = data;
   const formattedDate = new Intl.DateTimeFormat('sl-SI', {
     dateStyle: 'full',
     timeStyle: 'short',
@@ -36,7 +37,12 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
           <p style="margin: 4px 0;"><strong style="color: #c9a84c;">Datum:</strong> ${formattedDate}</p>
           <p style="margin: 4px 0;"><strong style="color: #c9a84c;">Lokacija:</strong> ${event.location}</p>
           <p style="margin: 4px 0;"><strong style="color: #c9a84c;">Število parov:</strong> ${numberOfPairs}</p>
-          ${event.price ? `<p style="margin: 4px 0;"><strong style="color: #c9a84c;">Cena:</strong> ${(event.price / 100).toFixed(0)}&euro; na par</p>` : ''}
+          ${isPaid && event.onlinePrice
+            ? `<p style="margin: 4px 0;"><strong style="color: #c9a84c;">Cena:</strong> ${(event.onlinePrice / 100).toFixed(0)}&euro; na par</p>`
+            : event.price
+              ? `<p style="margin: 4px 0;"><strong style="color: #c9a84c;">Cena:</strong> ${(event.price / 100).toFixed(0)}&euro; na par</p>`
+              : ''}
+          <p style="margin: 4px 0;"><strong style="color: #c9a84c;">Plačilo:</strong> ${isPaid ? 'Plačano online ✓' : 'Plačilo na kraju'}</p>
           <p style="margin: 4px 0;"><strong style="color: #c9a84c;">ID rezervacije:</strong> ${reservationId}</p>
         </div>
         <p>Veselimo se vašega obiska!</p>

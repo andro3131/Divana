@@ -72,9 +72,23 @@
     "pairs": "Število parov",
     "message": "Sporočilo (neobvezno)",
     "submit": "Potrdi rezervacijo",
+    "submitFree": "Rezerviraj mesto",
+    "submitFreeNote": "plačilo na kraju",
+    "submitPay": "Kupi vstopnico online",
+    "orSeparator": "ali",
     "success": "Rezervacija uspešna! Potrditev bo poslana na vaš e-poštni naslov.",
     "error": "Prišlo je do napake. Prosimo, poskusite znova.",
     "back": "Nazaj na domov"
+  },
+  "payment": {
+    "successTitle": "Plačilo uspešno!",
+    "successMessage": "Vaša vstopnica je potrjena. Potrditev bo poslana na vaš e-poštni naslov.",
+    "errorTitle": "Napaka",
+    "errorMessage": "Plačilo ni bilo potrjeno. Prosimo, preverite e-pošto ali nas kontaktirajte.",
+    "cancelTitle": "Plačilo preklicano",
+    "cancelMessage": "Plačilo ni bilo dokončano. Vaša rezervacija ni bila ustvarjena.",
+    "cancelRetry": "Poskusite znova",
+    "backHome": "Nazaj na domov"
   },
   "contact": {
     "title": "Kontakt",

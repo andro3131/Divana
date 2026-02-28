@@ -22,8 +22,10 @@ const reservations = await db
   .where(eq(Reservation.eventId, id!))
   .orderBy(Reservation.createdAt);
 
-const totalPairs = reservations.reduce((sum, r) => sum + r.numberOfPairs, 0);
+const activeReservations = reservations.filter((r) => r.status !== 'expired');
+const totalPairs = activeReservations.reduce((sum, r) => sum + r.numberOfPairs, 0);
 const remaining = event.capacity - totalPairs;
+const paidPairs = reservations.filter((r) => r.paymentStatus === 'paid').reduce((sum, r) => sum + r.numberOfPairs, 0);
 ---
 
 <AdminLayout title={`${event.titleSl} - Admin`}>
@@ -51,9 +53,9 @@ const remaining = event.capacity - totalPairs;
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-3 gap-4 mb-10">
+    <div class="grid grid-cols-4 gap-4 mb-10">
       <div class="bg-dark-800/50 border border-dark-700/50 rounded-xl p-4 text-center">
-        <p class="text-2xl font-semibold text-primary-400">{reservations.length}</p>
+        <p class="text-2xl font-semibold text-primary-400">{activeReservations.length}</p>
         <p class="text-dark-400 text-xs mt-1">Rezervacij</p>
       </div>
       <div class="bg-dark-800/50 border border-dark-700/50 rounded-xl p-4 text-center">
@@ -61,8 +63,16 @@ const remaining = event.capacity - totalPairs;
         <p class="text-dark-400 text-xs mt-1">Parov</p>
       </div>
       <div class="bg-dark-800/50 border border-dark-700/50 rounded-xl p-4 text-center">
+        <p class="text-2xl font-semibold text-green-400">{paidPairs}</p>
+        <p class="text-dark-400 text-xs mt-1">Plačano online</p>
+      </div>
+      <div class="bg-dark-800/50 border border-dark-700/50 rounded-xl p-4 text-center">
         <p class="text-2xl font-semibold text-primary-400">
-          {event.price ? `${((event.price / 100) * totalPairs).toFixed(0)}€` : '-'}
+          {(() => {
+            const onlineRevenue = event.onlinePrice ? (event.onlinePrice / 100) * paidPairs : 0;
+            const venueRevenue = event.price ? (event.price / 100) * (totalPairs - paidPairs) : 0;
+            return `${(onlineRevenue + venueRevenue).toFixed(0)}€`;
+          })()}
         </p>
         <p class="text-dark-400 text-xs mt-1">Prihodek</p>
       </div>
@@ -83,6 +93,7 @@ const remaining = event.capacity - totalPairs;
               <th class="text-center py-3 px-4 text-dark-400 font-medium">Parov</th>
               <th class="text-left py-3 px-4 text-dark-400 font-medium">Sporočilo</th>
               <th class="text-left py-3 px-4 text-dark-400 font-medium">Datum</th>
+              <th class="text-center py-3 px-4 text-dark-400 font-medium">Plačilo</th>
               <th class="text-center py-3 px-4 text-dark-400 font-medium">Status</th>
             </tr>
           </thead>
@@ -100,8 +111,21 @@ const remaining = event.capacity - totalPairs;
                   {new Intl.DateTimeFormat('sl-SI', { dateStyle: 'medium', timeStyle: 'short' }).format(res.createdAt)}
                 </td>
                 <td class="py-3 px-4 text-center">
-                  <span class={`px-2 py-0.5 rounded text-xs ${res.status === 'confirmed' ? 'bg-green-900/50 text-green-400' : 'bg-red-900/50 text-red-400'}`}>
-                    {res.status === 'confirmed' ? 'Potrjeno' : 'Preklicano'}
+                  {res.paymentStatus === 'paid' ? (
+                    <span class="px-2 py-0.5 rounded text-xs bg-green-900/50 text-green-400">Plačano</span>
+                  ) : res.paymentStatus === 'pending' ? (
+                    <span class="px-2 py-0.5 rounded text-xs bg-yellow-900/50 text-yellow-400">V teku</span>
+                  ) : (
+                    <span class="px-2 py-0.5 rounded text-xs bg-dark-700 text-dark-400">Na kraju</span>
+                  )}
+                </td>
+                <td class="py-3 px-4 text-center">
+                  <span class={`px-2 py-0.5 rounded text-xs ${
+                    res.status === 'confirmed' ? 'bg-green-900/50 text-green-400' :
+                    res.status === 'expired' ? 'bg-dark-700 text-dark-500' :
+                    'bg-red-900/50 text-red-400'
+                  }`}>
+                    {res.status === 'confirmed' ? 'Potrjeno' : res.status === 'expired' ? 'Poteklo' : 'Preklicano'}
                   </span>
                 </td>
               </tr>

@@ -23,7 +23,7 @@ if (!event) {
 const [{ totalPairs }] = await db
   .select({ totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)` })
   .from(Reservation)
-  .where(eq(Reservation.eventId, eventid!));
+  .where(sql`${Reservation.eventId} = ${eventid!} AND ${Reservation.status} != 'expired'`);
 
 const remaining = event.capacity - totalPairs;
 
@@ -65,7 +65,7 @@ const dateStr = new Intl.DateTimeFormat('sl-SI', {
       )}
 
       {remaining > 0 ? (
-        <ReservationForm locale={locale} eventId={eventid!} remainingCapacity={remaining} />
+        <ReservationForm locale={locale} eventId={eventid!} remainingCapacity={remaining} price={event.price} onlinePrice={event.onlinePrice} />
       ) : (
         <p class="text-center text-xl text-red-400 font-semibold">Razprodano</p>
       )}
