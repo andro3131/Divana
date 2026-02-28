@@ -32,8 +32,8 @@ const t = useTranslations(locale);
     <p class="text-sm text-primary-200/70 font-light tracking-[0.2em] uppercase whitespace-nowrap">{t('hero.subtitle')}</p>
   </div>
 
-  <!-- Desktop: subtitle + social icons, left side -->
-  <div class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-[28%] -translate-x-1/2 animate-fade-in-delay">
+  <!-- Desktop: subtitle + social icons, tracks singer position -->
+  <div id="hero-subtitle-desktop" class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-[28%] -translate-x-1/2 animate-fade-in-delay">
     <p class="text-lg lg:text-xl text-primary-200/80 font-light tracking-widest uppercase mb-4">{t('hero.subtitle')}</p>
     <div class="flex items-center gap-5">
       <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" class="text-primary-200/40 hover:text-gold transition-colors" aria-label="Facebook">
@@ -87,8 +87,40 @@ const t = useTranslations(locale);
 </style>
 
 <script>
-  const heroImg = document.getElementById('hero-img');
+  const heroImg = document.getElementById('hero-img') as HTMLImageElement;
   const scrollZone = document.getElementById('hero-scroll-zone');
+  const subtitleDesktop = document.getElementById('hero-subtitle-desktop');
+
+  // Track singer position on desktop
+  // singerX = fraction of image width where singer's body center is
+  const singerX = 0.37;
+
+  function updateSubtitlePosition() {
+    if (!heroImg || !subtitleDesktop || window.innerWidth < 768) return;
+    const imgW = heroImg.naturalWidth;
+    const imgH = heroImg.naturalHeight;
+    if (!imgW || !imgH) return;
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // object-cover center top: scale to fill, centered horizontally, top-aligned
+    const scale = Math.max(vw / imgW, vh / imgH);
+    const renderedW = imgW * scale;
+    const offsetX = (vw - renderedW) / 2;
+    const screenX = offsetX + singerX * renderedW;
+
+    subtitleDesktop.style.left = screenX + 'px';
+  }
+
+  if (heroImg && subtitleDesktop) {
+    if (heroImg.complete) {
+      updateSubtitlePosition();
+    } else {
+      heroImg.addEventListener('load', updateSubtitlePosition, { once: true });
+    }
+    window.addEventListener('resize', updateSubtitlePosition);
+  }
 
   if (heroImg && scrollZone) {
     // After intro animation ends, remove class so JS can control transform

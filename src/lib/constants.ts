@@ -60,14 +60,14 @@ export const SERVICE_SOLO_IMAGES = [
   { src: `${CDN_BASE}/PONUDBA/543092219_122161226114784629_8775921759800717983_n.jpg`, alt: 'Solo nastop - Divana' },
   { src: `${CDN_BASE}/Galerija/643446400_10237202575596879_1993265225850368144_n.jpg`, alt: 'Solo nastop - Divana' },
   { src: `${CDN_BASE}/PONUDBA/498928317_24044591278482056_1386265008874733784_n%20(1).jpg`, alt: 'Solo nastop - Divana' },
-  { src: `${CDN_BASE}/PONUDBA/534809539_122158113758784629_2475749194389185311_n.jpg`, alt: 'Solo nastop - Divana', objectPosition: 'center 60%' },
+  { src: `${CDN_BASE}/PONUDBA/534809539_122158113758784629_2475749194389185311_n.jpg`, alt: 'Solo nastop - Divana', objectPosition: 'center 25%' },
 ];
 
 export const SERVICE_BAND_IMAGES = [
   { src: `${CDN_BASE}/PONUDBA/591913408_122171483402784629_3785550888394690673_n.jpg`, alt: 'Koncert z bandom - Divana' },
-  { src: `${CDN_BASE}/PONUDBA/589723483_122171483390784629_4394423904053417200_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 40%' },
-  { src: `${CDN_BASE}/PONUDBA/590431116_122171483204784629_1822284055479484534_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 60%' },
-  { src: `${CDN_BASE}/PONUDBA/590442759_122171483594784629_3811275188146475286_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 60%' },
+  { src: `${CDN_BASE}/PONUDBA/589723483_122171483390784629_4394423904053417200_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 25%' },
+  { src: `${CDN_BASE}/PONUDBA/590431116_122171483204784629_1822284055479484534_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 25%' },
+  { src: `${CDN_BASE}/PONUDBA/590442759_122171483594784629_3811275188146475286_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 25%' },
   { src: `${CDN_BASE}/PONUDBA/592106383_122171483558784629_5594523380118323630_n.jpg`, alt: 'Koncert z bandom - Divana' },
 ];
 
