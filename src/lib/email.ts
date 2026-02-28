@@ -25,6 +25,7 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
 
   await resend.emails.send({
     from: 'Divana <onboarding@resend.dev>',
+    replyTo: 'carobnizvok@gmail.com',
     to: email,
     subject: `Potrditev rezervacije - ${event.titleSl}`,
     html: `
@@ -77,6 +78,7 @@ export async function sendReservationNotification(data: ConfirmationEmailData) {
 
   await resend.emails.send({
     from: 'Divana <onboarding@resend.dev>',
+    replyTo: 'carobnizvok@gmail.com',
     to: 'carobnizvok@gmail.com',
     subject: `Nova rezervacija: ${name} (${numberOfPairs} ${numberOfPairs === 1 ? 'par' : 'parov'}) - ${event.titleSl}`,
     html: `
@@ -110,6 +112,7 @@ export async function sendContactNotification(data: { name: string; email: strin
 
   await resend.emails.send({
     from: 'Divana <onboarding@resend.dev>',
+    replyTo: 'carobnizvok@gmail.com',
     to: 'carobnizvok@gmail.com',
     subject: `Novo sporočilo od ${data.name}`,
     html: `
