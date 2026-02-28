@@ -23,11 +23,13 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
     timeStyle: 'short',
   }).format(new Date(event.date));
 
+  // Free Resend plan: can only send to account owner email
+  // TODO: change to customer email (to: email) once domain is verified
   await resend.emails.send({
     from: 'Divana <onboarding@resend.dev>',
     replyTo: 'carobnizvok@gmail.com',
-    to: email,
-    subject: `Potrditev rezervacije - ${event.titleSl}`,
+    to: 'divana.essence@gmail.com',
+    subject: `Potrditev rezervacije za ${name} (${email}) - ${event.titleSl}`,
     html: `
       <div style="font-family: 'Helvetica Neue', sans-serif; max-width: 600px; margin: 0 auto; background: #0a1720; color: #e8eef2; padding: 40px; border-radius: 12px;">
         <h1 style="color: #c9a84c; font-size: 24px; margin-bottom: 24px;">Potrditev rezervacije</h1>
@@ -79,7 +81,7 @@ export async function sendReservationNotification(data: ConfirmationEmailData) {
   await resend.emails.send({
     from: 'Divana <onboarding@resend.dev>',
     replyTo: 'carobnizvok@gmail.com',
-    to: 'carobnizvok@gmail.com',
+    to: 'divana.essence@gmail.com',
     subject: `Nova rezervacija: ${name} (${numberOfPairs} ${numberOfPairs === 1 ? 'par' : 'parov'}) - ${event.titleSl}`,
     html: `
       <div style="font-family: 'Helvetica Neue', sans-serif; max-width: 600px; margin: 0 auto; background: #0a1720; color: #e8eef2; padding: 40px; border-radius: 12px;">
@@ -113,8 +115,8 @@ export async function sendContactNotification(data: { name: string; email: strin
   await resend.emails.send({
     from: 'Divana <onboarding@resend.dev>',
     replyTo: 'carobnizvok@gmail.com',
-    to: 'carobnizvok@gmail.com',
-    subject: `Novo sporočilo od ${data.name}`,
+    to: 'divana.essence@gmail.com',
+    subject: `Novo sporočilo od ${data.name} (${data.email})`,
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
         <p><strong>Od:</strong> ${data.name} (${data.email})</p>
