@@ -56,6 +56,8 @@ export const GALLERY_IMAGES = [
 
 // Service section placeholder images (replace with real photos later)
 export const SERVICE_SOLO_IMAGES = [
+  { src: `${CDN_BASE}/Galerija/495019547_10233081074321923_75249012129157082_n%20(1).jpg`, alt: 'Solo nastop - Divana' },
+  { src: `${CDN_BASE}/Galerija/494748828_10233081071641856_8958397412871168135_n.jpg`, alt: 'Solo nastop - Divana' },
   { src: `${CDN_BASE}/PONUDBA/643326141_10237202576796909_7052687857826097055_n.jpg`, alt: 'Solo nastop - Divana' },
   { src: `${CDN_BASE}/PONUDBA/543092219_122161226114784629_8775921759800717983_n.jpg`, alt: 'Solo nastop - Divana' },
   { src: `${CDN_BASE}/Galerija/643446400_10237202575596879_1993265225850368144_n.jpg`, alt: 'Solo nastop - Divana' },
