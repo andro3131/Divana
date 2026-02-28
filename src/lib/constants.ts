@@ -63,7 +63,7 @@ export const SERVICE_SOLO_IMAGES = [
   { src: `${CDN_BASE}/Galerija/643446400_10237202575596879_1993265225850368144_n.jpg`, alt: 'Solo nastop - Divana' },
   { src: `${CDN_BASE}/PONUDBA/498928317_24044591278482056_1386265008874733784_n%20(1).jpg`, alt: 'Solo nastop - Divana' },
   { src: `${CDN_BASE}/PONUDBA/534809539_122158113758784629_2475749194389185311_n.jpg`, alt: 'Solo nastop - Divana', objectPosition: 'center 25%' },
-  { src: `${CDN_BASE}/Galerija/b4fa7fb0-cb71-45d0-ac32-7fb8bd0be2e0.jpg`, alt: 'Solo nastop - Divana' },
+  { src: `${CDN_BASE}/Galerija/b4fa7fb0-cb71-45d0-ac32-7fb8bd0be2e0.jpg`, alt: 'Solo nastop - Divana', objectPosition: 'center 25%' },
 ];
 
 export const SERVICE_BAND_IMAGES = [
