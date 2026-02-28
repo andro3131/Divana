@@ -29,7 +29,7 @@ const photoClass = (side: 'left' | 'right') =>
       <div class="space-y-5">
         <div class={photoClass('left')} style="--rotate: -3deg" data-slide>
           <div class="mx-auto w-3/4 max-w-[280px] aspect-[4/3] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
-            <img src={images[0].src} alt={images[0].alt} class="w-full h-full object-cover" loading="lazy" />
+            <img src={images[0].src} alt={images[0].alt} class="w-full h-full object-cover object-top" loading="lazy" />
           </div>
         </div>
         <div class="text-dark-200 leading-relaxed text-base space-y-4 text-justify" data-animate>
