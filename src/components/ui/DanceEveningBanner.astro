@@ -240,7 +240,18 @@ const eventLocation = 'Dvorana Stik, Trebnje';
     to { opacity: 1; transform: translateX(-50%) translateY(0); }
   }
 
-  .dancers svg { width: 100%; height: 100%; }
+  .dancers svg {
+    width: 100%; height: 100%;
+    animation: danceSway 6s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  @keyframes danceSway {
+    0%, 100% { transform: rotate(-1.5deg) translateX(0); }
+    25% { transform: rotate(0.5deg) translateX(3px); }
+    50% { transform: rotate(1.5deg) translateX(0); }
+    75% { transform: rotate(0deg) translateX(-3px); }
+  }
 
   /* Content */
   .banner-content {
