@@ -5,13 +5,11 @@ interface Props {
   locale: Locale;
   eventId: string;
   remainingCapacity: number;
-  price?: number | null;
-  onlinePrice?: number | null;
+  onlinePrice: number;
 }
 
-const { locale, eventId, remainingCapacity, price, onlinePrice } = Astro.props;
+const { locale, eventId, remainingCapacity, onlinePrice } = Astro.props;
 const t = useTranslations(locale);
-const hasOnlinePayment = onlinePrice && onlinePrice > 0;
 const pairLabel = locale === 'sl' ? 'par' : 'couple';
 ---
 
@@ -69,45 +67,23 @@ const pairLabel = locale === 'sl' ? 'par' : 'couple';
     ></textarea>
   </div>
 
-  {hasOnlinePayment ? (
-    <div class="space-y-3 pt-2">
-      <button
-        type="button"
-        id="btn-stripe-pay"
-        class="w-full py-3.5 px-6 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300 transform hover:scale-[1.02] tracking-wider uppercase text-sm flex items-center justify-center gap-2"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-        {t('reservation.submitPay')} ({(onlinePrice / 100).toFixed(0)}&euro;/{pairLabel})
-      </button>
-      <div class="flex items-center gap-3">
-        <div class="flex-1 h-px bg-dark-600"></div>
-        <span class="text-dark-400 text-xs uppercase tracking-wider">{t('reservation.orSeparator')}</span>
-        <div class="flex-1 h-px bg-dark-600"></div>
-      </div>
-      <button
-        type="button"
-        id="btn-free-reserve"
-        class="w-full py-3 px-6 bg-dark-800 border border-dark-600 text-dark-200 font-medium rounded-lg hover:border-primary-500/50 hover:text-primary-300 transition-all duration-300 tracking-wider uppercase text-sm"
-      >
-        {t('reservation.submitFree')} ({price ? `${(price / 100).toFixed(0)}\u20AC/${pairLabel}` : ''} &ndash; {t('reservation.submitFreeNote')})
-      </button>
-    </div>
-  ) : (
+  <div class="pt-2">
     <button
-      type="submit"
-      class="w-full py-3 px-6 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300 transform hover:scale-[1.02] tracking-wider uppercase text-sm"
+      type="button"
+      id="btn-stripe-pay"
+      class="w-full py-3.5 px-6 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300 transform hover:scale-[1.02] tracking-wider uppercase text-sm flex items-center justify-center gap-2"
     >
-      {t('reservation.submit')}
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+      {t('reservation.submitPay')} ({(onlinePrice / 100).toFixed(0)}&euro;/{pairLabel})
     </button>
-  )}
+  </div>
 
   <div id="reservation-feedback" class="hidden text-center py-3 rounded-lg text-sm"></div>
 </form>
 
 <script>
   const form = document.getElementById('reservation-form') as HTMLFormElement;
-  const freeBtn = document.getElementById('btn-free-reserve');
-  const stripeBtn = document.getElementById('btn-stripe-pay');
+  const stripeBtn = document.getElementById('btn-stripe-pay')!;
   const feedback = document.getElementById('reservation-feedback')!;
 
   function getFormData() {
@@ -127,42 +103,12 @@ const pairLabel = locale === 'sl' ? 'par' : 'couple';
     feedback.textContent = message;
   }
 
-  async function handleFreeReservation(btn: HTMLElement) {
+  async function handleStripePayment() {
     if (!form.reportValidity()) return;
     const data = getFormData();
-    const originalText = btn.textContent;
-    btn.setAttribute('disabled', '');
-    btn.textContent = '...';
-    try {
-      const res = await fetch('/api/reservations/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const text = await res.text();
-      let result: any;
-      try { result = JSON.parse(text); } catch { result = { error: `Server error (${res.status})` }; }
-      if (res.ok) {
-        showFeedback('success', result.message);
-        form.reset();
-        setTimeout(() => { window.location.href = data.locale === 'en' ? '/en/' : '/'; }, 3000);
-      } else {
-        showFeedback('error', result.error || `Error ${res.status}`);
-      }
-    } catch (err: any) {
-      showFeedback('error', `Network error: ${err.message}`);
-    } finally {
-      btn.removeAttribute('disabled');
-      btn.textContent = originalText;
-    }
-  }
-
-  async function handleStripePayment(btn: HTMLElement) {
-    if (!form.reportValidity()) return;
-    const data = getFormData();
-    const originalText = btn.textContent;
-    btn.setAttribute('disabled', '');
-    btn.textContent = '...';
+    const originalText = stripeBtn.textContent;
+    stripeBtn.setAttribute('disabled', '');
+    stripeBtn.textContent = '...';
     try {
       const res = await fetch('/api/checkout/create-session', {
         method: 'POST',
@@ -174,23 +120,15 @@ const pairLabel = locale === 'sl' ? 'par' : 'couple';
         window.location.href = result.url;
       } else {
         showFeedback('error', result.error || `Error ${res.status}`);
-        btn.removeAttribute('disabled');
-        btn.textContent = originalText;
+        stripeBtn.removeAttribute('disabled');
+        stripeBtn.textContent = originalText;
       }
     } catch (err: any) {
       showFeedback('error', `Network error: ${err.message}`);
-      btn.removeAttribute('disabled');
-      btn.textContent = originalText;
+      stripeBtn.removeAttribute('disabled');
+      stripeBtn.textContent = originalText;
     }
   }
 
-  if (freeBtn) freeBtn.addEventListener('click', () => handleFreeReservation(freeBtn));
-  if (stripeBtn) stripeBtn.addEventListener('click', () => handleStripePayment(stripeBtn));
-  if (!freeBtn && !stripeBtn) {
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      await handleFreeReservation(submitBtn);
-    });
-  }
+  stripeBtn.addEventListener('click', handleStripePayment);
 </script>

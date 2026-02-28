@@ -194,7 +194,7 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
               <div class="di-detail-content">
                 <div class="di-detail-label">{t('danceInfo.priceLabel')}</div>
                 <div class="di-detail-value">{t('danceInfo.priceValue')}</div>
-                <div class="di-detail-sub">{t('danceInfo.priceSub')}</div>
+                {t('danceInfo.priceSub') && <div class="di-detail-sub">{t('danceInfo.priceSub')}</div>}
               </div>
             </div>
 

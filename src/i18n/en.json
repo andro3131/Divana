@@ -116,7 +116,7 @@
     "musicValue": "Maja Marinčič and band",
     "priceLabel": "Price",
     "priceValue": "€50 per couple",
-    "priceSub": "€40 per couple if you bring another couple",
+    "priceSub": "",
     "limited": "Limited number of spots!",
     "cta": "Sign up",
     "email": "carobnizvok@gmail.com"
@@ -130,7 +130,7 @@
     "priceLabel": "Price",
     "date": "March 8, 2026, 18:00–20:00",
     "location": "Dvorana Stik (Trebnje)",
-    "priceInfo": "€50 per couple (or €40 if you bring another couple)",
+    "priceInfo": "€50 per couple",
     "warning": "Limited spots available!",
     "cta": "Reserve now"
   },
