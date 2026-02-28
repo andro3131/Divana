@@ -3,7 +3,7 @@ interface Props {
   servicesData: Record<string, {
     title: string;
     description: string;
-    images: { src: string; alt: string }[];
+    images: { src: string; alt: string; objectPosition?: string }[];
   }>;
   contactSectionId: string;
   ctaLabel: string;
@@ -60,6 +60,7 @@ const { servicesData, contactSectionId, ctaLabel } = Astro.props;
     setTimeout(() => {
       mainImg.src = currentImages[index].src;
       mainImg.alt = currentImages[index].alt;
+      mainImg.style.objectPosition = currentImages[index].objectPosition || 'center';
       mainImg.style.opacity = '1';
     }, 150);
 
@@ -94,6 +95,7 @@ const { servicesData, contactSectionId, ctaLabel } = Astro.props;
       imgEl.src = img.src;
       imgEl.alt = img.alt;
       imgEl.className = 'w-full h-full object-cover';
+      if (img.objectPosition) imgEl.style.objectPosition = img.objectPosition;
       btn.appendChild(imgEl);
       btn.addEventListener('click', () => selectImage(i));
       thumbStrip.appendChild(btn);
@@ -101,6 +103,7 @@ const { servicesData, contactSectionId, ctaLabel } = Astro.props;
 
     mainImg.src = service.images[0].src;
     mainImg.alt = service.images[0].alt;
+    mainImg.style.objectPosition = service.images[0].objectPosition || 'center';
     mainImg.style.opacity = '1';
 
     modal.classList.remove('hidden');

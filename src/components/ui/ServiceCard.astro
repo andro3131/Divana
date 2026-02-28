@@ -3,7 +3,7 @@ interface Props {
   serviceId: string;
   title: string;
   shortDescription: string;
-  images: { src: string; alt: string }[];
+  images: { src: string; alt: string; objectPosition?: string }[];
   moreLabel: string;
   delay?: number;
 }
@@ -23,6 +23,7 @@ const { serviceId, title, shortDescription, images, moreLabel, delay = 0 } = Ast
       src={images[0].src}
       alt={images[0].alt}
       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      style={images[0].objectPosition ? `object-position: ${images[0].objectPosition}` : undefined}
       loading="lazy"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-dark-950/70 via-dark-950/10 to-transparent"></div>
