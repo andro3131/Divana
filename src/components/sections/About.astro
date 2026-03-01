@@ -11,7 +11,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const sectionId = sectionIds.about[locale];
-const heroImage = ABOUT_IMAGES[0];
+const heroImage = { src: 'https://divana-cdn.b-cdn.net/divana6.jpg', alt: 'Maja Marinčič' };
 ---
 
 <section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900">
