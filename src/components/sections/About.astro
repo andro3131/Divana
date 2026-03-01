@@ -19,9 +19,9 @@ const heroImage = { src: 'https://divana-cdn.b-cdn.net/divana6.jpg', alt: 'Maja 
     <SectionHeading title={t('about.title')} />
 
     <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-      <!-- Image - slides in from left -->
-      <div class="about-hero-img w-full max-w-[300px] md:max-w-none md:w-[40%] flex-shrink-0">
-        <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-800">
+      <!-- Image - slides in from left, tilt on hover, gold glow pulse -->
+      <div class="about-hero-img w-full max-w-[300px] md:max-w-none md:w-[40%] flex-shrink-0" style="perspective: 600px;">
+        <div class="about-hero-frame aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 bg-dark-800" id="about-tilt">
           <img src={heroImage.src} alt={heroImage.alt} class="w-full h-full object-cover object-top" loading="lazy" />
         </div>
       </div>
@@ -67,6 +67,25 @@ const heroImage = { src: 'https://divana-cdn.b-cdn.net/divana6.jpg', alt: 'Maja 
     opacity: 1;
     transform: translateX(0);
   }
+
+  /* Gold glow pulse */
+  .about-hero-frame {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.15), 0 0 40px rgba(201, 168, 76, 0.05);
+    transition: transform 0.15s ease, box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .about-hero-img.visible .about-hero-frame {
+    animation: about-glow-pulse 4s ease-in-out 1s infinite;
+  }
+  @keyframes about-glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.15), 0 0 40px rgba(201, 168, 76, 0.05);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(201, 168, 76, 0.3), 0 0 60px rgba(201, 168, 76, 0.1);
+    }
+  }
 </style>
 
 <script>
@@ -84,4 +103,21 @@ const heroImage = { src: 'https://divana-cdn.b-cdn.net/divana6.jpg', alt: 'Maja 
   document.querySelectorAll('.about-hero-img, .about-hero-text').forEach((el) => {
     aboutObserver.observe(el);
   });
+
+  // 3D tilt effect on hover
+  const tiltEl = document.getElementById('about-tilt');
+  if (tiltEl) {
+    const maxTilt = 8;
+    tiltEl.addEventListener('mousemove', (e) => {
+      const rect = tiltEl.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * maxTilt * 2;
+      const rotateX = (0.5 - y) * maxTilt * 2;
+      tiltEl.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+    });
+    tiltEl.addEventListener('mouseleave', () => {
+      tiltEl.style.transform = '';
+    });
+  }
 </script>
