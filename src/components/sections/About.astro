@@ -18,21 +18,21 @@ const heroImage = { src: 'https://divana-cdn.b-cdn.net/divana6.jpg', alt: 'Maja 
   <div class="max-w-5xl mx-auto">
     <SectionHeading title={t('about.title')} />
 
-    <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-      <!-- Image - slides in from left, tilt on hover, gold glow pulse -->
+    <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
+      <!-- Image - slides in from right, tilt on hover, border pulse -->
       <div class="about-hero-img w-full max-w-[300px] md:max-w-none md:w-[40%] flex-shrink-0" style="perspective: 600px;">
         <div class="about-hero-frame aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 bg-dark-800" id="about-tilt">
           <img src={heroImage.src} alt={heroImage.alt} class="w-full h-full object-cover object-top" loading="lazy" />
         </div>
       </div>
 
-      <!-- Text + button - slides in from right -->
-      <div class="about-hero-text flex-1 text-center md:text-left">
+      <!-- Text + button - slides in from left -->
+      <div class="about-hero-text flex-1 text-center md:text-right">
         <div class="space-y-5 text-dark-200 leading-relaxed text-base md:text-lg text-justify mb-8">
           <p>{t('about.bio1')}</p>
           <p>{t('about.bio2')}</p>
         </div>
-        <div class="text-center md:text-left">
+        <div class="text-center md:text-right">
           <button
             onclick="window.openAboutModal()"
             class="inline-flex items-center px-6 py-2.5 border border-gold/50 text-gold hover:bg-gold/10 hover:border-gold rounded-lg font-medium text-sm tracking-wider uppercase transition-all duration-300 cursor-pointer"
@@ -51,12 +51,12 @@ const heroImage = { src: 'https://divana-cdn.b-cdn.net/divana6.jpg', alt: 'Maja 
 <style>
   .about-hero-img {
     opacity: 0;
-    transform: translateX(-60px);
+    transform: translateX(60px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
   .about-hero-text {
     opacity: 0;
-    transform: translateX(60px);
+    transform: translateX(-60px);
     transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
   }
   .about-hero-img.visible {
@@ -68,22 +68,21 @@ const heroImage = { src: 'https://divana-cdn.b-cdn.net/divana6.jpg', alt: 'Maja 
     transform: translateX(0);
   }
 
-  /* Gold glow pulse */
+  /* Subtle border pulse */
   .about-hero-frame {
-    box-shadow: 0 0 20px rgba(201, 168, 76, 0.15), 0 0 40px rgba(201, 168, 76, 0.05);
-    transition: transform 0.15s ease, box-shadow 0.4s ease;
+    transition: transform 0.15s ease, border-color 0.4s ease;
     transform-style: preserve-3d;
     will-change: transform;
   }
   .about-hero-img.visible .about-hero-frame {
-    animation: about-glow-pulse 4s ease-in-out 1s infinite;
+    animation: about-border-pulse 4s ease-in-out 1s infinite;
   }
-  @keyframes about-glow-pulse {
+  @keyframes about-border-pulse {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(201, 168, 76, 0.15), 0 0 40px rgba(201, 168, 76, 0.05);
+      border-color: rgba(201, 168, 76, 0.2);
     }
     50% {
-      box-shadow: 0 0 30px rgba(201, 168, 76, 0.3), 0 0 60px rgba(201, 168, 76, 0.1);
+      border-color: rgba(201, 168, 76, 0.5);
     }
   }
 </style>
