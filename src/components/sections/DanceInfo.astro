@@ -204,7 +204,7 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
               <a class="di-cta-link" href={reservePath}>{t('danceInfo.ctaBuy')}</a>
             </div>
 
-            <div class="di-limited-gradient">
+            <div class="di-limited-gradient" id="di-limited-text">
               {t('danceInfo.limited')}
             </div>
           </div>
@@ -645,4 +645,23 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
     requestAnimationFrame(animate);
     window.addEventListener('resize', init);
   }
+
+  // Fetch remaining spots and update limited text
+  fetch('/api/events').then(r => r.json()).then(events => {
+    const event = events.find((e: any) => e.id === 'plesni-vecer-2026-03');
+    if (event) {
+      const el = document.getElementById('di-limited-text');
+      if (el) {
+        const lang = document.documentElement.lang || 'sl';
+        const remaining = event.remainingCapacity;
+        if (remaining <= 0) {
+          el.textContent = lang === 'sl' ? 'Razprodano!' : 'Sold out!';
+        } else {
+          el.textContent = lang === 'sl'
+            ? `Omejeno število prijav! (na voljo še ${remaining})`
+            : `Limited spots! (${remaining} remaining)`;
+        }
+      }
+    }
+  }).catch(() => {});
 </script>
