@@ -23,13 +23,11 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
     timeStyle: 'short',
   }).format(new Date(event.date));
 
-  // Free Resend plan: can only send to account owner email
-  // TODO: change to customer email (to: email) once domain is verified
   await resend.emails.send({
-    from: 'Divana <onboarding@resend.dev>',
+    from: 'Divana <info@divana.si>',
     replyTo: 'carobnizvok@gmail.com',
-    to: 'divana.essence@gmail.com',
-    subject: `Potrditev rezervacije za ${name} (${email}) - ${event.titleSl}`,
+    to: email,
+    subject: `Potrditev rezervacije - ${event.titleSl}`,
     html: `
       <div style="font-family: 'Helvetica Neue', sans-serif; max-width: 600px; margin: 0 auto; background: #0a1720; color: #e8eef2; padding: 40px; border-radius: 12px;">
         <h1 style="color: #c9a84c; font-size: 24px; margin-bottom: 24px;">Potrditev rezervacije</h1>
@@ -79,7 +77,7 @@ export async function sendReservationNotification(data: ConfirmationEmailData) {
       : '-';
 
   await resend.emails.send({
-    from: 'Divana <onboarding@resend.dev>',
+    from: 'Divana <info@divana.si>',
     replyTo: 'carobnizvok@gmail.com',
     to: 'divana.essence@gmail.com',
     subject: `Nova rezervacija: ${name} (${numberOfPairs} ${numberOfPairs === 1 ? 'par' : 'parov'}) - ${event.titleSl}`,
@@ -113,7 +111,7 @@ export async function sendContactNotification(data: { name: string; email: strin
   const resend = new Resend(apiKey);
 
   await resend.emails.send({
-    from: 'Divana <onboarding@resend.dev>',
+    from: 'Divana <info@divana.si>',
     replyTo: 'carobnizvok@gmail.com',
     to: 'divana.essence@gmail.com',
     subject: `Novo sporočilo od ${data.name} (${data.email})`,
