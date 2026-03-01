@@ -21,11 +21,12 @@ const musicPageUrl = locale === 'sl' ? '/glasba' : '/en/music';
     <SectionHeading title={t('music.title')} subtitle={t('music.subtitle')} />
 
     <!-- 4 Featured YouTube Videos - 2x2 grid (lite embed: thumbnail + play button) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8" data-animate>
-      {previewVideos.map((videoId) => (
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+      {previewVideos.map((videoId, i) => (
         <div
-          class="yt-lite aspect-video rounded-xl overflow-hidden bg-dark-800 relative cursor-pointer group"
+          class={`yt-lite aspect-video rounded-xl overflow-hidden bg-dark-800 relative cursor-pointer group ${i % 2 === 0 ? 'video-slide-left' : 'video-slide-right'}`}
           data-videoid={videoId}
+          data-video-slide
         >
           <img
             src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
@@ -74,5 +75,20 @@ const musicPageUrl = locale === 'sl' ? '/glasba' : '/en/music';
       el.classList.remove('cursor-pointer', 'group');
       el.appendChild(iframe);
     });
+  });
+
+  // Slide-in observer for video thumbnails
+  const videoSlideObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('slide-in');
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('[data-video-slide]').forEach((el) => {
+    videoSlideObserver.observe(el);
   });
 </script>

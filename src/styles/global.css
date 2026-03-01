@@ -220,6 +220,25 @@ body {
   transition: box-shadow 1s ease-in-out;
 }
 
+/* Video slide-in from left/right */
+.video-slide-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.video-slide-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.video-slide-left.slide-in,
+.video-slide-right.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* Service modal entrance */
 @keyframes modal-slide-up {
   from {
