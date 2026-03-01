@@ -25,7 +25,7 @@ const musicPageUrl = locale === 'sl' ? '/glasba' : '/en/music';
       {previewVideos.map((video, i) => (
         <div class={`${i % 2 === 0 ? 'video-slide-left' : 'video-slide-right'}`} data-video-slide>
           <div
-            class="yt-lite aspect-video rounded-xl overflow-hidden bg-dark-800 relative cursor-pointer group"
+            class="yt-lite aspect-video rounded-t-xl overflow-hidden bg-dark-800 relative cursor-pointer group"
             data-videoid={video.id}
           >
             <img
@@ -43,7 +43,9 @@ const musicPageUrl = locale === 'sl' ? '/glasba' : '/en/music';
               </div>
             </div>
           </div>
-          <p class="mt-2.5 text-base text-dark-300 text-center font-medium">{video.title}</p>
+          <div class="bg-dark-800/80 backdrop-blur-sm px-4 py-2.5 rounded-b-xl -mt-[1px]">
+            <p class="text-sm text-dark-200 text-center font-medium truncate">{video.title}</p>
+          </div>
         </div>
       ))}
     </div>
