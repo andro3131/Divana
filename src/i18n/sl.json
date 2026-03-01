@@ -27,6 +27,7 @@
   },
   "music": {
     "title": "Glasba",
+    "subtitle": "Vsaka pesem je potovanje.",
     "listenOn": "Poslušaj na Spotify",
     "watchOn": "Poglej na YouTube",
     "showAll": "Pokaži vse"
@@ -39,7 +40,7 @@
   "services": {
     "title": "Nastopi",
     "subtitle": "Glasba za vsak trenutek",
-    "intro": "Nastopam solo s kitaristom ali s polno zasedbo banda. Najdite pravo obliko za vaš dogodek.",
+    "intro": "Z glasbo oživljam večere na terasah, ustvarjam nepozabno vzdušje na porokah, rojstnih dnevih, posebnih dogodkih in koncertih. Glasbeno popestrimo tudi jubileje manjših in večjih podjetij, javne prireditve ter slavnostne otvoritve.",
     "solo": {
       "title": "Solo nastopi",
       "shortDescription": "Intimni nastopi za poroke, terase, obletnice in posebne trenutke — s kitaro, klaviaturo ali v manjši zasedbi.",
