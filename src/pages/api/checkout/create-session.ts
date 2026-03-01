@@ -80,7 +80,7 @@ export const POST: APIRoute = async ({ request }) => {
             currency: 'eur',
             product_data: {
               name: eventTitle,
-              description: `${numberOfPairs} ${numberOfPairs === 1 ? 'par' : 'parov'} – ${event.location}`,
+              description: `${new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : 'sl-SI', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(event.date))} · ${event.location}`,
             },
             unit_amount: event.onlinePrice,
           },
