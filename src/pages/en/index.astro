@@ -7,6 +7,7 @@ import Gallery from '../../components/sections/Gallery.astro';
 import Services from '../../components/sections/Services.astro';
 import DanceInfo from '../../components/sections/DanceInfo.astro';
 import Contact from '../../components/sections/Contact.astro';
+import AboutModal from '../../components/ui/AboutModal.astro';
 
 const locale = 'en' as const;
 ---
@@ -22,4 +23,5 @@ const locale = 'en' as const;
   <Services locale={locale} />
   <DanceInfo locale={locale} />
   <Contact locale={locale} />
+  <AboutModal locale={locale} />
 </BaseLayout>

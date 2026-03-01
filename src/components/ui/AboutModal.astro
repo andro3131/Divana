@@ -1,0 +1,99 @@
+---
+import { useTranslations, type Locale } from '../../i18n/ui';
+import { ABOUT_IMAGES } from '../../lib/constants';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const images = ABOUT_IMAGES;
+
+const bios = [
+  { text: t('about.bio1'), image: 0, side: 'left' as const },
+  { text: t('about.bio2'), image: 1, side: 'right' as const },
+  { text: t('about.bio3'), image: null, side: null, italic: true },
+  { text: t('about.bio4'), image: 2, side: 'left' as const },
+  { text: t('about.bio5'), image: 3, side: 'right' as const },
+  { text: t('about.bio6'), image: null, side: null },
+  { text: t('about.bio7'), image: 4, side: 'left' as const },
+  { text: t('about.bio8'), image: 5, side: 'right' as const },
+  { text: t('about.bio9'), image: null, side: null },
+  { text: t('about.bio10'), image: 6, side: 'left' as const },
+  { text: t('about.bio11'), image: 7, side: 'right' as const, italic: true },
+];
+---
+
+<div id="about-modal" class="fixed inset-0 z-[100] hidden bg-dark-950/95 backdrop-blur-md overflow-y-auto">
+  <div class="min-h-full flex items-start justify-center p-4 md:p-8 py-12" id="about-modal-backdrop">
+    <div class="relative bg-dark-800 rounded-2xl max-w-4xl w-full overflow-hidden border border-dark-700/50 shadow-2xl" id="about-modal-content">
+
+      <!-- Close button -->
+      <button id="about-modal-close" class="sticky top-4 float-right mr-4 mt-4 z-10 bg-dark-950/70 backdrop-blur-sm rounded-full p-2 text-white/70 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="p-6 md:p-10 pt-2">
+        <h2 class="text-3xl md:text-4xl font-heading font-semibold text-gold-gradient inline-block mb-8">
+          {t('about.title')}
+        </h2>
+
+        <div class="space-y-10">
+          {bios.map((bio) => (
+            bio.image !== null ? (
+              <div class={`flex flex-col ${bio.side === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} gap-6 items-center`}>
+                <div class="w-full max-w-[240px] md:w-[200px] flex-shrink-0">
+                  <div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-gold/20 shadow-lg shadow-gold/10 bg-dark-900">
+                    <img src={images[bio.image].src} alt={images[bio.image].alt} class="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                </div>
+                <p class={`text-dark-200 leading-relaxed text-base md:text-lg text-justify ${bio.italic ? 'text-gold italic' : ''}`}>
+                  {bio.text}
+                </p>
+              </div>
+            ) : (
+              <p class={`text-dark-200 leading-relaxed text-base md:text-lg text-justify ${bio.italic ? 'text-gold italic' : ''}`}>
+                {bio.text}
+              </p>
+            )
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('about-modal');
+  const content = document.getElementById('about-modal-content');
+  const closeBtn = document.getElementById('about-modal-close');
+  const backdrop = document.getElementById('about-modal-backdrop');
+
+  window.openAboutModal = function() {
+    modal.classList.remove('hidden');
+    content.classList.add('modal-enter');
+    document.body.classList.add('lightbox-open');
+    modal.scrollTop = 0;
+  };
+
+  function closeAboutModal() {
+    modal.classList.add('hidden');
+    content.classList.remove('modal-enter');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  closeBtn?.addEventListener('click', closeAboutModal);
+
+  backdrop?.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeAboutModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closeAboutModal();
+    }
+  });
+</script>
