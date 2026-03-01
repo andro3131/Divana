@@ -4,7 +4,7 @@
     "about": "O meni",
     "music": "Glasba",
     "gallery": "Galerija",
-    "services": "Rezerviraj me",
+    "services": "Povabi me",
     "danceEvenings": "Plesni večeri",
     "contact": "Kontakt"
   },
@@ -40,7 +40,7 @@
     "showAll": "Pokaži vse"
   },
   "services": {
-    "title": "Rezerviraj me",
+    "title": "Povabi me",
     "subtitle": "Naj glasba pove, kar besede ne morejo.",
     "solo": {
       "title": "Solo nastopi",

@@ -4,7 +4,7 @@
     "about": "About",
     "music": "Music",
     "gallery": "Gallery",
-    "services": "Book me",
+    "services": "Invite me",
     "danceEvenings": "Dance Evenings",
     "contact": "Contact"
   },
@@ -40,7 +40,7 @@
     "showAll": "See all"
   },
   "services": {
-    "title": "Book me",
+    "title": "Invite me",
     "subtitle": "Let the music say what words cannot.",
     "solo": {
       "title": "Solo Performances",
