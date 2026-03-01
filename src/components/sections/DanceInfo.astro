@@ -189,7 +189,7 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
 
             <div class="di-detail-row">
               <div class="di-detail-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.2 7A7 7 0 007.2 12a7 7 0 0010 5M4 10h10M4 14h10"/></svg>
               </div>
               <div class="di-detail-content">
                 <div class="di-detail-label">{t('danceInfo.priceLabel')}</div>
@@ -563,8 +563,8 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
     .di-pulse-badge span { font-size: 12px; }
     .di-dancers {
       display: block;
-      right: -5px; bottom: 0;
-      width: 40%; height: 55%;
+      right: -5px; bottom: auto; top: 18%;
+      width: 48%; height: 62%;
       opacity: 0.15;
     }
   }
@@ -663,9 +663,9 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
         if (remaining <= 0) {
           el.textContent = lang === 'sl' ? 'Razprodano!' : 'Sold out!';
         } else {
-          el.textContent = lang === 'sl'
-            ? `Omejeno število prijav! (na voljo še ${remaining})`
-            : `Limited spots! (${remaining} remaining)`;
+          el.innerHTML = lang === 'sl'
+            ? `Omejeno število prijav! <span style="-webkit-text-fill-color:#E2C77A; color:#E2C77A;">(na voljo še ${remaining})</span>`
+            : `Limited spots! <span style="-webkit-text-fill-color:#E2C77A; color:#E2C77A;">(${remaining} remaining)</span>`;
         }
       }
     }
