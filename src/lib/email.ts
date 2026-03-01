@@ -5,6 +5,7 @@ interface ConfirmationEmailData {
   numberOfPairs: number;
   reservationId: string;
   isPaid?: boolean;
+  receiptUrl?: string;
 }
 
 export async function sendConfirmationEmail(data: ConfirmationEmailData) {
@@ -46,6 +47,11 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
           <p style="margin: 4px 0;"><strong style="color: #c9a84c;">Plačilo:</strong> ${isPaid ? 'Plačano online ✓' : 'Plačilo na kraju'}</p>
           <p style="margin: 4px 0;"><strong style="color: #c9a84c;">ID rezervacije:</strong> ${reservationId}</p>
         </div>
+        ${data.receiptUrl ? `
+        <div style="text-align: center; margin-bottom: 24px;">
+          <a href="${data.receiptUrl}" target="_blank" style="display: inline-block; background: #c9a84c; color: #0a1720; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold;">Potrdilo plačila (PDF)</a>
+        </div>
+        ` : ''}
         <p>Veselimo se vašega obiska!</p>
         <p style="margin-top: 24px; color: #7a9cb2;">Lep pozdrav,<br/>Divana - Maja Marinčič</p>
       </div>

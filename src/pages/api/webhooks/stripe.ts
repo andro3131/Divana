@@ -55,6 +55,20 @@ export const POST: APIRoute = async ({ request }) => {
             .where(eq(Event.id, reservation.eventId));
 
           if (eventData) {
+            // Get receipt URL from Stripe charge
+            let receiptUrl: string | undefined;
+            try {
+              if (session.payment_intent) {
+                const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent as string);
+                if (paymentIntent.latest_charge) {
+                  const charge = await stripe.charges.retrieve(paymentIntent.latest_charge as string);
+                  receiptUrl = charge.receipt_url ?? undefined;
+                }
+              }
+            } catch (e) {
+              console.error('Failed to get receipt URL:', e);
+            }
+
             const { sendConfirmationEmail, sendReservationNotification } = await import('../../../lib/email');
             const emailData = {
               email: reservation.email,
@@ -63,6 +77,7 @@ export const POST: APIRoute = async ({ request }) => {
               numberOfPairs: reservation.numberOfPairs,
               reservationId,
               isPaid: true,
+              receiptUrl,
             };
             await Promise.all([
               sendConfirmationEmail(emailData),
