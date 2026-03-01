@@ -27,13 +27,14 @@
   },
   "music": {
     "title": "Glasba",
-    "subtitle": "Vsaka pesem je potovanje.",
+    "subtitle": "Vsaka pesem je potovanje. Pridružite se mi na poti.",
     "listenOn": "Poslušaj na Spotify",
     "watchOn": "Poglej na YouTube",
     "showAll": "Pokaži vse"
   },
   "gallery": {
     "title": "Galerija",
+    "subtitle": "Trenutki, ujeti v svetlobo. Sprehodite se skozi moje spomine.",
     "photoCredit": "Foto: Dejan Udovč",
     "showAll": "Pokaži vse"
   },

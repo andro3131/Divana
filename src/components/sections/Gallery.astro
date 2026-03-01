@@ -24,7 +24,7 @@ const galleryPageUrl = locale === 'sl' ? '/galerija' : '/en/gallery';
 
 <section id={sectionId} class="py-24 px-4 md:px-8 bg-dark-900">
   <div class="max-w-7xl mx-auto">
-    <SectionHeading title={t('gallery.title')} />
+    <SectionHeading title={t('gallery.title')} subtitle={t('gallery.subtitle')} />
 
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
       {previewImages.map((img, idx) => (

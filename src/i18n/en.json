@@ -27,13 +27,14 @@
   },
   "music": {
     "title": "Music",
-    "subtitle": "Every song is a journey.",
+    "subtitle": "Every song is a journey. Come along for the ride.",
     "listenOn": "Listen on Spotify",
     "watchOn": "Watch on YouTube",
     "showAll": "See all"
   },
   "gallery": {
     "title": "Gallery",
+    "subtitle": "Moments captured in light. Walk through my memories.",
     "photoCredit": "Photo: Dejan Udovč",
     "showAll": "See all"
   },
