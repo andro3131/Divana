@@ -11,7 +11,7 @@ export const ABOUT_IMAGES = [
   { src: `${CDN_BASE}/Galerija/471274937_10231807214836232_483847351603642680_n.jpg`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/Galerija/522859584_17866800663423931_907949271408418841_n.webp`, alt: 'Maja Marinčič' },
   // Rest
-  { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.33.15.png`, alt: 'Maja Marinčič' },
+  { src: `${CDN_BASE}/divana3.jpg`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.32.49.png`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.45.09.png`, alt: 'Maja Marinčič' },
   { src: `${CDN_BASE}/OMENI/Screenshot%202026-02-27%20at%2018.45.23.png`, alt: 'Maja Marinčič' },
