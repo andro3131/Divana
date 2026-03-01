@@ -200,15 +200,12 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
 
             <div class="di-separator"></div>
 
-            <div class="di-limited-banner">
-              <span class="di-limited-glow"></span>
-              <span class="di-limited-star">&#10022;</span>
-              <span class="di-limited-text">{t('danceInfo.limited')}</span>
-              <span class="di-limited-star">&#10022;</span>
+            <div class="di-cta-area">
+              <a class="di-cta-link" href={reservePath}>{t('danceInfo.ctaBuy')}</a>
             </div>
 
-            <div class="di-cta-area">
-              <a class="di-cta-link" href={reservePath}>{t('danceInfo.cta')}</a>
+            <div class="di-limited-gradient">
+              {t('danceInfo.limited')}
             </div>
           </div>
 
@@ -459,66 +456,25 @@ const reservePath = locale === 'sl' ? '/rezervacija/plesni-vecer-2026-03' : '/en
     background: linear-gradient(90deg, rgba(201,162,78,0.08), rgba(201,162,78,0.06), transparent);
   }
 
-  /* Limited banner – elegant gold glow */
-  .di-limited-banner {
-    position: relative;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-    font-family: 'Playfair Display', serif;
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: #e0c872;
-    padding: 12px 24px;
-    border: 1.5px solid rgba(201,168,76,0.4);
-    border-radius: 6px;
-    background: rgba(201,168,76,0.06);
-    width: fit-content;
-    overflow: hidden;
-    animation: diLimitedGlow 3s ease-in-out infinite;
+  /* Limited – gradient text animation */
+  .di-limited-gradient {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #E74C3C, #E8A04E, #E74C3C);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: diGradShift 4s ease-in-out infinite;
+    margin-top: 10px;
   }
 
-  .di-limited-text {
-    animation: diTextPulse 3s ease-in-out infinite;
-  }
-
-  .di-limited-star {
-    font-size: 10px;
-    color: #c9a84c;
-    opacity: 0.7;
-    animation: diStarPulse 3s ease-in-out infinite;
-  }
-
-  .di-limited-glow {
-    position: absolute; inset: 0;
-    border-radius: 6px;
-    pointer-events: none;
-    animation: diGlowSweep 4s ease-in-out infinite;
-  }
-
-  @keyframes diLimitedGlow {
-    0%, 100% {
-      border-color: rgba(201,168,76,0.3);
-      box-shadow: 0 0 8px rgba(201,168,76,0.08), inset 0 0 8px rgba(201,168,76,0.03);
-    }
-    50% {
-      border-color: rgba(224,200,114,0.6);
-      box-shadow: 0 0 20px rgba(201,168,76,0.2), inset 0 0 15px rgba(201,168,76,0.06);
-    }
-  }
-
-  @keyframes diTextPulse {
-    0%, 100% { opacity: 0.8; text-shadow: 0 0 4px rgba(201,168,76,0.1); }
-    50% { opacity: 1; text-shadow: 0 0 12px rgba(224,200,114,0.4); }
-  }
-
-  @keyframes diStarPulse {
-    0%, 100% { opacity: 0.4; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1.1); }
-  }
-
-  @keyframes diGlowSweep {
-    0% { background: linear-gradient(90deg, transparent 0%, rgba(224,200,114,0.08) 0%, transparent 0%); }
-    50% { background: linear-gradient(90deg, transparent 30%, rgba(224,200,114,0.12) 50%, transparent 70%); }
-    100% { background: linear-gradient(90deg, transparent 100%, rgba(224,200,114,0.08) 100%, transparent 100%); }
+  @keyframes diGradShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   /* CTA */
