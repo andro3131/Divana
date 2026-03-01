@@ -78,6 +78,11 @@ const sectionId = sectionIds.contact[locale];
         </div>
 
         <div>
+          <h3 class="text-lg font-heading font-semibold text-gold mb-2">{locale === 'sl' ? 'Lokacija' : 'Location'}</h3>
+          <p class="text-dark-200">{locale === 'sl' ? 'Trebnje' : 'Trebnje, Slovenia'}</p>
+        </div>
+
+        <div>
           <h3 class="text-lg font-heading font-semibold text-gold mb-4">{locale === 'sl' ? 'Družbena omrežja' : 'Social Media'}</h3>
           <div class="flex flex-wrap gap-4">
             <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-dark-300 hover:text-gold transition-colors">
