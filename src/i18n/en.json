@@ -4,7 +4,7 @@
     "about": "About",
     "music": "Music",
     "gallery": "Gallery",
-    "services": "Performances",
+    "services": "Book me",
     "danceEvenings": "Dance Evenings",
     "contact": "Contact"
   },
@@ -39,7 +39,7 @@
     "showAll": "See all"
   },
   "services": {
-    "title": "Performances",
+    "title": "Book me",
     "subtitle": "Music for every moment",
     "intro": "I bring music to life on terraces, create unforgettable atmospheres at weddings, birthdays, special events and concerts. We also enrich jubilees of companies large and small, public events and grand openings.",
     "solo": {

@@ -4,7 +4,7 @@
     "about": "O meni",
     "music": "Glasba",
     "gallery": "Galerija",
-    "services": "Nastopi",
+    "services": "Rezerviraj me",
     "danceEvenings": "Plesni večeri",
     "contact": "Kontakt"
   },
@@ -39,7 +39,7 @@
     "showAll": "Pokaži vse"
   },
   "services": {
-    "title": "Nastopi",
+    "title": "Rezerviraj me",
     "subtitle": "Glasba za vsak trenutek",
     "intro": "Z glasbo oživljam večere na terasah, ustvarjam nepozabno vzdušje na porokah, rojstnih dnevih, posebnih dogodkih in koncertih. Glasbeno popestrimo tudi jubileje manjših in večjih podjetij, javne prireditve ter slavnostne otvoritve.",
     "solo": {
