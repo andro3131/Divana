@@ -75,22 +75,22 @@ export const SERVICE_BAND_IMAGES = [
 ];
 
 export const YOUTUBE_VIDEOS = [
-  '9mWZ5hJKpGQ',
-  'Zb5P_9-zNYA',
-  'JIfGS-l6SYU',
-  'KIG0ezdLPhU',
-  'sSrsoNldClc',
-  'zzOe7TKXMws',
-  'J9pJTPhc8BQ',
-  'vORLuHL3a3s',
-  'iyWIBfWaBSg',
-  'NvewjfWDBoY',
-  '_DZ3bcwVm0M',
-  'FDnxQdTkvdQ',
-  '4V_AuR5o84s',
-  'T0pP3zQ8b-w',
-  'KiaMJbzMTCQ',
-  'mgCrRBXR7i0',
+  { id: '9mWZ5hJKpGQ', title: 'Najdeš spet domov' },
+  { id: 'Zb5P_9-zNYA', title: 'Veži me za sebe (Toše Proeski)' },
+  { id: 'JIfGS-l6SYU', title: 'Ta trenutek' },
+  { id: 'KIG0ezdLPhU', title: 'Dahni mi' },
+  { id: 'sSrsoNldClc', title: 'Sestro (Ezerski Biseri 2024)' },
+  { id: 'zzOe7TKXMws', title: 'Lunca cofke je pobrala' },
+  { id: 'J9pJTPhc8BQ', title: 'Unchained Melody (cover)' },
+  { id: 'vORLuHL3a3s', title: 'Pravijo, da je ljubezen (cover The Rose)' },
+  { id: 'iyWIBfWaBSg', title: 'Metulja sva' },
+  { id: 'NvewjfWDBoY', title: 'Tamburaš' },
+  { id: '_DZ3bcwVm0M', title: 'Mimogrede (z Matjažem Strmolom)' },
+  { id: 'FDnxQdTkvdQ', title: 'Islands in the Stream (z Mikijem Brankovićem)' },
+  { id: '4V_AuR5o84s', title: 'Sva (Maraaya)' },
+  { id: 'T0pP3zQ8b-w', title: 'Verjamem (live, Eva Boto)' },
+  { id: 'KiaMJbzMTCQ', title: 'Hit the Road Jack (live cover)' },
+  { id: 'mgCrRBXR7i0', title: 'Ti z mano znaš (Alya in Erosi)' },
 ];
 
 export const SPOTIFY_ARTIST_ID = '1hvb1zjESGKbORt57GeQ2Y';
