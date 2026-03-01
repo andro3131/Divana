@@ -85,6 +85,12 @@ export const YOUTUBE_VIDEOS = [
   'vORLuHL3a3s',
   'iyWIBfWaBSg',
   'NvewjfWDBoY',
+  '_DZ3bcwVm0M',
+  'FDnxQdTkvdQ',
+  '4V_AuR5o84s',
+  'T0pP3zQ8b-w',
+  'KiaMJbzMTCQ',
+  'mgCrRBXR7i0',
 ];
 
 export const SPOTIFY_ARTIST_ID = '1hvb1zjESGKbORt57GeQ2Y';
