@@ -17,7 +17,7 @@ const navItems = [
   { key: 'music', label: t('nav.music') },
   { key: 'gallery', label: t('nav.gallery') },
   { key: 'services', label: t('nav.services') },
-  { key: 'danceEvenings', label: t('nav.danceEvenings'), badge: locale === 'sl' ? 'NOVO' : 'NEW' },
+  { key: 'danceEvenings', label: t('nav.danceEvenings') },
   { key: 'contact', label: t('nav.contact') },
 ];
 ---
@@ -35,14 +35,9 @@ const navItems = [
         {navItems.map((item) => (
           <a
             href={`#${sectionIds[item.key][locale]}`}
-            class="relative text-dark-200 hover:text-gold text-sm tracking-wider uppercase transition-colors duration-200"
+            class="text-dark-200 hover:text-gold text-sm tracking-wider uppercase transition-colors duration-200"
           >
             {item.label}
-            {item.badge && (
-              <span class="novo-pulse absolute -top-2.5 -right-7 bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">
-                {item.badge}
-              </span>
-            )}
           </a>
         ))}
         <a
@@ -78,11 +73,6 @@ const navItems = [
           class="mobile-nav-link block text-dark-200 hover:text-gold text-lg tracking-wider uppercase transition-colors"
         >
           {item.label}
-          {item.badge && (
-            <span class="novo-pulse inline-block ml-2 bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none align-middle">
-              {item.badge}
-            </span>
-          )}
         </a>
       ))}
       <div class="pt-4 border-t border-dark-700/50">
