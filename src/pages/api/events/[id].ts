@@ -25,7 +25,7 @@ export const GET: APIRoute = async ({ params, cookies }) => {
   const [{ totalPairs }] = await db
     .select({ totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)` })
     .from(Reservation)
-    .where(eq(Reservation.eventId, id!));
+    .where(sql`${Reservation.eventId} = ${id} AND ${Reservation.status} = 'confirmed'`);
 
   return new Response(
     JSON.stringify({

@@ -23,7 +23,7 @@ if (!event) {
 const [{ totalPairs }] = await db
   .select({ totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)` })
   .from(Reservation)
-  .where(sql`${Reservation.eventId} = ${eventid!} AND ${Reservation.status} != 'expired'`);
+  .where(sql`${Reservation.eventId} = ${eventid!} AND ${Reservation.status} = 'confirmed'`);
 
 const remaining = event.capacity - totalPairs;
 

@@ -33,7 +33,7 @@ export const GET: APIRoute = async () => {
           totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)`,
         })
         .from(Reservation)
-        .where(eq(Reservation.eventId, event.id));
+        .where(sql`${Reservation.eventId} = ${event.id} AND ${Reservation.status} = 'confirmed'`);
 
       return {
         ...event,

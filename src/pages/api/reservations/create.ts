@@ -36,7 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
     const [{ totalPairs }] = await db
       .select({ totalPairs: sql<number>`COALESCE(SUM(${Reservation.numberOfPairs}), 0)` })
       .from(Reservation)
-      .where(sql`${Reservation.eventId} = ${eventId} AND ${Reservation.status} != 'expired'`);
+      .where(sql`${Reservation.eventId} = ${eventId} AND ${Reservation.status} = 'confirmed'`);
 
     const remaining = event.capacity - totalPairs;
     if (numberOfPairs > remaining) {
