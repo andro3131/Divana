@@ -67,11 +67,18 @@ const pairLabel = locale === 'sl' ? 'par' : 'couple';
     ></textarea>
   </div>
 
+  <div id="price-info" class="hidden text-center text-sm text-primary-400 font-medium py-2 bg-primary-900/20 rounded-lg border border-primary-500/20">
+  </div>
+
   <div class="pt-2">
     <button
       type="button"
       id="btn-stripe-pay"
       class="w-full py-3.5 px-6 bg-gradient-to-r from-primary-400 to-primary-600 text-dark-950 font-semibold rounded-lg hover:from-primary-300 hover:to-primary-500 transition-all duration-300 transform hover:scale-[1.02] tracking-wider uppercase text-sm flex items-center justify-center gap-2"
+      data-base-price={onlinePrice}
+      data-discount-price="4000"
+      data-pair-label={pairLabel}
+      data-submit-text={t('reservation.submitPay')}
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
       {t('reservation.submitPay')} ({(onlinePrice / 100).toFixed(0)}&euro;/{pairLabel})
@@ -131,4 +138,37 @@ const pairLabel = locale === 'sl' ? 'par' : 'couple';
   }
 
   stripeBtn.addEventListener('click', handleStripePayment);
+
+  // Dynamic price update based on pair count
+  const pairsInput = document.getElementById('res-pairs') as HTMLInputElement;
+  const priceInfo = document.getElementById('price-info')!;
+  const basePrice = Number(stripeBtn.dataset.basePrice) || 5000;
+  const discountPrice = Number(stripeBtn.dataset.discountPrice) || 4000;
+  const pairLbl = stripeBtn.dataset.pairLabel || 'par';
+  const submitText = stripeBtn.dataset.submitText || '';
+  const locale = form.dataset.locale || 'sl';
+
+  function updatePrice() {
+    const pairs = Number(pairsInput.value) || 1;
+    const unitPrice = pairs >= 2 ? discountPrice : basePrice;
+    const total = (unitPrice / 100) * pairs;
+
+    // Update button text
+    const svg = stripeBtn.querySelector('svg')?.outerHTML || '';
+    stripeBtn.innerHTML = `${svg} ${submitText} (${unitPrice / 100}€/${pairLbl})`;
+
+    // Show/hide discount info
+    if (pairs >= 2) {
+      const saved = ((basePrice - discountPrice) / 100) * pairs;
+      priceInfo.classList.remove('hidden');
+      priceInfo.innerHTML = locale === 'sl'
+        ? `🎉 Popust za ${pairs} pare: <strong>${unitPrice / 100}€/${pairLbl}</strong> · Skupaj: <strong>${total}€</strong> (prihranek ${saved}€)`
+        : `🎉 Discount for ${pairs} couples: <strong>€${unitPrice / 100}/${pairLbl}</strong> · Total: <strong>€${total}</strong> (save €${saved})`;
+    } else {
+      priceInfo.classList.add('hidden');
+    }
+  }
+
+  pairsInput.addEventListener('input', updatePrice);
+  pairsInput.addEventListener('change', updatePrice);
 </script>

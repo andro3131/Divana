@@ -70,6 +70,9 @@ export const POST: APIRoute = async ({ request }) => {
     const stripe = getStripe();
     const eventTitle = locale === 'en' && event.titleEn ? event.titleEn : event.titleSl;
 
+    // Volume discount: 40€/pair for 2+ pairs, otherwise 50€/pair
+    const unitPrice = numberOfPairs >= 2 ? 4000 : event.onlinePrice;
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
@@ -82,7 +85,7 @@ export const POST: APIRoute = async ({ request }) => {
               name: eventTitle,
               description: `${new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : 'sl-SI', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(event.date))} · ${event.location}`,
             },
-            unit_amount: event.onlinePrice,
+            unit_amount: unitPrice,
           },
           quantity: numberOfPairs,
         },

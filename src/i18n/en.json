@@ -118,7 +118,7 @@
     "musicValue": "Divana and band",
     "priceLabel": "Price",
     "priceValue": "€50 per couple",
-    "priceSub": "",
+    "priceSub": "2+ couples: €40 per couple",
     "limited": "Limited number of spots!",
     "cta": "Sign up",
     "ctaBuy": "Buy ticket",
@@ -133,7 +133,7 @@
     "priceLabel": "Price",
     "date": "March 8, 2026, 18:00–20:00",
     "location": "Dvorana Stik (Trebnje)",
-    "priceInfo": "€50 per couple",
+    "priceInfo": "€50 per couple (2+: €40)",
     "warning": "Limited spots available!",
     "cta": "Reserve now"
   },
