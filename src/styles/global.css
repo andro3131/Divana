@@ -259,3 +259,13 @@ body {
 .lightbox-open {
   overflow: hidden;
 }
+
+/* Dance evening image */
+.dance-evening-img img {
+  height: 307px;
+}
+@media (min-width: 768px) {
+  .dance-evening-img img {
+    height: 460px;
+  }
+}
