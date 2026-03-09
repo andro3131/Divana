@@ -20,7 +20,7 @@ const t = useTranslations(locale);
       src={HERO_IMAGE}
       alt="Divana - Maja Marinčič"
       id="hero-img"
-      class="w-full h-full object-cover object-[18%_12%] md:object-top hero-zoom-in"
+      class="w-full h-full object-cover object-center hero-zoom-in"
       loading="eager"
       fetchpriority="high"
     />
@@ -33,7 +33,7 @@ const t = useTranslations(locale);
   </div>
 
   <!-- Desktop: subtitle + social icons, tracks singer position -->
-  <div id="hero-subtitle-desktop" class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-[28%] -translate-x-1/2 animate-fade-in-delay">
+  <div id="hero-subtitle-desktop" class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-1/2 -translate-x-1/2 animate-fade-in-delay">
     <p class="text-lg lg:text-xl text-primary-200/80 font-light tracking-widest uppercase mb-4">{t('hero.subtitle')}</p>
     <div class="flex items-center gap-5">
       <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" class="text-primary-200/40 hover:text-gold transition-colors" aria-label="Facebook">
