@@ -23,6 +23,21 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
       </p>
     </div>
 
+    <!-- Dance evening atmosphere image -->
+    <div class="max-w-2xl mx-auto mb-16 rounded-2xl overflow-hidden border border-dark-700/30" data-animate>
+      <img
+        id="dance-evening-img"
+        src=""
+        alt={locale === 'sl' ? 'Plesni večer' : 'Dance evening'}
+        class="w-full h-64 md:h-80 object-cover hidden"
+        loading="lazy"
+      />
+      <!-- Placeholder until image is set -->
+      <div id="dance-evening-img-placeholder" class="w-full h-64 md:h-80 bg-dark-800/50 flex items-center justify-center">
+        <p class="text-dark-600 text-sm italic">{locale === 'sl' ? 'Slika prihaja kmalu ...' : 'Image coming soon ...'}</p>
+      </div>
+    </div>
+
     <!-- Events loaded via client-side fetch -->
     <div id="events-container" data-animate>
       <h3 class="text-lg text-dark-300 text-center mb-8 tracking-wider uppercase">{t('danceEvenings.upcoming')}</h3>
