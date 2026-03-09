@@ -82,7 +82,7 @@ export const SERVICE_SOLO_IMAGES = [
 ];
 
 export const SERVICE_BAND_IMAGES = [
-  { src: `${CDN_BASE}/PONUDBA/591913408_122171483402784629_3785550888394690673_n.jpg`, alt: 'Koncert z bandom - Divana' },
+  { src: `${CDN_BASE}/divana2.jpg`, alt: 'Koncert z bandom - Divana' },
   { src: `${CDN_BASE}/PONUDBA/589723483_122171483390784629_4394423904053417200_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 25%' },
   { src: `${CDN_BASE}/PONUDBA/590431116_122171483204784629_1822284055479484534_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 25%' },
   { src: `${CDN_BASE}/PONUDBA/590442759_122171483594784629_3811275188146475286_n.jpg`, alt: 'Koncert z bandom - Divana', objectPosition: 'center 25%' },
