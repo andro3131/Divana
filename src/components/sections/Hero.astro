@@ -96,21 +96,7 @@ const t = useTranslations(locale);
   const singerX = 0.325;
 
   function updateSubtitlePosition() {
-    if (!heroImg || !subtitleDesktop || window.innerWidth < 768) return;
-    const imgW = heroImg.naturalWidth;
-    const imgH = heroImg.naturalHeight;
-    if (!imgW || !imgH) return;
-
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    // object-cover center top: scale to fill, centered horizontally, top-aligned
-    const scale = Math.max(vw / imgW, vh / imgH);
-    const renderedW = imgW * scale;
-    const offsetX = (vw - renderedW) / 2;
-    const screenX = offsetX + singerX * renderedW;
-
-    subtitleDesktop.style.left = screenX + 'px';
+    // Centered via CSS (left-1/2 -translate-x-1/2), no JS override needed
   }
 
   if (heroImg && subtitleDesktop) {
