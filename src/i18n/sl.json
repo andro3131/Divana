@@ -58,7 +58,8 @@
   "danceEvenings": {
     "title": "Plesni večeri",
     "subtitle": "Vajin stik",
-    "description": "To ni samo plesni večer. Je prostor za pare. Za pogled, ki se ne umakne. Za dotik, ki prebudi vajin gib. Verjamem, da si odnosi zaslužijo čas. In prostor. In večer samo za dva.",
+    "description": "Organiziram plesne večere za pare — intimne dogodke z živo glasbo, kjer ples postane jezik povezave. To ni samo plesni večer. Je prostor za pogled, ki se ne umakne. Za dotik, ki prebudi vajin gib. Za večer samo za vaju.",
+    "noEventsNote": "Spremljajte nas na socialnih omrežjih ali se prijavite na novice — ko bo naslednji plesni večer razpisan, boste prvi obveščeni.",
     "reserve": "Rezerviraj mesto",
     "spotsLeft": "Še {count} prostih mest",
     "soldOut": "Razprodano",

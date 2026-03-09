@@ -58,7 +58,8 @@
   "danceEvenings": {
     "title": "Dance Evenings",
     "subtitle": "Your Connection",
-    "description": "This is not just a dance evening. It's a space for couples. For a gaze that doesn't look away. For a touch that awakens your movement. I believe that relationships deserve time. And space. And an evening just for two.",
+    "description": "I organize dance evenings for couples — intimate events with live music, where dance becomes the language of connection. This is not just a dance evening. It's a space for a gaze that doesn't look away. For a touch that awakens your movement. For an evening just for the two of you.",
+    "noEventsNote": "Follow us on social media or subscribe to our newsletter — you'll be the first to know when the next dance evening is announced.",
     "reserve": "Reserve a spot",
     "spotsLeft": "{count} spots remaining",
     "soldOut": "Sold out",
