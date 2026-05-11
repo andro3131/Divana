@@ -1,7 +1,6 @@
 ---
 import { useTranslations, type Locale } from '../../i18n/ui';
-import { HERO_IMAGE, SOCIAL_LINKS } from '../../lib/constants';
-// import DanceEveningBanner from '../ui/DanceEveningBanner.astro'; // ARCHIVED — kept for future events
+import { HERO_IMAGE, CONCERT_BANNER_IMAGE, SOCIAL_LINKS } from '../../lib/constants';
 
 interface Props {
   locale: Locale;
@@ -9,6 +8,9 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const concertAlt = locale === 'sl'
+  ? 'Maja Marinčič DIVANA koncert – 26. 5. 2026, Grad Žužemberk'
+  : 'Maja Marinčič DIVANA concert – 26 May 2026, Žužemberk Castle';
 ---
 
 <!-- Scroll zone: extra height creates scroll space for zoom effect before page moves -->
@@ -20,7 +22,7 @@ const t = useTranslations(locale);
       src={HERO_IMAGE}
       alt="Divana - Maja Marinčič"
       id="hero-img"
-      class="w-full h-full object-cover object-center hero-zoom-in"
+      class="w-full h-full object-cover object-[18%_12%] md:object-top hero-zoom-in"
       loading="eager"
       fetchpriority="high"
     />
@@ -32,8 +34,8 @@ const t = useTranslations(locale);
     <p class="text-sm text-primary-200/70 font-light tracking-[0.2em] uppercase whitespace-nowrap">{t('hero.subtitle')}</p>
   </div>
 
-  <!-- Desktop: subtitle + social icons, tracks singer position -->
-  <div id="hero-subtitle-desktop" class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-[calc(50%+50px)] -translate-x-1/2 animate-fade-in-delay">
+  <!-- Desktop: subtitle + social icons, tracks singer position (JS sets left) -->
+  <div id="hero-subtitle-desktop" class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-[28%] -translate-x-1/2 animate-fade-in-delay">
     <p class="text-lg lg:text-xl text-primary-200/80 font-light tracking-widest uppercase mb-4">{t('hero.subtitle')}</p>
     <div class="flex items-center gap-5">
       <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" class="text-primary-200/40 hover:text-gold transition-colors" aria-label="Facebook">
@@ -51,10 +53,17 @@ const t = useTranslations(locale);
     </div>
   </div>
 
-  <!-- Dance Evening Banner — ARCHIVED, uncomment for future events -->
-  <!-- <div class="absolute left-1/2 -translate-x-1/2 bottom-12 sm:bottom-16 md:left-auto md:translate-x-0 md:right-[14%] md:top-[55%] md:bottom-auto md:-translate-y-1/2 lg:right-[16%] xl:right-[18%] z-20 hero-banner-mobile">
-    <DanceEveningBanner locale={locale} />
-  </div> -->
+  <!-- Concert poster banner -->
+  <div class="concert-banner-wrap absolute z-20 left-1/2 -translate-x-1/2 bottom-20 sm:bottom-24 md:left-auto md:translate-x-0 md:right-[8%] md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:right-[10%] xl:right-[12%]">
+    <div class="concert-banner-float">
+      <img
+        src={CONCERT_BANNER_IMAGE}
+        alt={concertAlt}
+        class="concert-banner-img"
+        loading="eager"
+      />
+    </div>
+  </div>
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
@@ -77,11 +86,44 @@ const t = useTranslations(locale);
     will-change: transform;
   }
 
-  /* Wider, shorter banner on mobile */
-  @media (max-width: 767px) {
-    .hero-banner-mobile :global(.banner-wrapper) {
-      width: min(320px, 82vw);
-      aspect-ratio: 3 / 2.6;
+  /* Concert banner — slide in from right after a short delay */
+  @keyframes concertBannerSlideIn {
+    from { opacity: 0; transform: translateX(80px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes concertBannerSlideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes concertBannerFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+
+  .concert-banner-wrap {
+    width: min(240px, 62vw);
+    opacity: 0;
+    animation: concertBannerSlideUp 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  }
+
+  .concert-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.5),
+      0 0 24px rgba(201, 162, 78, 0.18);
+    border: 1px solid rgba(201, 162, 78, 0.25);
+  }
+
+  @media (min-width: 768px) {
+    .concert-banner-wrap {
+      width: min(300px, 24vw);
+      animation: concertBannerSlideIn 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+    }
+    .concert-banner-float {
+      animation: concertBannerFloat 5s ease-in-out 2.4s infinite;
     }
   }
 </style>
@@ -96,7 +138,21 @@ const t = useTranslations(locale);
   const singerX = 0.325;
 
   function updateSubtitlePosition() {
-    // Centered via CSS (left-1/2 -translate-x-1/2), no JS override needed
+    if (!heroImg || !subtitleDesktop || window.innerWidth < 768) return;
+    const imgW = heroImg.naturalWidth;
+    const imgH = heroImg.naturalHeight;
+    if (!imgW || !imgH) return;
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // object-cover with object-top: scale to fill, centered horizontally, top-aligned
+    const scale = Math.max(vw / imgW, vh / imgH);
+    const renderedW = imgW * scale;
+    const offsetX = (vw - renderedW) / 2;
+    const screenX = offsetX + singerX * renderedW;
+
+    subtitleDesktop.style.left = screenX + 'px';
   }
 
   if (heroImg && subtitleDesktop) {
