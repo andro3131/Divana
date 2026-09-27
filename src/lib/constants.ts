@@ -1,6 +1,7 @@
 export const CDN_BASE = 'https://divana-cdn.b-cdn.net';
 
-export const HERO_IMAGE = `${CDN_BASE}/DIVANA-HERO.jpg`;
+// Left-shifted hero while the Trebnje teaser is live
+export const HERO_IMAGE = `${CDN_BASE}/Premakni_pevko_malo_bolj_levo_ohrani_jo_pa_tono_ta_delpmaspu.jpg`;
 export const LOGO_IMAGE = `${CDN_BASE}/logo-divana-transparent.png`;
 
 // About section images - story from childhood to singer
@@ -113,7 +114,7 @@ export const SPOTIFY_ARTIST_URL = `https://open.spotify.com/artist/${SPOTIFY_ART
 
 export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/profile.php?id=61573538886479',
-  instagram: 'https://www.instagram.com/maja.divana/',
+  instagram: 'https://www.instagram.com/maja.divana.new/',
   youtube: 'https://www.youtube.com/@Divana.essence',
   spotify: SPOTIFY_ARTIST_URL,
   email: 'carobnizvok@gmail.com',

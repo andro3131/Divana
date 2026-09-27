@@ -1,0 +1,174 @@
+---
+import { type Locale } from '../../i18n/ui';
+import { sectionIds } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props as Props;
+
+const copy = {
+  label: locale === 'sl' ? 'Divana koncert' : 'Divana concert',
+  title: 'Trebnje',
+  date: locale === 'sl' ? 'torek · 17. 11. 2026' : 'Tuesday · 17 Nov 2026',
+  place: 'Kulturni dom Trebnje',
+  note: locale === 'sl' ? 'Kmalu več podrobnosti' : 'More details soon',
+  cta: locale === 'sl' ? 'Več kmalu' : 'Coming soon',
+  novo: 'NOVO',
+};
+
+const contactId = sectionIds.contact[locale];
+---
+
+<div class="teaser-float">
+  <div class="banner-wrapper">
+    <div class="teaser-card">
+      <div class="novo-badge">{copy.novo}</div>
+
+      <div class="content">
+        <div class="label">{copy.label}</div>
+        <div class="title">Trebnje</div>
+        <div class="date">{copy.date}</div>
+        <div class="place">{copy.place}</div>
+        <div class="note">{copy.note}</div>
+
+        <div class="cta-area">
+          <a class="cta-btn" href={`#${contactId}`}>{copy.cta}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Gentle up-down float */
+  @keyframes teaserFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  .teaser-float { animation: teaserFloat 4.8s ease-in-out 0.8s infinite; }
+
+  .banner-wrapper {
+    position: relative;
+    width: min(380px, 80vw);
+    aspect-ratio: 3 / 3.1;
+    max-height: 84vh;
+  }
+
+  .teaser-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 14, 10, 0.78);
+    border: 1px solid rgba(201, 162, 78, 0.22);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+  }
+
+  .teaser-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(120% 80% at 40% 10%, rgba(201,162,78,0.12), transparent 60%),
+                radial-gradient(80% 60% at 75% 85%, rgba(201,162,78,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .content { position: absolute; inset: 0; padding: 26px 24px; text-align: left; }
+
+  .label {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: clamp(11px, 2.8vw, 13px);
+    color: #C9A24E;
+    opacity: 0.9;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(42px, 10vw, 56px);
+    line-height: 1.05;
+    margin: 4px 0 8px;
+    text-align: center;
+    background: linear-gradient(160deg, #E2C77A 0%, #C9A24E 35%, #8A6A20 65%, #E2C77A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .date, .place, .note {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+  }
+  .date {
+    color: #E8D9B3;
+    letter-spacing: 0.18em;
+    font-size: clamp(12px, 3.2vw, 14px);
+    margin-bottom: 6px;
+  }
+  .place {
+    color: #E2C77A;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-size: clamp(13px, 3.4vw, 15px);
+    margin-bottom: 6px;
+  }
+  .note {
+    color: #D9CCAC;
+    font-style: italic;
+    opacity: 0.9;
+    letter-spacing: 0.04em;
+    font-size: clamp(12px, 3vw, 13px);
+    margin-bottom: 18px;
+  }
+
+  .cta-area { text-align: center; }
+  .cta-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1.5px solid #C9A24E;
+    color: #E2C77A;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 11px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(201,162,78,0.10), rgba(201,162,78,0.04));
+  }
+  .cta-btn:hover {
+    border-color: #E2C77A;
+    color: #FFF;
+    background: linear-gradient(135deg, rgba(201,162,78,0.28), rgba(138,106,32,0.24));
+    box-shadow: 0 8px 24px rgba(201,162,78,0.22);
+    transform: translateY(-1.5px);
+  }
+
+  .novo-badge {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 45% 40%, #E74C3C, #9B2335);
+    color: #fff;
+    font-weight: 900;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(10deg);
+    box-shadow: 0 4px 18px rgba(192,57,43,0.4);
+  }
+</style>
+

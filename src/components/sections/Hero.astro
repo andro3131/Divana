@@ -2,6 +2,7 @@
 import { useTranslations, type Locale } from '../../i18n/ui';
 import { HERO_IMAGE, SOCIAL_LINKS } from '../../lib/constants';
 // import DanceEveningBanner from '../ui/DanceEveningBanner.astro'; // ARCHIVED — kept for future events
+import ConcertTeaserBanner from '../ui/ConcertTeaserBanner.astro';
 
 interface Props {
   locale: Locale;
@@ -20,7 +21,7 @@ const t = useTranslations(locale);
       src={HERO_IMAGE}
       alt="Divana - Maja Marinčič"
       id="hero-img"
-      class="w-full h-full object-cover object-center hero-zoom-in"
+      class="w-full h-full object-cover object-[18%_12%] md:object-top hero-zoom-in"
       loading="eager"
       fetchpriority="high"
     />
@@ -33,7 +34,7 @@ const t = useTranslations(locale);
   </div>
 
   <!-- Desktop: subtitle + social icons, tracks singer position -->
-  <div id="hero-subtitle-desktop" class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-[calc(50%+50px)] -translate-x-1/2 animate-fade-in-delay">
+  <div id="hero-subtitle-desktop" class="absolute z-10 hidden md:flex flex-col items-center bottom-[16%] left-1/2 -translate-x-1/2 animate-fade-in-delay">
     <p class="text-lg lg:text-xl text-primary-200/80 font-light tracking-widest uppercase mb-4">{t('hero.subtitle')}</p>
     <div class="flex items-center gap-5">
       <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" class="text-primary-200/40 hover:text-gold transition-colors" aria-label="Facebook">
@@ -55,6 +56,11 @@ const t = useTranslations(locale);
   <!-- <div class="absolute left-1/2 -translate-x-1/2 bottom-12 sm:bottom-16 md:left-auto md:translate-x-0 md:right-[14%] md:top-[55%] md:bottom-auto md:-translate-y-1/2 lg:right-[16%] xl:right-[18%] z-20 hero-banner-mobile">
     <DanceEveningBanner locale={locale} />
   </div> -->
+
+  <!-- Concert Teaser Banner: bottom-center on mobile, right on desktop -->
+  <div class="absolute left-1/2 -translate-x-1/2 bottom-12 sm:bottom-16 md:left-auto md:translate-x-0 md:right-[12%] md:top-[56%] md:bottom-auto md:-translate-y-1/2 lg:right-[14%] xl:right-[18%] z-20 hero-banner-mobile">
+    <ConcertTeaserBanner locale={locale} />
+  </div>
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
@@ -90,13 +96,22 @@ const t = useTranslations(locale);
   const heroImg = document.getElementById('hero-img') as HTMLImageElement;
   const scrollZone = document.getElementById('hero-scroll-zone');
   const subtitleDesktop = document.getElementById('hero-subtitle-desktop');
+  const heroSection = document.getElementById('hero') as HTMLElement;
 
   // Track singer position on desktop
   // singerX = fraction of image width where singer's body center is
   const singerX = 0.325;
 
   function updateSubtitlePosition() {
-    // Centered via CSS (left-1/2 -translate-x-1/2), no JS override needed
+    if (!heroImg || !subtitleDesktop) return;
+    // Use the rendered (possibly transformed) image rect
+    const imgRect = heroImg.getBoundingClientRect();
+    // Compute horizontal position of singer within viewport
+    const targetCenterX = imgRect.left + imgRect.width * singerX;
+    // Clamp slightly in from viewport edges
+    const vw = window.innerWidth;
+    const clamped = Math.max(40, Math.min(vw - 40, targetCenterX));
+    (subtitleDesktop as HTMLElement).style.left = `${clamped}px`;
   }
 
   if (heroImg && subtitleDesktop) {
@@ -106,6 +121,7 @@ const t = useTranslations(locale);
       heroImg.addEventListener('load', updateSubtitlePosition, { once: true });
     }
     window.addEventListener('resize', updateSubtitlePosition);
+    window.addEventListener('scroll', updateSubtitlePosition, { passive: true });
   }
 
   if (heroImg && scrollZone) {
