@@ -23,11 +23,11 @@ export const GALLERY_IMAGES = [
   `${CDN_BASE}/divana1.jpg`,
   `${CDN_BASE}/divana2.jpg`,
   `${CDN_BASE}/divana3.jpg`,
-  `${CDN_BASE}/divana4.jpg`,
+  `${CDN_BASE}/Galerija/dock-hat-turquoise.jpg`,
   `${CDN_BASE}/divana5.jpg`,
   `${CDN_BASE}/divana6.jpg`,
   // Rest on /galerija page
-  `${CDN_BASE}/Galerija/dock-hat-turquoise.jpg`,
+  `${CDN_BASE}/divana4.jpg`,
   `${CDN_BASE}/Galerija/poni-vibes-stage.jpg`,
   `${CDN_BASE}/Galerija/studio-red-hair-teal.jpg`,
   `${CDN_BASE}/Galerija/outdoor-hat-amber.jpg`,
