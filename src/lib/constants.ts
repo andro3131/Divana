@@ -114,7 +114,7 @@ export const SPOTIFY_ARTIST_URL = `https://open.spotify.com/artist/${SPOTIFY_ART
 
 export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/profile.php?id=61573538886479',
-  instagram: 'https://www.instagram.com/maja.divana/',
+  instagram: 'https://www.instagram.com/maja.divana.new/',
   youtube: 'https://www.youtube.com/@Divana.essence',
   spotify: SPOTIFY_ARTIST_URL,
   email: 'carobnizvok@gmail.com',
