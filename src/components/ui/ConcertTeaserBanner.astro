@@ -83,10 +83,10 @@ const contactId = sectionIds.contact[locale];
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    font-size: clamp(11px, 2.8vw, 13px);
+    font-size: clamp(12px, 2.5vw, 16px);
     color: #C9A24E;
     opacity: 0.9;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-align: center;
   }
 
@@ -94,9 +94,9 @@ const contactId = sectionIds.contact[locale];
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 800;
-    font-size: clamp(42px, 10vw, 56px);
+    font-size: clamp(54px, 11.5vw, 80px);
     line-height: 1.05;
-    margin: 4px 0 8px;
+    margin: 2px 0 10px;
     text-align: center;
     background: linear-gradient(160deg, #E2C77A 0%, #C9A24E 35%, #8A6A20 65%, #E2C77A 100%);
     -webkit-background-clip: text;
@@ -111,14 +111,14 @@ const contactId = sectionIds.contact[locale];
   .date {
     color: #E8D9B3;
     letter-spacing: 0.18em;
-    font-size: clamp(12px, 3.2vw, 14px);
+    font-size: clamp(13px, 3.2vw, 16px);
     margin-bottom: 6px;
   }
   .place {
     color: #E2C77A;
     letter-spacing: 0.08em;
     font-weight: 700;
-    font-size: clamp(13px, 3.4vw, 15px);
+    font-size: clamp(14px, 3.6vw, 18px);
     margin-bottom: 6px;
   }
   .note {
@@ -126,21 +126,21 @@ const contactId = sectionIds.contact[locale];
     font-style: italic;
     opacity: 0.9;
     letter-spacing: 0.04em;
-    font-size: clamp(12px, 3vw, 13px);
-    margin-bottom: 18px;
+    font-size: clamp(13px, 3vw, 15px);
+    margin-bottom: 14px;
   }
 
   .cta-area { text-align: center; }
   .cta-btn {
     display: inline-block;
-    padding: 10px 22px;
+    padding: 12px 26px;
     border: 1.5px solid #C9A24E;
     color: #E2C77A;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 13px;
     text-decoration: none;
     transition: all 0.3s ease;
     background: linear-gradient(135deg, rgba(201,162,78,0.10), rgba(201,162,78,0.04));
@@ -155,17 +155,17 @@ const contactId = sectionIds.contact[locale];
 
   .novo-badge {
     position: absolute;
-    top: -14px;
-    right: -14px;
-    width: 56px;
-    height: 56px;
+    top: 10px;
+    right: 10px;
+    width: clamp(44px, 7vw, 64px);
+    height: clamp(44px, 7vw, 64px);
     border-radius: 50%;
     background: radial-gradient(circle at 45% 40%, #E74C3C, #9B2335);
     color: #fff;
     font-weight: 900;
     font-family: 'Playfair Display', serif;
     letter-spacing: 0.06em;
-    font-size: 12px;
+    font-size: clamp(10px, 2vw, 13px);
     display: flex; align-items: center; justify-content: center;
     transform: rotate(10deg);
     box-shadow: 0 4px 18px rgba(192,57,43,0.4);
