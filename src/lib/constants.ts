@@ -22,18 +22,19 @@ export const GALLERY_IMAGES = [
   // First 6 shown on homepage preview
   `${CDN_BASE}/divana1.jpg`,
   `${CDN_BASE}/divana2.jpg`,
+  `${CDN_BASE}/Galerija/booth-headphones.jpg`,
+  `${CDN_BASE}/Galerija/dock-hat-turquoise.jpg`,
+  `${CDN_BASE}/divana5.jpg`,
+  `${CDN_BASE}/Galerija/studio-red-hair-teal.jpg`,
+  // Ensure displaced originals are still included in full gallery
   `${CDN_BASE}/divana3.jpg`,
   `${CDN_BASE}/divana4.jpg`,
-  `${CDN_BASE}/divana5.jpg`,
   `${CDN_BASE}/divana6.jpg`,
   // Rest on /galerija page
-  `${CDN_BASE}/Galerija/dock-hat-turquoise.jpg`,
   `${CDN_BASE}/Galerija/poni-vibes-stage.jpg`,
-  `${CDN_BASE}/Galerija/studio-red-hair-teal.jpg`,
   `${CDN_BASE}/Galerija/outdoor-hat-amber.jpg`,
   `${CDN_BASE}/Galerija/bw-closeup.jpg`,
   `${CDN_BASE}/Galerija/studio-blue-dress.jpg`,
-  `${CDN_BASE}/Galerija/booth-headphones.jpg`,
   `${CDN_BASE}/Galerija/studio-sphere.jpg`,
   `${CDN_BASE}/Galerija/outdoor-guitar.jpg`,
   `${CDN_BASE}/Galerija/fb-cover-purple-stage.jpg`,
