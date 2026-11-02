@@ -10,12 +10,12 @@ const { locale } = Astro.props as Props;
 const alt = locale === 'sl'
   ? 'Plakat: Maja Marinčič z bendom – V trenutku, 17. november 2026 ob 18. uri, Kulturni dom Trebnje'
   : 'Poster: Maja Marinčič with band – V trenutku, 17 November 2026 at 6 pm, Kulturni dom Trebnje';
-const title = locale === 'sl' ? 'Odpri plakat' : 'Open poster';
+const title = locale === 'sl' ? 'Več o koncertu' : 'More about the concert';
 ---
 
 <div class="teaser-float">
   <div class="banner-wrapper">
-    <a class="poster-card" href="/plakati/trebnje-2026-11-17.jpg" target="_blank" rel="noopener" title={title}>
+    <a class="poster-card" href="#concert-poster" title={title}>
       <picture>
         <source srcset="/plakati/trebnje-2026-11-17.webp" type="image/webp" />
         <img
@@ -31,6 +31,19 @@ const title = locale === 'sl' ? 'Odpri plakat' : 'Open poster';
     <div class="novo-badge">NOVO</div>
   </div>
 </div>
+
+<script>
+  // Klik na plakat: gladko pomakni do ležečega plakata v »Prihajajoči dogodki«
+  document.querySelectorAll<HTMLAnchorElement>('.poster-card').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const target = document.getElementById('concert-poster');
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - 170;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+</script>
 
 <style>
   /* Rahlo lebdenje gor-dol */

@@ -36,6 +36,33 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
     <!-- Events loaded via client-side fetch -->
     <div id="events-container" data-animate>
       <h3 class="text-lg text-dark-300 text-center mb-8 tracking-wider uppercase">{t('danceEvenings.upcoming')}</h3>
+
+      <!-- Koncertni plakat (ležeči) — se sam skrije po datumu v data-until -->
+      <a
+        id="concert-poster"
+        data-until="2026-11-18T00:00:00+01:00"
+        href="/plakati/trebnje-2026-11-17-lezeci.jpg"
+        target="_blank"
+        rel="noopener"
+        class="block mb-8 rounded-2xl overflow-hidden border border-gold/30 hover:border-gold/60 shadow-xl shadow-black/40 transition-all duration-300"
+        title={locale === 'sl' ? 'Odpri plakat' : 'Open poster'}
+      >
+        <picture>
+          <source srcset="/plakati/trebnje-2026-11-17-lezeci.webp" type="image/webp" />
+          <img
+            src="/plakati/trebnje-2026-11-17-lezeci.jpg"
+            alt={locale === 'sl'
+              ? 'Koncert: Maja Marinčič z bendom – V trenutku, 17. november 2026 ob 18. uri, Kulturni dom Trebnje. Vstop prost.'
+              : 'Concert: Maja Marinčič with band – V trenutku, 17 November 2026 at 6 pm, Kulturni dom Trebnje. Free entry.'}
+            width="1800"
+            height="1012"
+            class="w-full h-auto block"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </a>
+
       <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Loading skeleton -->
         <div class="event-skeleton bg-dark-800/50 border border-dark-700/50 rounded-2xl p-6 animate-pulse">
@@ -54,6 +81,11 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
 </section>
 
 <script define:vars={{ locale, reservePath }}>
+  // Koncertni plakat: po izteku datuma ga skrij
+  const poster = document.getElementById('concert-poster');
+  const posterActive = !!poster && new Date() < new Date(poster.dataset.until);
+  if (poster && !posterActive) poster.remove();
+
   async function loadEvents() {
     try {
       const res = await fetch('/api/events');
@@ -66,7 +98,8 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
       document.querySelectorAll('.event-skeleton').forEach(el => el.remove());
 
       if (events.length === 0) {
-        noEvents?.classList.remove('hidden');
+        if (!posterActive) noEvents?.classList.remove('hidden');
+        grid?.classList.add('hidden');
         return;
       }
 
@@ -108,7 +141,7 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
     } catch (e) {
       document.querySelectorAll('.event-skeleton').forEach(el => el.remove());
       const noEvents = document.getElementById('no-events');
-      noEvents?.classList.remove('hidden');
+      if (!posterActive) noEvents?.classList.remove('hidden');
     }
   }
 
