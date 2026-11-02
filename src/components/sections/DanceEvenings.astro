@@ -38,13 +38,11 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
       <h3 class="text-lg text-dark-300 text-center mb-8 tracking-wider uppercase">{t('danceEvenings.upcoming')}</h3>
 
       <!-- Koncertni plakat (ležeči) — se sam skrije po datumu v data-until -->
+      <div id="concert-poster" data-until="2026-11-18T00:00:00+01:00" class="poster-float mb-8">
       <a
-        id="concert-poster"
-        data-until="2026-11-18T00:00:00+01:00"
+        id="concert-poster-link"
         href="/plakati/trebnje-2026-11-17-lezeci.jpg"
-        target="_blank"
-        rel="noopener"
-        class="block mb-8 rounded-2xl overflow-hidden border border-gold/30 hover:border-gold/60 shadow-xl shadow-black/40 transition-all duration-300"
+        class="block rounded-2xl overflow-hidden border border-gold/30 hover:border-gold/60 shadow-xl shadow-black/40 transition-all duration-300"
         title={locale === 'sl' ? 'Odpri plakat' : 'Open poster'}
       >
         <picture>
@@ -62,6 +60,7 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
           />
         </picture>
       </a>
+      </div>
 
       <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Loading skeleton -->
@@ -79,6 +78,65 @@ const reservePath = locale === 'sl' ? '/rezervacija' : '/en/reservation';
     </div>
   </div>
 </section>
+
+<!-- Modal za koncertni plakat -->
+<div id="poster-modal" class="fixed inset-0 z-[100] hidden bg-dark-950/95 backdrop-blur-md" role="dialog" aria-modal="true">
+  <button id="poster-modal-close" class="absolute top-4 right-4 z-10 text-white/70 hover:text-white transition-colors p-2" aria-label={locale === 'sl' ? 'Zapri' : 'Close'}>
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <div class="poster-modal-inner flex items-center justify-center h-full p-4 md:p-12">
+    <picture class="contents">
+      <!-- Na telefonu pokončna različica, ki bolje zapolni zaslon -->
+      <source media="(max-width: 767px)" srcset="/plakati/trebnje-2026-11-17.jpg" />
+      <img
+        src="/plakati/trebnje-2026-11-17-lezeci.jpg"
+        alt={locale === 'sl' ? 'Koncertni plakat – Trebnje, 17. 11. 2026' : 'Concert poster – Trebnje, 17 Nov 2026'}
+        class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+        loading="lazy"
+      />
+    </picture>
+  </div>
+</div>
+
+<style>
+  /* Rahlo nihanje gor-dol (kot plakat v heroju) */
+  @keyframes posterFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .poster-float { animation: posterFloat 4.8s ease-in-out 0.8s infinite; }
+</style>
+
+<script>
+  // Klik na ležeči plakat odpre modal namesto nove strani
+  const modal = document.getElementById('poster-modal');
+  const link = document.getElementById('concert-poster-link');
+  const closeBtn = document.getElementById('poster-modal-close');
+
+  function openModal() {
+    modal?.classList.remove('hidden');
+    document.body.classList.add('lightbox-open');
+  }
+  function closeModal() {
+    modal?.classList.add('hidden');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  link?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal();
+  });
+  closeBtn?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    if (t === modal || t.classList.contains('poster-modal-inner')) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) closeModal();
+  });
+</script>
 
 <script define:vars={{ locale, reservePath }}>
   // Koncertni plakat: po izteku datuma ga skrij
