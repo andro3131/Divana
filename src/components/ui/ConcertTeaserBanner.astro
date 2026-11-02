@@ -1,6 +1,5 @@
 ---
 import { type Locale } from '../../i18n/ui';
-import { sectionIds } from '../../i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -8,167 +7,85 @@ interface Props {
 
 const { locale } = Astro.props as Props;
 
-const copy = {
-  label: locale === 'sl' ? 'Divana koncert' : 'Divana concert',
-  title: 'Trebnje',
-  date: locale === 'sl' ? 'torek · 17. 11. 2026' : 'Tuesday · 17 Nov 2026',
-  place: 'Kulturni dom Trebnje',
-  note: locale === 'sl' ? 'Kmalu več podrobnosti' : 'More details soon',
-  cta: locale === 'sl' ? 'Več kmalu' : 'Coming soon',
-  novo: 'NOVO',
-};
-
-const contactId = sectionIds.contact[locale];
+const alt = locale === 'sl'
+  ? 'Plakat: Maja Marinčič z bendom – V trenutku, 17. november 2026 ob 18. uri, Kulturni dom Trebnje'
+  : 'Poster: Maja Marinčič with band – V trenutku, 17 November 2026 at 6 pm, Kulturni dom Trebnje';
+const title = locale === 'sl' ? 'Odpri plakat' : 'Open poster';
 ---
 
 <div class="teaser-float">
   <div class="banner-wrapper">
-    <div class="teaser-card">
-      <div class="novo-badge">{copy.novo}</div>
-
-      <div class="content">
-        <div class="label">{copy.label}</div>
-        <div class="title">Trebnje</div>
-        <div class="date">{copy.date}</div>
-        <div class="place">{copy.place}</div>
-        <div class="note">{copy.note}</div>
-
-        <div class="cta-area">
-          <a class="cta-btn" href={`#${contactId}`}>{copy.cta}</a>
-        </div>
-      </div>
-    </div>
+    <a class="poster-card" href="/plakati/trebnje-2026-11-17.jpg" target="_blank" rel="noopener" title={title}>
+      <picture>
+        <source srcset="/plakati/trebnje-2026-11-17.webp" type="image/webp" />
+        <img
+          src="/plakati/trebnje-2026-11-17.jpg"
+          alt={alt}
+          width="1131"
+          height="1600"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
+    </a>
+    <div class="novo-badge">NOVO</div>
   </div>
 </div>
 
 <style>
-  /* Gentle up-down float */
+  /* Rahlo lebdenje gor-dol */
   @keyframes teaserFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-14px); }
+    50% { transform: translateY(-12px); }
   }
   .teaser-float { animation: teaserFloat 4.8s ease-in-out 0.8s infinite; }
 
+  /* Pokončni plakat (razmerje 1448 × 2048) */
   .banner-wrapper {
     position: relative;
-    width: min(380px, 80vw);
-    aspect-ratio: 3 / 3.1;
-    max-height: 84vh;
+    height: min(66vh, 600px);
+    aspect-ratio: 1448 / 2048;
   }
 
-  .teaser-card {
-    position: relative;
+  .poster-card {
+    display: block;
     width: 100%;
     height: 100%;
-    background: rgba(18, 14, 10, 0.78);
-    border: 1px solid rgba(201, 162, 78, 0.22);
-    border-radius: 14px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(201, 162, 78, 0.55);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55), 0 0 0 4px rgba(18, 14, 10, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
-
-  .teaser-card::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(120% 80% at 40% 10%, rgba(201,162,78,0.12), transparent 60%),
-                radial-gradient(80% 60% at 75% 85%, rgba(201,162,78,0.06), transparent 70%);
-    pointer-events: none;
-  }
-
-  .content { position: absolute; inset: 0; padding: 26px 24px; text-align: left; }
-
-  .label {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    font-size: clamp(12px, 2.5vw, 16px);
-    color: #C9A24E;
-    opacity: 0.9;
-    margin-bottom: 8px;
-    text-align: center;
-  }
-
-  .title {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 800;
-    font-size: clamp(54px, 11.5vw, 80px);
-    line-height: 1.05;
-    margin: 2px 0 10px;
-    text-align: center;
-    background: linear-gradient(160deg, #E2C77A 0%, #C9A24E 35%, #8A6A20 65%, #E2C77A 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .date, .place, .note {
-    font-family: 'Playfair Display', serif;
-    text-align: center;
-  }
-  .date {
-    color: #E8D9B3;
-    letter-spacing: 0.18em;
-    font-size: clamp(13px, 3.2vw, 16px);
-    margin-bottom: 6px;
-  }
-  .place {
-    color: #E2C77A;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    font-size: clamp(14px, 3.6vw, 18px);
-    margin-bottom: 6px;
-  }
-  .note {
-    color: #D9CCAC;
-    font-style: italic;
-    opacity: 0.9;
-    letter-spacing: 0.04em;
-    font-size: clamp(13px, 3vw, 15px);
-    margin-bottom: 14px;
-  }
-
-  .cta-area { text-align: center; }
-  .cta-btn {
-    display: inline-block;
-    padding: 12px 26px;
-    border: 1.5px solid #C9A24E;
-    color: #E2C77A;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    font-size: 13px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, rgba(201,162,78,0.10), rgba(201,162,78,0.04));
-  }
-  .cta-btn:hover {
+  .poster-card:hover {
+    transform: translateY(-2px) scale(1.015);
     border-color: #E2C77A;
-    color: #FFF;
-    background: linear-gradient(135deg, rgba(201,162,78,0.28), rgba(138,106,32,0.24));
-    box-shadow: 0 8px 24px rgba(201,162,78,0.22);
-    transform: translateY(-1.5px);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.6), 0 0 24px rgba(201, 162, 78, 0.25);
+  }
+
+  .poster-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .novo-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: clamp(44px, 7vw, 64px);
-    height: clamp(44px, 7vw, 64px);
+    top: 17%;
+    right: -18px;
+    width: clamp(44px, 6vw, 60px);
+    height: clamp(44px, 6vw, 60px);
     border-radius: 50%;
     background: radial-gradient(circle at 45% 40%, #E74C3C, #9B2335);
     color: #fff;
     font-weight: 900;
     font-family: 'Playfair Display', serif;
     letter-spacing: 0.06em;
-    font-size: clamp(10px, 2vw, 13px);
+    font-size: clamp(10px, 1.8vw, 13px);
     display: flex; align-items: center; justify-content: center;
     transform: rotate(10deg);
-    box-shadow: 0 4px 18px rgba(192,57,43,0.4);
+    box-shadow: 0 4px 18px rgba(192, 57, 43, 0.45);
+    pointer-events: none;
   }
 </style>
-

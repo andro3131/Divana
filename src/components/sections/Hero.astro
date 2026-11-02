@@ -58,7 +58,7 @@ const t = useTranslations(locale);
   </div> -->
 
   <!-- Concert Teaser Banner: bottom-center on mobile, right on desktop -->
-  <div class="absolute left-1/2 -translate-x-1/2 bottom-12 sm:bottom-16 md:left-auto md:translate-x-0 md:right-[12%] md:top-[56%] md:bottom-auto md:-translate-y-1/2 lg:right-[14%] xl:right-[18%] z-20 hero-banner-mobile">
+  <div class="absolute left-1/2 -translate-x-1/2 bottom-12 sm:bottom-16 md:left-auto md:translate-x-0 md:right-[8%] md:top-[54%] md:bottom-auto md:-translate-y-1/2 lg:right-[14%] xl:right-[18%] z-20 hero-banner-mobile">
     <ConcertTeaserBanner locale={locale} />
   </div>
 
@@ -83,11 +83,11 @@ const t = useTranslations(locale);
     will-change: transform;
   }
 
-  /* Wider, shorter banner on mobile */
+  /* Mobilno: manjši pokončni plakat spodaj na sredini */
   @media (max-width: 767px) {
     .hero-banner-mobile :global(.banner-wrapper) {
-      width: min(320px, 82vw);
-      aspect-ratio: 3 / 2.6;
+      height: min(44vh, 360px);
+      aspect-ratio: 1448 / 2048;
     }
   }
 </style>
